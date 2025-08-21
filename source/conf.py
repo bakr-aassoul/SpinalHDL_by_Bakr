@@ -1,18 +1,31 @@
 # Configuration file for the Sphinx documentation builder.
+# Full documentation: https://www.sphinx-doc.org/en/master/usage/configuration.html
 
-# General project information
-project = 'SpinalHDL Documentation'
-copyright = '2023, Your Name'
-author = 'Your Name'
+# -- Project Information -----------------------------------------------------
+project = "SpinalHDL Documentation"
+copyright = "2023, Your Name"
+author = "Your Name"
 
-# Extensions to load (enable Markdown support via MyST Parser)
-extensions = ['myst_parser']
+# -- General Configuration ---------------------------------------------------
+extensions = [
+    "myst_parser",  # Add MyST-Parser to support Markdown (.md) files
+]
 
-# Source file formats: Recognize Markdown (.md) and reStructuredText (.rst)
+# Support both .rst and .md formats
 source_suffix = {
-    '.rst': 'restructuredtext',
-    '.md': 'markdown',
+    ".rst": "restructuredtext",
+    ".md": "markdown",
 }
 
-# HTML theme to use for the documentation
-html_theme = 'alabaster'
+# Paths to exclude from documentation build (if any)
+exclude_patterns = []
+
+# Template settings (if using custom HTML templates)
+templates_path = ["_templates"]
+
+# -- HTML Output Options -----------------------------------------------------
+# The theme to use for HTML documentation. You can choose others like sphinx_rtd_theme or furo.
+html_theme = "alabaster"  # Replace 'alabaster' with your desired theme, e.g., 'sphinx_rtd_theme'.
+
+# Static files (e.g., custom CSS or JS, stored in the '_static' directory)
+html_static_path = ["_static"]
