@@ -1,12 +1,10 @@
-# SpinalHDL Dokumentation
+# Einleitung
 
-## Einleitung
-
-### Motivation
+## Motivation
 
 SpinalHDL wurde entwickelt, um die Produktivitäts- und Wartbarkeitsprobleme klassischer Hardwarebeschreibungssprachen (HDLs) wie VHDL und Verilog zu beheben. Es ermöglicht Entwicklern, wiederverwendbare und skalierbare digitale Designs in einer modernen, typgesicherten Umgebung zu erstellen – durch die Integration in die Programmiersprache Scala.
 
-### Überblick über traditionelle HDLs (VHDL/Verilog)
+## Überblick über traditionelle HDLs (VHDL/Verilog)
 
 Traditionelle HDLs wie VHDL und Verilog wurden in den 1980er Jahren entwickelt. Obwohl sie bis heute Standard sind, haben sie erhebliche Nachteile:
 
@@ -15,7 +13,7 @@ Traditionelle HDLs wie VHDL und Verilog wurden in den 1980er Jahren entwickelt. 
 - **Statischer Code:** Keine Möglichkeit zur dynamischen Erzeugung von Komponenten.  
 - **Mangelnde Integration moderner Softwarepraktiken:** Keine Unit-Tests, keine IDE-Integration auf hohem Niveau.
 
-### Warum die Abkehr sinnvoll ist
+## Warum die Abkehr sinnvoll ist
 
 Moderne Hardwareentwicklungsprojekte profitieren von den Prinzipien der Softwareentwicklung:
 
@@ -27,11 +25,11 @@ SpinalHDL vereint diese Stärken mit der Möglichkeit, dennoch synthetisierbaren
 
 ---
 
-##  Grundlagen von SpinalHDL
+#  Grundlagen von SpinalHDL
 
 SpinalHDL ist eine Hardwarebeschreibungssprache, die als **Domain Specific Language (DSL)** in **Scala** implementiert ist. Sie bietet gegenüber VHDL und Verilog eine moderne, typensichere und modulare Beschreibung von Schaltungen.
 
-### Variablendeklaration in SpinalHDL
+## Variablendeklaration in SpinalHDL
 
 Die wichtigsten Typen zur Signalbeschreibung:
 
@@ -43,7 +41,7 @@ Die wichtigsten Typen zur Signalbeschreibung:
 | `Bits` | Bit-Vektor ohne Interpretation | `val raw = Bits(4 bits)`     |
 
 > In SpinalHDL beschreibt `val` eine **konstante Referenz auf ein Signalobjekt** – nicht das Signal selbst wie in Verilog.
-### Signale vs. Register
+## Signale vs. Register
 
 ```scala
 val a = UInt(8 bits)       // Kombinatorisch (wire)
@@ -56,7 +54,7 @@ val b = Reg(UInt(8 bits))  // Getaktetes Register
 val count = Reg(UInt(4 bits)) init(0)
 ```
 
-### Steuerstrukturen
+## Steuerstrukturen
 
 Wie in Scala aber spezialisiert für Hardwarelogik:
 
@@ -81,7 +79,7 @@ when(io.a === io.b) {
 }
 ```
 
-### Bundles (Schnittstellen)
+## Bundles (Schnittstellen)
 
 Ein `Bundle` ist wie ein `struct`:
 
@@ -94,7 +92,7 @@ val io = new Bundle {
 ```
  Alle Signale im Bundle sind typisiert (`in`, `out`, `inout`).
 
-### Vektoren und Arrays
+## Vektoren und Arrays
 
 ```scala
 val vec = Vec(UInt(8 bits), 4)
@@ -102,7 +100,7 @@ val arr = Array.fill(4)(UInt(8 bits))
 ```
 Vektoren erlauben z. B. Busse, Speicher, Registergruppen.
 
-### Komponentenstruktur
+## Komponentenstruktur
 
 Eine Hardwareeinheit (Modul) ist eine Klasse, die von `Component` erbt:
 
@@ -118,7 +116,7 @@ class MyModule extends Component {
 }
 ```
 
-### Top-Level mit Verilog-Ausgabe
+## Top-Level mit Verilog-Ausgabe
 
 ```scala
 object MyModuleVerilog {
@@ -128,7 +126,7 @@ object MyModuleVerilog {
 }
 ```
 
-### Typisches Verhalten vs. VHDL
+## Typisches Verhalten vs. VHDL
 
 | Aktion                | VHDL                  | SpinalHDL                         |
 |-----------------------|-----------------------|-----------------------------------|
@@ -137,14 +135,14 @@ object MyModuleVerilog {
 | Register mit Reset    | Prozess mit Reset     | `Reg(...) init(...)`              |
 | Strukturierte I/Os    | Record / Port Map     | `Bundle`, `in/out`                |
 
-### Besonderheiten
+## Besonderheiten
 
 - **stark typisiert** – viele Fehler werden vom Compiler erkannt  
 - **parametrisierbar** – Bausteine können generisch sein  
 - **simulationsfähig** – direkt in Scala testbar  
 - **Verilog/VHDL-Ausgabe** – leicht integrierbar  
 
-### TL;DR für Anfänger
+## TL;DR für Anfänger
 
 | Du willst …         | … dann nutze             |
 |---------------------|--------------------------|
@@ -156,9 +154,9 @@ object MyModuleVerilog {
 
 ---
 
-##  Struktur und Aufbau eines SpinalHDL-Projekts
+#  Struktur und Aufbau eines SpinalHDL-Projekts
 
-### Ordnerstruktur
+## Ordnerstruktur
 
 ```text
 my-spinal-project/
@@ -172,13 +170,13 @@ my-spinal-project/
 └── README.md
 ```
 
-### Entwicklungsumgebung
+## Entwicklungsumgebung
 
 - **IDE:** IntelliJ IDEA mit Scala-Plugin  
 - **Build-Tool:** sbt (Scala Build Tool)  
 - **Simulation:** Verilator oder GHDL  
 
-### Beispiel-Kommando
+## Beispiel-Kommando
 
 ```bash
 sbt compile
@@ -187,27 +185,27 @@ sbt run
 
 ---
 
-##  Vorteile von SpinalHDL gegenüber traditionellen HDLs
+#  Vorteile von SpinalHDL gegenüber traditionellen HDLs
 
-### Syntax und Typsicherheit
+## Syntax und Typsicherheit
 
 SpinalHDL basiert auf Scala und profitiert von einer modernen, stark typisierten Syntax. Typfehler oder Verbindungsprobleme werden bereits zur Kompilierzeit erkannt, was typische Laufzeitfehler klassischer HDLs verhindert.
 
-### Abstraktion und Wiederverwendbarkeit
+## Abstraktion und Wiederverwendbarkeit
 
 Mit Vererbung, generischen Klassen und parametrisierten Modulen können Komponenten einfach angepasst und wiederverwendet werden. Schleifen, Funktionen, Bedingungen und sogar Fabriken für Komponenten sind möglich.
 
-### Fehlerdiagnose
+## Fehlerdiagnose
 
 Fehlermeldungen in SpinalHDL enthalten vollständige Stacktraces aus Scala und zeigen direkt auf die Quelle des Problems  z. B. eine ungültige Zuweisung oder ein Signal, das mehrfach getrieben wird.
 
-### Simulation & Debugging
+## Simulation & Debugging
 
 Durch die Integration mit Scala kann SpinalHDL direkt in der JVM simuliert werden. Mit `SimConfig` und `ScalaTest` lassen sich präzise, wiederholbare Testcases erstellen.
 
 ---
 
-##  Entwicklungsworkflow
+#  Entwicklungsworkflow
 
 In SpinalHDL folgt ein typischer Designprozess drei Phasen:
 
@@ -215,7 +213,7 @@ In SpinalHDL folgt ein typischer Designprozess drei Phasen:
 2. **Simulation & Verifikation** (Test)
 3. **Codegenerierung** (Export in Verilog/VHDL)
 
-###  a. Komponentenbeschreibung
+##   Komponentenbeschreibung
 
 Hier wird das gewünschte Verhalten in einem Modul (Component) beschrieben.
 
@@ -228,7 +226,7 @@ class Adder extends Component {
   io.result := io.a + io.b
 }
 ```
-####  Erklärung :
+###  Erklärung :
 
 - `class Adder extends Component`: definiert eine neue SpinalHDL-Komponente.
 - `val io = new Bundle { ... }`: legt die I/O-Schnittstelle fest.
@@ -238,7 +236,7 @@ class Adder extends Component {
 
 **Das ist reine Kombinatorik**, kein Register (d.h. keine Speicherung, kein Takt).
 
-###  b. Simulationsmöglichkeiten
+##   Simulationsmöglichkeiten
 
 Mit SpinalHDL kannst du direkt in Scala simulieren.
 
@@ -251,7 +249,7 @@ SimConfig.withWave.compile(new Adder).doSim { dut =>
   assert(dut.io.result.toInt == 11)
 }
 ```
-####  Erklärung :
+###  Erklärung :
 
 - `SimConfig.withWave`: Aktiviert Wellenform-Ausgabe (`.vcd`).
 - `compile(new Adder)`: kompiliert die Adder-Komponente für Simulation.
@@ -266,7 +264,7 @@ SimConfig.withWave.compile(new Adder).doSim { dut =>
 
 >  Hinweis: Die Simulation verwendet dieselbe Logik wie der Synthese-Code, sie ist somit **cycle-accurate**.
 
-### c. Code generieren (Verilog/VHDL)
+## Code generieren (Verilog/VHDL)
 
 Mit einem einfachen Aufruf generierst du RTL-Code:
 
@@ -281,7 +279,7 @@ SpinalVhdl(new Adder)
  Der generierte Code wird im aktuellen Arbeitsverzeichnis gespeichert oft in einem Unterordner wie `./rtl/` oder `./simWorkspace/Adder`.
 
 
-###  Zusammengefasst:
+##  Zusammengefasst:
 
 | Schritt          | Ziel                           | Beispiel                          |
 |------------------|--------------------------------|-----------------------------------|
@@ -291,9 +289,9 @@ SpinalVhdl(new Adder)
 
 ---
 
-##  Praxisbeispiele
+#  Praxisbeispiele
 
-### Comparator
+## Comparator
 
 Ein Comparator vergleicht zwei Werte (`a` und `b`) und erzeugt Ausgänge für:
 - Gleichheit (`equal`)
@@ -382,7 +380,7 @@ sbt "runMain ComparatorVerilog"
 Ergebnis: Die Datei `Comparator.v` wird generiert, und die Testbench prüft die Vergleichsfunktionen.
 
 ---
-### Zähler
+## Zähler
 
 Ein Zähler zählt bei jedem Takt um 1 nach oben. Er kann in vielen Anwendungen eingesetzt werden, z. B. als Zeitgeber, Schleifenzähler oder zur Adressierung.
 
@@ -466,7 +464,7 @@ Die Datei `Counter.v` wird generiert. In der Simulation zählt der Wert bei `ena
 
 ---
 
-### Taktteiler (Clock Divider)
+## Taktteiler (Clock Divider)
 
 Ein Taktteiler erzeugt aus einem schnellen Eingangstakt einen langsameren Ausgangstakt, indem er Takte zählt und z. B. nur jedes 256. Signal durchlässt.
 
@@ -538,7 +536,7 @@ Das erzeugt:
 
 ---
 
-### PWM
+## PWM
 
 Dies ist ein einfaches SpinalHDL-Projekt, das ein parametrierbares PWM-Modul (Pulsweitenmodulation) implementiert. Es enthält:
 
@@ -594,7 +592,7 @@ class Pwm(width: Int) extends Component {
 - `counter`: Zählt von 0 bis zum Maximalwert und beginnt dann wieder von vorn.
 - `pwmOut`: Wird „an“, solange `counter < duty`.
 
-####  Beispiel (bei 8 Bit Auflösung)
+###  Beispiel (bei 8 Bit Auflösung)
 
 - `duty = 0` → Signal ist immer aus
 - `duty = 128` → Signal ist 50 % der Zeit an
