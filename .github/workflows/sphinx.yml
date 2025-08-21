@@ -20,13 +20,13 @@ jobs:
         with:
           python-version: "3.x"
 
-      # Step 3: Install Python dependencies (Sphinx + PDF tools)
+      # Step 3: Install dependencies (Sphinx + LaTeX tools)
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install sphinx myst-parser
           sudo apt-get update
-          sudo apt-get install -y texlive-latex-recommended texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra latexmk
+          sudo apt-get install -y texlive-full xz-utils latexmk
 
       # Step 4: Build HTML documentation
       - name: Build HTML documentation
@@ -37,11 +37,11 @@ jobs:
       - name: Build PDF documentation
         run: |
           sphinx-build -b latex ./source ./latex
-          cd latex && make
+          cd latex && latexmk -xelatex -f yourprojectname.tex
 
       # Step 6: Upload PDF artifact
       - name: Upload PDF artifact
-        uses: actions/upload-artifact@v4  # Use the latest version (v4)
+        uses: actions/upload-artifact@v4
         with:
           name: Documentation-PDF
           path: ./latex/*.pdf
