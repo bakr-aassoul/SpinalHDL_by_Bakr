@@ -1,4 +1,4 @@
-# SpinalHDL
+# SpinalHDL Dokumentation
 
 ## 1. Einleitung
 
