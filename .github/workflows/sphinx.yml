@@ -1,33 +1,39 @@
-name: Build and Deploy Sphinx Documentation
+name: Build and Deploy Sphinx Documentation to GitHub Pages
 
 on:
   push:
     branches:
-      - main
+      - main  # Trigger the workflow when changes are pushed to the `main` branch
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Use the latest version of Ubuntu for the build environment
 
     steps:
-      - name: Checkout the code
+      # Step 1: Check out the repository code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup Python
+      # Step 2: Set up Python environment
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: '3.x'  # Specify Python 3.x (latest supported version)
 
-      - name: Install dependencies
+      # Step 3: Install dependencies (Sphinx and MyST-Parser for Markdown support)
+      - name: Install Python dependencies
         run: |
+          python -m pip install --upgrade pip
           pip install sphinx myst-parser
 
+      # Step 4: Build the Sphinx documentation
       - name: Build Sphinx documentation
         run: |
-          sphinx-build -b html ./source ./docs
+          sphinx-build -b html ./source ./docs  # Build HTML from source/ into docs/
 
+      # Step 5: Deploy the documentation to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # Use the GitHub-provided token for authentication
+          publish_dir: ./docs  # Directory containing generated HTML files (target)
