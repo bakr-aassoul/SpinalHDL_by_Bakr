@@ -2,7 +2,7 @@
 # Full documentation: https://www.sphinx-doc.org/en/master/usage/configuration.html
 
 # -- Project Information -----------------------------------------------------
-project = "SpinalHDL Documentation"
+project = "SpinalHDL"
 copyright = "2025, Bakr Aassoul"
 author = "Bakr Aassoul"
 
