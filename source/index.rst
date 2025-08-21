@@ -1,6 +1,6 @@
-.. spinalHDL master file
+.. spinalHDL Documention master file
 
-Welcome to SpinalHDL!
+Welcome to SpinalHDL Documention
 ====================================
 
 .. toctree::
