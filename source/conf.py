@@ -13,17 +13,14 @@
    copyright = '2025, Bakr Aassoul'
    author = 'Bakr Aassoul'
 
-   # -- General configuration ---------------------------------------------------
-   extensions = [
-       'myst_parser',  # Add support for Markdown files
-   ]
+   # Add myst_parser to enable Markdown support
+extensions = ['myst_parser']
 
-   # Markdown and reStructuredText support
-   source_suffix = {
-       '.rst': 'restructuredtext',
-       '.md': 'markdown',
-   }
-
+# Allow Sphinx to recognize Markdown files
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
    # Paths
    templates_path = ['_templates']
    exclude_patterns = []
