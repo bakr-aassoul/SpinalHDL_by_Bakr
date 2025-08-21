@@ -1,6 +1,6 @@
 # SpinalHDL Dokumentation
 
-## 1. Einleitung
+## Einleitung
 
 ### Motivation
 
@@ -27,7 +27,7 @@ SpinalHDL vereint diese Stärken mit der Möglichkeit, dennoch synthetisierbaren
 
 ---
 
-## 2. Grundlagen von SpinalHDL
+##  Grundlagen von SpinalHDL
 
 SpinalHDL ist eine Hardwarebeschreibungssprache, die als **Domain Specific Language (DSL)** in **Scala** implementiert ist. Sie bietet gegenüber VHDL und Verilog eine moderne, typensichere und modulare Beschreibung von Schaltungen.
 
@@ -156,7 +156,7 @@ object MyModuleVerilog {
 
 ---
 
-## 3. Struktur und Aufbau eines SpinalHDL-Projekts
+##  Struktur und Aufbau eines SpinalHDL-Projekts
 
 ### Ordnerstruktur
 
@@ -187,7 +187,7 @@ sbt run
 
 ---
 
-## 4. Vorteile von SpinalHDL gegenüber traditionellen HDLs
+##  Vorteile von SpinalHDL gegenüber traditionellen HDLs
 
 ### Syntax und Typsicherheit
 
@@ -207,7 +207,7 @@ Durch die Integration mit Scala kann SpinalHDL direkt in der JVM simuliert werde
 
 ---
 
-## 5. Entwicklungsworkflow
+##  Entwicklungsworkflow
 
 In SpinalHDL folgt ein typischer Designprozess drei Phasen:
 
@@ -291,7 +291,7 @@ SpinalVhdl(new Adder)
 
 ---
 
-## 6. Praxisbeispiele
+##  Praxisbeispiele
 
 ### Comparator
 
