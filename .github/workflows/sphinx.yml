@@ -1,37 +1,33 @@
 name: Build and Deploy Sphinx Documentation
 
-   on:
-     push:
-       branches:
-         - main
-         
-   jobs:
-     build:
-       runs-on: ubuntu-latest
+on:
+  push:
+    branches:
+      - main
 
-       steps:
-         - name: Checkout the code
-           uses: actions/checkout@v3
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-         - name: Setup Python
-           uses: actions/setup-python@v4
-           with:
-             python-version: '3.x'
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v3
 
-         - name: Install dependencies
-           run: |
-             pip install sphinx myst-parser
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
 
-         - name: Build Sphinx documentation
-           run: |
-             sphinx-build -b html ./source ./docs
+      - name: Install dependencies
+        run: |
+          pip install sphinx myst-parser
 
-         - name: Prepare GitHub Pages files
-           run: |
-             touch ./docs/.nojekyll
+      - name: Build Sphinx documentation
+        run: |
+          sphinx-build -b html ./source ./docs
 
-         - name: Deploy to GitHub Pages
-           uses: peaceiris/actions-gh-pages@v3
-           with:
-             github_token: ${{ secrets.GITHUB_TOKEN }}
-             publish_dir: ./docs
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
