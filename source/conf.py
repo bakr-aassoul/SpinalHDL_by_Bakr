@@ -3,8 +3,8 @@
 
 # -- Project Information -----------------------------------------------------
 project = "SpinalHDL Documentation"
-copyright = "2023, Your Name"
-author = "Your Name"
+copyright = "2025, Bakr Aassoul"
+author = "Bakr Aassoul"
 
 # -- General Configuration ---------------------------------------------------
 extensions = [
