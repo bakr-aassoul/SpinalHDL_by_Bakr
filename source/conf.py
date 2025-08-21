@@ -1,9 +1,9 @@
 # Configuration file for the Sphinx documentation builder.
 
 # -- Project Information -----------------------------------------------------
-project = 'Your Project Name'
-copyright = '2023'
-author = 'Your Name'
+project = 'SpinalHDL'
+copyright = '2025, Bakr Aassoul'
+author = 'Bakr Aassoul'
 
 # -- General Configuration ---------------------------------------------------
 extensions = ['myst_parser']  # Add extensions here
