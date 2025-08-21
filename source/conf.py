@@ -29,3 +29,13 @@ html_theme = "alabaster"  # Replace 'alabaster' with your desired theme, e.g., '
 
 # Static files (e.g., custom CSS or JS, stored in the '_static' directory)
 html_static_path = ["_static"]
+
+latex_engine = 'xelatex'  # Use XeLaTeX for better Unicode support
+
+   latex_elements = {
+       'preamble': r'''
+           \usepackage[utf8]{inputenc}  % Support UTF-8 input
+           \usepackage[T1]{fontenc}     % Output quality fonts for PDF
+           \usepackage{lmodern}         % Use a modern LaTeX font
+       ''',
+   }
