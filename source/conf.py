@@ -1,33 +1,18 @@
 # Configuration file for the Sphinx documentation builder.
-   # This file only contains a selection of the most common options. For a full
-   # list see the documentation: https://www.sphinx-doc.org/en/master/usage/configuration.html
 
-   import os
-   import sys
-   # Path setup
-   # Add any paths that contain custom modules to sys.path here.
-   sys.path.insert(0, os.path.abspath('.'))
+# General project information
+project = 'SpinalHDL Documentation'
+copyright = '2023, Your Name'
+author = 'Your Name'
 
-   # -- Project information -----------------------------------------------------
-   project = 'SpinalHDL Documentation'
-   copyright = '2023, Your Name'
-   author = 'Your Name'
+# Extensions to load (enable Markdown support via MyST Parser)
+extensions = ['myst_parser']
 
-   # -- General configuration ---------------------------------------------------
-   extensions = [
-       'myst_parser',  # Add support for Markdown files
-   ]
+# Source file formats: Recognize Markdown (.md) and reStructuredText (.rst)
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
 
-   # Markdown and reStructuredText support
-   source_suffix = {
-       '.rst': 'restructuredtext',
-       '.md': 'markdown',
-   }
-
-   # Paths
-   templates_path = ['_templates']
-   exclude_patterns = []
-
-   # -- Options for HTML output -------------------------------------------------
-   html_theme = 'alabaster'  # You can change the theme (e.g., 'sphinx_rtd_theme')
-   html_static_path = ['_static']
+# HTML theme to use for the documentation
+html_theme = 'alabaster'
