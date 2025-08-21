@@ -635,3 +635,56 @@ object PwmSim {
   }
 }
 ```
+**`[3]PwmVerilog.scala`**
+
+```scala
+import spinal.core._
+
+object PwmVerilog {
+  def main(args: Array[String]): Unit = {
+    SpinalVerilog(new Pwm(8))
+  }
+}
+```
+
+
+
+**`build.sbt`**
+
+```scala
+name := "pwm-spinalhdl"
+
+version := "0.1"
+
+scalaVersion := "2.13.12"
+
+libraryDependencies ++= Seq(
+  "com.github.spinalhdl" %% "spinalhdl-core" % "1.9.1",
+  "com.github.spinalhdl" %% "spinalhdl-sim"  % "1.9.1" % Test
+)
+```
+
+
+
+**Projekt kompilieren und starten**
+
+
+
+```bash
+sbt compile
+```
+
+```bash
+sbt "runMain PwmVerilog"
+```
+
+```bash
+sbt "runMain PwmSim"
+```
+
+
+**Ergebnis**
+
+- Wir erhalten ein synthetisierbares PWM-Modul  
+- Wir können das Verhalten direkt simulieren  
+- Der generierte Verilog-Code (`Pwm.v`) ist für FPGA/ASIC verwendbar
