@@ -479,8 +479,9 @@ class ClockDivider(divisorWidth: Int) extends Component {
 - `msb`: Der höchste Bitwert des Zählers (Most Significant Bit) wird als geteilter Takt ausgegeben.
 - **Beispiel**: Bei `divisorWidth = 8` ergibt sich ein Teiler von 256 (halbe Periode = 128 Takte).
 
-:::{container}
+:::{container}testbench
 **Testbench: `ClockDividerSim.scala`**
+
 ```scala
 import spinal.core._
 import spinal.sim._
@@ -502,6 +503,8 @@ object ClockDividerSim {
 }
 ```
 :::
+
+
 
 **Verilog-Ausgabe: `ClockDividerVerilog.scala`**
 
