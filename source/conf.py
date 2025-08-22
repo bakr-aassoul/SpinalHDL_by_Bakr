@@ -28,6 +28,7 @@ latex_elements = {
         \usepackage{lmodern}
         \usepackage{fancyhdr}
 
+        \makeatletter
         % Redefine the 'normal' pagestyle used by Sphinx
         \fancypagestyle{normal}{
             \fancyhf{} % clear all header/footer fields
@@ -38,8 +39,10 @@ latex_elements = {
             \renewcommand{\headrulewidth}{0.4pt}
             \renewcommand{\footrulewidth}{0.4pt}
         }
+        \makeatother
     ''',
 }
+
 language = 'de'   # German
 latex_documents = [
     ('index',               # Your master .rst/.md file (no extension)
