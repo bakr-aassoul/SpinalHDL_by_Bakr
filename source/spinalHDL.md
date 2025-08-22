@@ -1,27 +1,57 @@
 # Einleitung
 
-## Motivation
+## Ziele dieser Dokumentation
+Diese Dokumentation verfolgt das Ziel, einen leicht verständlichen Einstieg in SpinalHDL zu 
+geben und die wichtigsten Grundlagen systematisch aufzubereiten. Neben der 
+theoretischen Einführung werden praxisnahe Beispiele vorgestellt, die den gesamten 
+Entwicklungsworkflow abdecken. Dazu gehören die Komponentenbeschreibung, die 
+Simulation und schließlich die Generierung von Verilog- oder VHDL-Code. Auf diese Weise 
+soll ein Fundament geschaffen werden, auf dem Leserinnen und Leser sowohl kleine 
+Experimente als auch größere Projekte selbstständig entwickeln können. Darüber hinaus 
+wird ein Ausblick auf komplexere Designs wie den VexRiscv-Prozessor gegeben, um die 
+Skalierbarkeit von SpinalHDL aufzuzeigen.
 
-SpinalHDL wurde entwickelt, um die Produktivitäts- und Wartbarkeitsprobleme klassischer Hardwarebeschreibungssprachen (HDLs) wie VHDL und Verilog zu beheben. Es ermöglicht Entwicklern, wiederverwendbare und skalierbare digitale Designs in einer modernen, typgesicherten Umgebung zu erstellen – durch die Integration in die Programmiersprache Scala.
+## Motivation
+SpinalHDL ist eine moderne Hardwarebeschreibungssprache, die als Domain-Specific 
+Language (DSL) in Scala implementiert ist. Sie bietet eine typensichere, modulare und 
+ausdrucksstarke Möglichkeit, digitale Schaltungen zu entwerfen, und generiert daraus 
+synthetisierbaren Verilog- oder VHDL-Code für etablierte FPGA- und ASIC-Toolchains.  
+
+Das zentrale Anliegen von SpinalHDL ist es, die Entwicklung digitaler Hardware einfacher, 
+produktiver und zugleich zuverlässiger zu gestalten. Anstelle der starren und oft 
+fehleranfälligen Ansätze klassischer HDLs wie VHDL oder Verilog bietet SpinalHDL eine 
+moderne Syntax, die es Entwicklern erlaubt, Schaltungen klar, modular und 
+wiederverwendbar zu beschreiben. Durch die Integration bewährter 
+Softwareentwicklungsprinzipien (etwa Unit-Tests, parametrisierbare Module und 
+IDE-Unterstützung) entsteht eine Arbeitsweise, die sowohl präzise als auch effizient ist. 
+Gleichzeitig bleibt die volle Kompatibilität zur etablierten FPGA- und ASIC-Toolchain 
+erhalten, da SpinalHDL automatisch synthetisierbaren Verilog- oder VHDL-Code erzeugt. 
+Damit schlägt SpinalHDL eine Brücke zwischen den Methoden moderner 
+Softwareentwicklung und der Zuverlässigkeit klassischer Hardwarebeschreibung.
+
 
 ## Überblick über traditionelle HDLs (VHDL/Verilog)
-
-Traditionelle HDLs wie VHDL und Verilog wurden in den 1980er Jahren entwickelt. Obwohl sie bis heute Standard sind, haben sie erhebliche Nachteile:
+Um die Vorteile von SpinalHDL besser einordnen zu können, lohnt sich ein Blick auf die 
+traditionellen Hardwarebeschreibungssprachen VHDL und Verilog. Beide wurden in den 
+1980er-Jahren entwickelt und haben sich als Industriestandard etabliert. Trotz ihrer 
+Verbreitung bringen sie jedoch erhebliche Nachteile mit sich.
 
 - **Geringe Abstraktion:** Strukturelle Wiederverwendung und Parametrisierung sind schwierig.  
 - **Schlechte Fehlerdiagnose:** Kompilierungsfehler liefern oft kryptische Fehlermeldungen.  
-- **Statischer Code:** Keine Möglichkeit zur dynamischen Erzeugung von Komponenten.  
-- **Mangelnde Integration moderner Softwarepraktiken:** Keine Unit-Tests, keine IDE-Integration auf hohem Niveau.
+- **Statischer Code-Struktur:** Keine Möglichkeit zur dynamischen Erzeugung von Komponenten.
+- **Mangelnde Integration moderner Softwarepraktiken:** Unit-Tests, modulare Softwaremuster 
+  oder IDE-Integration sind nur eingeschränkt möglich.
+Diese Einschränkungen machen klassische HDLs gerade bei komplexen Projekten schwer 
+handhabbar und mindern sowohl die Produktivität als auch die Wartbarkeit. Genau an 
+dieser Stelle setzt SpinalHDL an.
 
 ## Warum die Abkehr sinnvoll ist
-
-Moderne Hardwareentwicklungsprojekte profitieren von den Prinzipien der Softwareentwicklung:
-
-- Wiederverwendbarkeit durch Module  
-- Testbarkeit durch Simulation und automatisierte Tests  
-- Abstraktion durch objektorientierte und funktionale Programmierung  
-
-SpinalHDL vereint diese Stärken mit der Möglichkeit, dennoch synthetisierbaren VHDL- oder Verilog-Code zu generieren.
+Moderne Hardwareentwicklungsprojekte profitieren zunehmend von Prinzipien der 
+Softwareentwicklung. Dazu gehören die Wiederverwendbarkeit durch modulare Bausteine, 
+die Testbarkeit durch Simulation und automatisierte Prüfungen sowie die Abstraktion durch 
+objektorientierte oder funktionale Programmierung. SpinalHDL vereint diese Stärken und 
+ermöglicht gleichzeitig die Generierung von synthetisierbarem Verilog- oder VHDL-Code, 
+der problemlos in bestehende Toolchains integriert werden kann. 
 
 #  Grundlagen von SpinalHDL
 
@@ -153,7 +183,9 @@ object MyModuleVerilog {
 #  Struktur und Aufbau eines SpinalHDL-Projekts
 
 ## Ordnerstruktur
-
+Ein SpinalHDL-Projekt orientiert sich in der Regel an der typischen Struktur von Scala-Projekten. 
+Die Dateien sind so gegliedert, dass eine klare Trennung zwischen Entwurf, Test und generiertem 
+Code besteht. Ein mögliches Projekt kann beispielsweise folgendermaßen aufgebaut sein:
 ```text
 my-spinal-project/
 ├── build.sbt
@@ -167,13 +199,15 @@ my-spinal-project/
 ```
 
 ## Entwicklungsumgebung
+Für die Arbeit mit SpinalHDL empfiehlt sich die Verwendung einer modernen Entwicklungsumgebung.  
+In der Praxis hat sich **IntelliJ IDEA** mit installiertem Scala-Plugin bewährt. Damit stehen Funktionen wie Code-Vervollständigung, Syntaxhervorhebung und Refactoring zur Verfügung, die die Entwicklung deutlich vereinfachen.
+Als Build-Tool wird **sbt (Scala Build Tool)** eingesetzt. Es verwaltet die Abhängigkeiten, kompiliert den Quellcode und führt Programme aus. Dadurch lässt sich der gesamte Entwicklungsprozess strukturiert und reproduzierbar abwickeln.
 
-- **IDE:** IntelliJ IDEA mit Scala-Plugin  
-- **Build-Tool:** sbt (Scala Build Tool)  
-- **Simulation:** Verilator oder GHDL  
+Zur Simulation kommen häufig **Verilator** oder **GHDL** zum Einsatz. Diese Werkzeuge ermöglichen eine schnelle und präzise Verifikation des Verhaltens der entworfenen Schaltungen und sind in der Community weit verbreitet.
+
 
 ## Beispiel-Kommando
-
+Die folgenden Befehle zeigen einen typischen Ablauf beim Arbeiten mit einem SpinalHDL-Projekt:
 ```bash
 sbt compile
 sbt run
@@ -183,21 +217,16 @@ sbt run
 #  Vorteile von SpinalHDL gegenüber traditionellen HDLs
 
 ## Syntax und Typsicherheit
-
-SpinalHDL basiert auf Scala und profitiert von einer modernen, stark typisierten Syntax. Typfehler oder Verbindungsprobleme werden bereits zur Kompilierzeit erkannt, was typische Laufzeitfehler klassischer HDLs verhindert.
+SpinalHDL basiert auf Scala und profitiert von einer modernen, stark typisierten Syntax. Typfehler oder fehlerhafte Verbindungen zwischen Signalen werden bereits während der Kompilierung erkannt. Dadurch lassen sich viele Probleme ausschließen, die in klassischen HDLs oft erst bei der Simulation oder sogar im Syntheseprozess sichtbar werden.
 
 ## Abstraktion und Wiederverwendbarkeit
-
-Mit Vererbung, generischen Klassen und parametrisierten Modulen können Komponenten einfach angepasst und wiederverwendet werden. Schleifen, Funktionen, Bedingungen und sogar Fabriken für Komponenten sind möglich.
+Durch Vererbung, generische Klassen und parametrisierte Module können Komponenten einfach angepasst und wiederverwendet werden. Entwicklerinnen und Entwickler können Schleifen, Funktionen oder Bedingungen einsetzen und sogar Fabriken für Komponenten erstellen. Damit wird eine hohe Flexibilität erreicht, die klassische HDLs in dieser Form nicht bieten.
 
 ## Fehlerdiagnose
-
-Fehlermeldungen in SpinalHDL enthalten vollständige Stacktraces aus Scala und zeigen direkt auf die Quelle des Problems  z. B. eine ungültige Zuweisung oder ein Signal, das mehrfach getrieben wird.
+Fehlermeldungen in SpinalHDL enthalten vollständige Stacktraces aus Scala und zeigen präzise auf die Quelle eines Problems. Wenn beispielsweise eine ungültige Zuweisung oder ein mehrfach getriebenes Signal vorliegt, wird dies direkt sichtbar. Dadurch wird die Fehlersuche erheblich vereinfacht und Entwicklungszeit eingespart.
 
 ## Simulation & Debugging
-
-Durch die Integration mit Scala kann SpinalHDL direkt in der JVM simuliert werden. Mit `SimConfig` und `ScalaTest` lassen sich präzise, wiederholbare Testcases erstellen.
-
+Da SpinalHDL in Scala integriert ist, können Schaltungen direkt in der Java Virtual Machine simuliert werden. Mit Hilfsmitteln wie `SimConfig` und `ScalaTest` lassen sich präzise und wiederholbare Testfälle erstellen. Dies ermöglicht eine enge Verzahnung von Entwicklung, Simulation und Verifikation und erleichtert das Debugging erheblich.
 
 #  Entwicklungsworkflow
 
@@ -283,6 +312,8 @@ SpinalVhdl(new Adder)
 
 
 #  Praxisbeispiele
+Im Folgenden werden einige typische Praxisbeispiele vorgestellt, die den Einsatz von SpinalHDL verdeutlichen. Jedes Beispiel enthält die Beschreibung des Moduls, eine Testbench zur Simulation sowie die Möglichkeit, eine Verilog-Datei zu generieren. Auf diese Weise wird der komplette Ablauf von der Modellierung über die Verifikation bis 
+zur Codegenerierung sichtbar.
 
 ## Comparator
 
@@ -290,6 +321,19 @@ Ein Comparator vergleicht zwei Werte (`a` und `b`) und erzeugt Ausgänge für:
 - Gleichheit (`equal`)
 - Größer-als (`greater`)
 - Kleiner-als (`less`)
+  
+**Projektstruktur**
+```
+comparator-spinalhdl/
+├── build.sbt
+├── src/
+│   ├── main/scala/
+│   │   ├── Comparator.scala        // Comparator-Modul
+│   │   └── ComparatorVerilog.scala // Verilog-Generierung
+│   └── test/scala/
+│       └── ComparatorSim.scala     // Testbench
+└── README.md
+```
 
 **Aufbau des Moduls**
 
@@ -376,6 +420,19 @@ Ergebnis: Die Datei `Comparator.v` wird generiert, und die Testbench prüft die 
 
 Ein Zähler zählt bei jedem Takt um 1 nach oben. Er kann in vielen Anwendungen eingesetzt werden, z. B. als Zeitgeber, Schleifenzähler oder zur Adressierung.
 
+**Projektstruktur**
+```
+counter-spinalhdl/
+├── build.sbt
+├── src/
+│   ├── main/scala/
+│   │   ├── Counter.scala        // Zähler-Modul
+│   │   └── CounterVerilog.scala // Verilog-Generierung
+│   └── test/scala/
+│       └── CounterSim.scala     // Testbench
+└── README.md
+```
+
 **Aufbau des Moduls**
 
 ```scala
@@ -459,6 +516,19 @@ Die Datei `Counter.v` wird generiert. In der Simulation zählt der Wert bei `ena
 ## Taktteiler (Clock Divider)
 
 Ein Taktteiler erzeugt aus einem schnellen Eingangstakt einen langsameren Ausgangstakt, indem er Takte zählt und z. B. nur jedes 256. Signal durchlässt.
+
+**Projektstruktur**
+```
+clockdivider-spinalhdl/
+├── build.sbt
+├── src/
+│   ├── main/scala/
+│   │   ├── ClockDivider.scala        // Taktteiler-Modul
+│   │   └── ClockDividerVerilog.scala // Verilog-Generierung
+│   └── test/scala/
+│       └── ClockDividerSim.scala     // Testbench
+└── README.md
+```
 
 **Aufbau des Moduls**
 
@@ -592,7 +662,7 @@ Das Modul vergleicht einen Zähler mit einem Zielwert (`duty`).
 Solange der Zähler kleiner ist, ist das Signal **an**  danach **aus**.  
 Dieser Zyklus wiederholt sich ständig.
 
-  **[1] `src/main/scala/Pwm.scala` (Code wie oben)**
+**[1] `src/main/scala/Pwm.scala` (Code wie oben)**
 
 Siehe oben unter „Aufbau des Moduls“.
 
@@ -676,3 +746,201 @@ sbt "runMain PwmSim"
 - Wir erhalten ein synthetisierbares PWM-Modul  
 - Wir können das Verhalten direkt simulieren  
 - Der generierte Verilog-Code (`Pwm.v`) ist für FPGA/ASIC verwendbar
+
+# Komplexere Designs: Der VexRiscv-Prozessor
+SpinalHDL eignet sich nicht nur für kleine Module wie Zähler oder PWM-Generatoren. 
+Es kann auch für sehr große und komplexe Designs verwendet werden. Ein bekanntes Beispiel dafür ist der **VexRiscv-Prozessor**.  
+
+Der VexRiscv ist ein vollständiger 32-Bit-RISC-V-Prozessor, der vollständig in SpinalHDL 
+geschrieben wurde. Er wird in vielen FPGA-Projekten eingesetzt und ist in der 
+Open-Source-Community weit verbreitet.  
+
+## Architektur
+Der Prozessor basiert auf einer **Pipeline-Architektur**. Das bedeutet, dass die 
+Abarbeitung von Instruktionen in mehrere Schritte aufgeteilt wird, die parallel 
+ausgeführt werden können.  
+
+Ein einfaches Bild dafür ist eine Fabrikstraße: während ein Arbeitsschritt an einer 
+Instruktion gerade ausgeführt wird, befindet sich die nächste Instruktion bereits 
+in der folgenden Station. Dadurch wird die Ausführung schneller und effizienter.  
+
+**Pipeline-Skizze:**
+<img width="602" height="377" alt="Screenshot 2025-08-22 at 14 09 24" src="https://github.com/user-attachments/assets/91404905-f756-4b6a-950c-4e9791b61e3d" />
+
+Die Abbildung zeigt eine 5-Stufen-Pipeline, in der mehrere Instruktionen überlappend 
+bearbeitet werden.  
+
+- **IF (Instruction Fetch):** Instruktion wird aus dem Speicher geholt.  
+- **ID (Instruction Decode):** Die Instruktion wird dekodiert, Register werden gelesen.  
+- **OF (Operand Fetch):** Operanden werden vorbereitet.  
+- **IE (Instruction Execute):** Die eigentliche Operation (z. B. Addition) wird ausgeführt.  
+- **OS (Operand Store):** Ergebnis wird in Register oder Speicher zurückgeschrieben.  
+
+Man erkennt, dass während Instruktion 1 noch in der Ausführung ist, bereits weitere 
+Instruktionen in früheren Phasen bearbeitet werden. Dadurch steigert die Pipeline den 
+Durchsatz erheblich, ohne dass die Taktrate des Prozessors erhöht werden muss.
+
+## Das Plugin‑System in der Praxis
+Eine Besonderheit des VexRiscv ist sein **Plugin-System**.
+Anstatt alle Funktionen fest in den Prozessor einzubauen, können Entwickler einzelne Bausteine hinzufügen oder weglassen.  
+
+Beispiel:  
+- Für ein sehr kleines FPGA kann ein minimaler Prozessor ohne Cache oder Multiplikationseinheit erzeugt werden.  
+- Für größere Systeme kann man zusätzliche Plugins einfügen, etwa für Multiplikation, 
+Caches oder Debugging. 
+
+Im Folgenden stehen drei realistische Konfigurationen: minimal, „microcontroller-artig“ und eine Variante mit zusätzlichen Rechen-Plugins. Anschließend folgt ein schlanker Top-Level, der die vom Core erzeugten Bus-Schnittstellen nach außen führt.
+
+Übliche Imports:
+ ```scala
+> import spinal.core._
+> import vexriscv._
+> import vexriscv.plugin._
+ ```
+### Minimaler Core (einfachste Konfiguration)
+
+```scala
+class VexRiscvMinimal extends Component {
+  val cpu = new VexRiscv(
+    VexRiscvConfig(
+      plugins = List(
+        new IBusSimplePlugin(),   // Instruktionsbus, einfache Handshake-Schnittstelle
+        new DBusSimplePlugin(),   // Datenbus, einfache Handshake-Schnittstelle
+        new DecoderSimplePlugin,  // Instruktionsdecoder
+        new RegFilePlugin,        // Registerfile
+        new IntAluPlugin          // Ganzzahl-ALU
+      )
+    )
+  )
+}
+```
+Diese Konfiguration eignet sich für sehr kleine FPGAs und Demonstrationen. Sie hat weder
+Caches noch CSR‑Funktionen und ist dadurch leicht zu verstehen
+
+In diesem Beispiel wird ein Prozessor mit einem einfachen Instruktionsbus, einem Datenbus, einem Decoder, einem Registerfile und einer arithmetischen Logikeinheit (ALU) erzeugt.
+
+Der VexRiscv zeigt sehr deutlich, wie mächtig SpinalHDL ist. Während klassische HDLs schnell unübersichtlich werden, wenn man modulare und parametrisierbare Designs bauen möchte, bietet SpinalHDL hier große Vorteile. Dass ein kompletter Prozessor mit Scala und SpinalHDL beschrieben werden kann und anschließend als Verilog oder VHDL generiert wird, beweist die Praxistauglichkeit dieser Sprache.
+
+### “MCU”-Profil (etwas umfangreicher)
+```scala
+class VexRiscvMcu extends Component {
+  val cpu = new VexRiscv(
+    VexRiscvConfig(
+      plugins = List(
+        new IBusSimplePlugin(resetVector = 0x00000000L),
+        new DBusSimplePlugin(),
+        new DecoderSimplePlugin,
+        new RegFilePlugin,
+        new IntAluPlugin,
+        new HazardSimplePlugin,     // einfaches Hazard-Handling in der Pipeline
+        new BranchPlugin,           // Sprunglogik
+        new CsrPlugin(CsrPluginConfig.small(mtvecInit = 0x00000000L))
+      )
+    )
+  )
+}
+```
+Diese Konfiguration ist bereits deutlich leistungsfähiger.
+Mit Hazard-Handling lassen sich Pipeline-Konflikte automatisch auflösen, und mit dem CSR-Plugin (Control and Status Registers) erhält der Prozessor die Basis für Betriebssystem-ähnliche Software.
+Das ist die Konfiguration, die man in einem kleinen SoC (z. B. mit UART, Timer und On-Chip-RAM) nutzen würde.
+
+### Variante mit zusätzlichen Recheneinheiten
+```
+class VexRiscvWithMulDiv extends Component {
+  val cpu = new VexRiscv(
+    VexRiscvConfig(
+      plugins = List(
+        new IBusSimplePlugin(resetVector = 0x00000000L),
+        new DBusSimplePlugin(),
+        new DecoderSimplePlugin,
+        new RegFilePlugin,
+        new IntAluPlugin,
+        // Zusätzliche Recheneinheiten:
+        new MulPlugin,              // Multiplikation
+        new DivPlugin,              // Division
+        new BranchPlugin,
+        new HazardSimplePlugin
+      )
+    )
+  )
+}
+```
+Mit dieser Konfiguration erhält der Prozessor Unterstützung für Multiplikation und Division.
+Das ist besonders nützlich, wenn man Anwendungen ausführen möchte, die stark auf mathematische Operationen angewiesen sind (z. B. Signalverarbeitung oder Kryptographie).
+
+### Top-Level: Bus aus dem Core herausführen
+Die Bus-Schnittstellen der Plugins lassen sich einfach nach außen führen.
+So kann man den Prozessor mit Speicher, Peripherie oder einem SoC-Framework verbinden.
+```
+class VexRiscvTop extends Component {
+  val io = new Bundle {
+    val iBus = master(IBusSimpleBus())   // Instruktionsbus
+    val dBus = master(DBusSimpleBus())   // Datenbus
+  }
+
+  val core = new VexRiscv(
+    VexRiscvConfig(
+      plugins = List(
+        new IBusSimplePlugin(resetVector = 0x00000000L),
+        new DBusSimplePlugin(),
+        new DecoderSimplePlugin,
+        new RegFilePlugin,
+        new IntAluPlugin
+      )
+    )
+  )
+
+  // Plugins im Core finden und Interfaces verbinden
+  private val iBusP = core.plugins.collectFirst { case p: IBusSimplePlugin => p }.get
+  private val dBusP = core.plugins.collectFirst { case p: DBusSimplePlugin => p }.get
+
+  io.iBus <> iBusP.iBus
+  io.dBus <> dBusP.dBus
+}
+```
+Damit steht ein Prozessor-Top-Level zur Verfügung, der wie eine normale Komponente
+in andere Designs integriert werden kann.
+
+### Verilog generieren
+```
+object VexRiscvTopVerilog {
+  def main(args: Array[String]): Unit = {
+    SpinalVerilog(new VexRiscvTop)
+  }
+}
+```
+Dieser kleine Generator erzeugt aus dem SpinalHDL-Design den entsprechenden Verilog-Code,
+der in gängigen FPGA-Toolchains weiterverwendet werden kann.
+
+## Fazit
+Die drei Konfigurationen zeigen, wie man mit wenigen Zeilen Code von einem sehr kleinen 
+Core zu einem funktionsreicheren Design gelangt. Das Plugin-System ist dabei der Schlüssel: 
+Es erlaubt, gezielt Fähigkeiten hinzuzufügen und gleichzeitig die Kontrolle über 
+Ressourcenverbrauch und Komplexität zu behalten.
+Der VexRiscv verdeutlicht damit, dass SpinalHDL nicht nur für einfache Module geeignet ist, 
+sondern auch für komplette Prozessorarchitekturen praxistauglich eingesetzt werden kann.
+
+# Zusammenfassung und Ausblick
+
+In dieser Dokumentation wurden die Grundlagen von SpinalHDL vorgestellt. 
+Wir haben gesehen, wie sich einfache Module wie Zähler, PWM-Generatoren oder Comparatoren 
+in wenigen Zeilen Code beschreiben lassen. Dabei wurde deutlich, dass SpinalHDL dank 
+starker Typisierung, klarer Syntax und nahtloser Integration von Simulation und Test 
+einen deutlichen Vorteil gegenüber klassischen HDLs bietet.
+
+Am Beispiel des VexRiscv-Prozessors wurde gezeigt, dass SpinalHDL auch für 
+hochkomplexe Designs geeignet ist. Die modulare Architektur und das Plugin-System 
+ermöglichen es, Prozessorvarianten flexibel zu konfigurieren – von sehr kleinen 
+Cores bis hin zu vollwertigen Systemen mit Multiplikation, Division und CSR-Unterstützung. 
+Damit wird sichtbar, wie SpinalHDL vom Prototyping bis zur realen SoC-Entwicklung 
+eingesetzt werden kann.
+
+Ein möglicher Ausblick ist die weitere Erforschung von **skalierbaren SoC-Architekturen**, 
+die mit SpinalHDL entworfen werden. Durch die Kombination mit Open-Source-Projekten 
+wie LiteX oder der Integration in FPGA-Toolchains können Entwickler komplette 
+Systeme entwerfen, die von der einfachen Steuerlogik bis hin zu 
+leistungsfähigen RISC-V-Prozessoren reichen.  
+
+SpinalHDL ist damit nicht nur ein Werkzeug für den Einstieg, 
+sondern eine ernstzunehmende Alternative zu VHDL und Verilog, 
+die sich in Zukunft noch stärker in der Hardwareentwicklung etablieren dürfte.
