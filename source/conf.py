@@ -44,19 +44,20 @@ latex_elements = {
     ''',
 
     # This replaces the default title page
-    'maketitle': r'''
-        \begin{titlepage}
-            \centering
-            \vspace*{3cm}
-            \includegraphics[width=0.5\textwidth]{_static/spinalhdl-logo.png}\par
-            \vspace{2cm}
-            {\Huge \bfseries SpinalHDL Dokumentation \par}
-            \vspace{1cm}
-            {\Large Bakr Aassoul \par}
-            \vfill
-            {\large \today \par}
-        \end{titlepage}
-    '''
+   'maketitle': r'''
+    \begin{titlepage}
+        \centering
+        \vspace*{3cm}
+        \includegraphics[width=0.5\textwidth]{spinalhdl-logo.png}\par
+        \vspace{2cm}
+        {\Huge \bfseries SpinalHDL Dokumentation \par}
+        \vspace{1cm}
+        {\Large Bakr Aassoul \par}
+        \vfill
+        {\large \today \par}
+    \end{titlepage}
+'''
+
 }
 
 language = 'de'   # German
