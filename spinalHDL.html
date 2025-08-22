@@ -60,7 +60,6 @@
 <p>SpinalHDL vereint diese Stärken mit der Möglichkeit, dennoch synthetisierbaren VHDL- oder Verilog-Code zu generieren.</p>
 </section>
 </section>
-<hr class="docutils" />
 <section id="grundlagen-von-spinalhdl">
 <h1><span class="section-number">2. </span>Grundlagen von SpinalHDL<a class="headerlink" href="#grundlagen-von-spinalhdl" title="Link to this heading">¶</a></h1>
 <p>SpinalHDL ist eine Hardwarebeschreibungssprache, die als <strong>Domain Specific Language (DSL)</strong> in <strong>Scala</strong> implementiert ist. Sie bietet gegenüber VHDL und Verilog eine moderne, typensichere und modulare Beschreibung von Schaltungen.</p>
@@ -243,7 +242,6 @@
 </table>
 </section>
 </section>
-<hr class="docutils" />
 <section id="struktur-und-aufbau-eines-spinalhdl-projekts">
 <h1><span class="section-number">3. </span>Struktur und Aufbau eines SpinalHDL-Projekts<a class="headerlink" href="#struktur-und-aufbau-eines-spinalhdl-projekts" title="Link to this heading">¶</a></h1>
 <section id="ordnerstruktur">
@@ -276,7 +274,6 @@ sbt<span class="w"> </span>run
 </div>
 </section>
 </section>
-<hr class="docutils" />
 <section id="vorteile-von-spinalhdl-gegenuber-traditionellen-hdls">
 <h1><span class="section-number">4. </span>Vorteile von SpinalHDL gegenüber traditionellen HDLs<a class="headerlink" href="#vorteile-von-spinalhdl-gegenuber-traditionellen-hdls" title="Link to this heading">¶</a></h1>
 <section id="syntax-und-typsicherheit">
@@ -296,7 +293,6 @@ sbt<span class="w"> </span>run
 <p>Durch die Integration mit Scala kann SpinalHDL direkt in der JVM simuliert werden. Mit <code class="docutils literal notranslate"><span class="pre">SimConfig</span></code> und <code class="docutils literal notranslate"><span class="pre">ScalaTest</span></code> lassen sich präzise, wiederholbare Testcases erstellen.</p>
 </section>
 </section>
-<hr class="docutils" />
 <section id="entwicklungsworkflow">
 <h1><span class="section-number">5. </span>Entwicklungsworkflow<a class="headerlink" href="#entwicklungsworkflow" title="Link to this heading">¶</a></h1>
 <p>In SpinalHDL folgt ein typischer Designprozess drei Phasen:</p>
@@ -404,7 +400,6 @@ sbt<span class="w"> </span>run
 </table>
 </section>
 </section>
-<hr class="docutils" />
 <section id="praxisbeispiele">
 <h1><span class="section-number">6. </span>Praxisbeispiele<a class="headerlink" href="#praxisbeispiele" title="Link to this heading">¶</a></h1>
 <section id="comparator">
@@ -490,7 +485,6 @@ sbt<span class="w"> </span><span class="s2">&quot;runMain ComparatorVerilog&quot
 </div>
 <p>Ergebnis: Die Datei <code class="docutils literal notranslate"><span class="pre">Comparator.v</span></code> wird generiert, und die Testbench prüft die Vergleichsfunktionen.</p>
 </section>
-<hr class="docutils" />
 <section id="zahler">
 <h2><span class="section-number">6.2. </span>Zähler<a class="headerlink" href="#zahler" title="Link to this heading">¶</a></h2>
 <p>Ein Zähler zählt bei jedem Takt um 1 nach oben. Er kann in vielen Anwendungen eingesetzt werden, z. B. als Zeitgeber, Schleifenzähler oder zur Adressierung.</p>
@@ -567,7 +561,6 @@ sbt<span class="w"> </span><span class="s2">&quot;runMain CounterVerilog&quot;</
 <p><strong>Ergebnis:</strong>
 Die Datei <code class="docutils literal notranslate"><span class="pre">Counter.v</span></code> wird generiert. In der Simulation zählt der Wert bei <code class="docutils literal notranslate"><span class="pre">enable</span> <span class="pre">=</span> <span class="pre">true</span></code> hoch.</p>
 </section>
-<hr class="docutils" />
 <section id="taktteiler-clock-divider">
 <h2><span class="section-number">6.3. </span>Taktteiler (Clock Divider)<a class="headerlink" href="#taktteiler-clock-divider" title="Link to this heading">¶</a></h2>
 <p>Ein Taktteiler erzeugt aus einem schnellen Eingangstakt einen langsameren Ausgangstakt, indem er Takte zählt und z. B. nur jedes 256. Signal durchlässt.</p>
@@ -632,7 +625,6 @@ sbt<span class="w"> </span><span class="s2">&quot;runMain ClockDividerVerilog&qu
 <li><p>und zeigt die Simulation mit <code class="docutils literal notranslate"><span class="pre">clkOut</span></code>, der etwa alle 128 Takte wechselt.</p></li>
 </ul>
 </section>
-<hr class="docutils" />
 <section id="pwm">
 <h2><span class="section-number">6.4. </span>PWM<a class="headerlink" href="#pwm" title="Link to this heading">¶</a></h2>
 <p>Dies ist ein einfaches SpinalHDL-Projekt, das ein parametrierbares PWM-Modul (Pulsweitenmodulation) implementiert. Es enthält:</p>

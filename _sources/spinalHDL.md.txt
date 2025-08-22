@@ -23,8 +23,6 @@ Moderne Hardwareentwicklungsprojekte profitieren von den Prinzipien der Software
 
 SpinalHDL vereint diese Stärken mit der Möglichkeit, dennoch synthetisierbaren VHDL- oder Verilog-Code zu generieren.
 
----
-
 #  Grundlagen von SpinalHDL
 
 SpinalHDL ist eine Hardwarebeschreibungssprache, die als **Domain Specific Language (DSL)** in **Scala** implementiert ist. Sie bietet gegenüber VHDL und Verilog eine moderne, typensichere und modulare Beschreibung von Schaltungen.
@@ -152,8 +150,6 @@ object MyModuleVerilog {
 | Verzweigung         | `when { ... }`           |
 | Interface           | `new Bundle { ... }`     |
 
----
-
 #  Struktur und Aufbau eines SpinalHDL-Projekts
 
 ## Ordnerstruktur
@@ -183,7 +179,6 @@ sbt compile
 sbt run
 ```
 
----
 
 #  Vorteile von SpinalHDL gegenüber traditionellen HDLs
 
@@ -203,7 +198,6 @@ Fehlermeldungen in SpinalHDL enthalten vollständige Stacktraces aus Scala und z
 
 Durch die Integration mit Scala kann SpinalHDL direkt in der JVM simuliert werden. Mit `SimConfig` und `ScalaTest` lassen sich präzise, wiederholbare Testcases erstellen.
 
----
 
 #  Entwicklungsworkflow
 
@@ -287,7 +281,6 @@ SpinalVhdl(new Adder)
 | Simulation       | Verhalten testen               | `doSim { ... }`                   |
 | Codegenerierung  | Verilog/VHDL für Synthesis     | `SpinalVerilog(...)
 
----
 
 #  Praxisbeispiele
 
@@ -379,7 +372,6 @@ sbt "runMain ComparatorVerilog"
 
 Ergebnis: Die Datei `Comparator.v` wird generiert, und die Testbench prüft die Vergleichsfunktionen.
 
----
 ## Zähler
 
 Ein Zähler zählt bei jedem Takt um 1 nach oben. Er kann in vielen Anwendungen eingesetzt werden, z. B. als Zeitgeber, Schleifenzähler oder zur Adressierung.
@@ -462,7 +454,7 @@ sbt "runMain CounterVerilog"
 **Ergebnis:**
 Die Datei `Counter.v` wird generiert. In der Simulation zählt der Wert bei `enable = true` hoch.
 
----
+
 
 ## Taktteiler (Clock Divider)
 
@@ -534,7 +526,6 @@ Das erzeugt:
 - `ClockDivider.v`: die Verilog-Datei
 - und zeigt die Simulation mit `clkOut`, der etwa alle 128 Takte wechselt.
 
----
 
 ## PWM
 
