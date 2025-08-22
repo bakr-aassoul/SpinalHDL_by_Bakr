@@ -766,7 +766,7 @@ Instruktion gerade ausgeführt wird, befindet sich die nächste Instruktion bere
 in der folgenden Station. Dadurch wird die Ausführung schneller und effizienter.  
 
 **Pipeline-Skizze:**
-<img width="602" height="377" alt="Screenshot 2025-08-22 at 14 09 24" src="https://github.com/user-attachments/assets/91404905-f756-4b6a-950c-4e9791b61e3d" />
+![Pipeline sketch](https://github.com/user-attachments/assets/91404905-f756-4b6a-950c-4e9791b61e3d)
 
 Die Abbildung zeigt eine 5-Stufen-Pipeline, in der mehrere Instruktionen überlappend 
 bearbeitet werden.  
