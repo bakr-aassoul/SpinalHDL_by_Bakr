@@ -4,6 +4,7 @@
 project = 'SpinalHDL Dokumentation'
 copyright = '2025, Bakr Aassoul'
 author = 'Bakr Aassoul'
+latex_additional_files = ['_static/spinalhdl-logo.png']
 
 # -- General Configuration ---------------------------------------------------
 extensions = ['myst_parser']  # Add extensions here
