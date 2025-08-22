@@ -28,3 +28,4 @@ latex_elements = {
         \usepackage{lmodern}
     ''',
 }
+language = 'de'   # German
