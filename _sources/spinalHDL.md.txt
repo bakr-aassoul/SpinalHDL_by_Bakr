@@ -480,7 +480,6 @@ class ClockDivider(divisorWidth: Int) extends Component {
 - **Beispiel**: Bei `divisorWidth = 8` ergibt sich ein Teiler von 256 (halbe Periode = 128 Takte).
 
 **Testbench: `ClockDividerSim.scala`**
-
 ```scala
 import spinal.core._
 import spinal.sim._
