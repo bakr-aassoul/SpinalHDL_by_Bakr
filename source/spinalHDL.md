@@ -462,6 +462,7 @@ Ein Taktteiler erzeugt aus einem schnellen Eingangstakt einen langsameren Ausgan
 
 **Aufbau des Moduls**
 
+\nopagebreak
 ```scala
 class ClockDivider(divisorWidth: Int) extends Component {
   val io = new Bundle {
