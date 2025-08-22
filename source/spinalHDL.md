@@ -11,6 +11,7 @@ Experimente als auch größere Projekte selbstständig entwickeln können. Darü
 wird ein Ausblick auf komplexere Designs wie den VexRiscv-Prozessor gegeben, um die 
 Skalierbarkeit von SpinalHDL aufzuzeigen.
 
+
 ## Motivation
 SpinalHDL ist eine moderne Hardwarebeschreibungssprache, die als Domain-Specific 
 Language (DSL) in Scala implementiert ist. Sie bietet eine typensichere, modulare und 
