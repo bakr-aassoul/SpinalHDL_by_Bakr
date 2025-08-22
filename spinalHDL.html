@@ -583,26 +583,26 @@ Die Datei <code class="docutils literal notranslate"><span class="pre">Counter.v
 <li><p><strong>Beispiel</strong>: Bei <code class="docutils literal notranslate"><span class="pre">divisorWidth</span> <span class="pre">=</span> <span class="pre">8</span></code> ergibt sich ein Teiler von 256 (halbe Periode = 128 Takte).</p></li>
 </ul>
 <p><strong>Testbench: <code class="docutils literal notranslate"><span class="pre">ClockDividerSim.scala</span></code></strong></p>
-<p>:::scala
-import spinal.core._
-import spinal.sim._
-import spinal.core.sim._</p>
-<p>object ClockDividerSim {
-def main(args: Array[String]): Unit = {
-SimConfig.withWave.compile(new ClockDivider(8)).doSim { dut =&gt;
-dut.clockDomain.forkStimulus(10)</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  for (i &lt;- 0 until 300) {
-    dut.clockDomain.waitSampling()
-    println(s&quot;Takt $i: clkOut = ${dut.io.clkOut.toBoolean}&quot;)
-  }
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">sim</span><span class="p">.</span><span class="n">_</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="nn">sim</span><span class="p">.</span><span class="n">_</span>
 
-  simSuccess()
-}
+<span class="k">object</span><span class="w"> </span><span class="nc">ClockDividerSim</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">String</span><span class="p">]):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nc">SimConfig</span><span class="p">.</span><span class="n">withWave</span><span class="p">.</span><span class="n">compile</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">ClockDivider</span><span class="p">(</span><span class="mi">8</span><span class="p">)).</span><span class="n">doSim</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">dut</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">      </span><span class="n">dut</span><span class="p">.</span><span class="n">clockDomain</span><span class="p">.</span><span class="n">forkStimulus</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">until</span><span class="w"> </span><span class="mi">300</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">dut</span><span class="p">.</span><span class="n">clockDomain</span><span class="p">.</span><span class="n">waitSampling</span><span class="p">()</span>
+<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">s&quot;Takt </span><span class="si">$</span><span class="n">i</span><span class="s">: clkOut = </span><span class="si">${</span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">clkOut</span><span class="p">.</span><span class="n">toBoolean</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">      </span><span class="p">}</span>
+
+<span class="w">      </span><span class="n">simSuccess</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<p>}
-}
-:::</p>
 <p><strong>Verilog-Ausgabe: <code class="docutils literal notranslate"><span class="pre">ClockDividerVerilog.scala</span></code></strong></p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
 
