@@ -27,6 +27,7 @@ latex_elements = {
         \usepackage[T1]{fontenc}
         \usepackage{lmodern}
         \usepackage{fancyhdr}
+        \usepackage{graphicx} % needed for \includegraphics
 
         \makeatletter
         % Redefine the 'normal' pagestyle used by Sphinx
@@ -41,7 +42,23 @@ latex_elements = {
         }
         \makeatother
     ''',
+
+    # This replaces the default title page
+    'maketitle': r'''
+        \begin{titlepage}
+            \centering
+            \vspace*{3cm}
+            \includegraphics[width=0.5\textwidth]{_static/spinalhdl-logo.png}\par
+            \vspace{2cm}
+            {\Huge \bfseries SpinalHDL Dokumentation \par}
+            \vspace{1cm}
+            {\Large Bakr Aassoul \par}
+            \vfill
+            {\large \today \par}
+        \end{titlepage}
+    '''
 }
+
 
 language = 'de'   # German
 latex_documents = [
