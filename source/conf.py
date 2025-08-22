@@ -41,3 +41,10 @@ latex_elements = {
     ''',
 }
 language = 'de'   # German
+latex_documents = [
+    ('index',               # Your master .rst/.md file (no extension)
+     'SpinalHDL.tex',       # Name of the LaTeX file Sphinx should create
+     'SpinalHDL Dokumentation',  # Document title
+     'Bakr Aassoul',        # Author
+     'manual'),             # 'manual' or 'howto'
+]
