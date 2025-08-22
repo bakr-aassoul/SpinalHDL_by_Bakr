@@ -59,7 +59,6 @@ latex_elements = {
     '''
 }
 
-
 language = 'de'   # German
 latex_documents = [
     ('index',               # Your master .rst/.md file (no extension)
