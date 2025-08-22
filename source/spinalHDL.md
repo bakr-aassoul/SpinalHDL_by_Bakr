@@ -462,7 +462,6 @@ Ein Taktteiler erzeugt aus einem schnellen Eingangstakt einen langsameren Ausgan
 
 **Aufbau des Moduls**
 
-\nopagebreak
 ```scala
 class ClockDivider(divisorWidth: Int) extends Component {
   val io = new Bundle {
@@ -482,7 +481,7 @@ class ClockDivider(divisorWidth: Int) extends Component {
 
 **Testbench: `ClockDividerSim.scala`**
 
-```scala
+:::scala
 import spinal.core._
 import spinal.sim._
 import spinal.core.sim._
@@ -501,7 +500,7 @@ object ClockDividerSim {
     }
   }
 }
-```
+:::
 
 **Verilog-Ausgabe: `ClockDividerVerilog.scala`**
 
