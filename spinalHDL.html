@@ -35,29 +35,61 @@
             
   <section id="einleitung">
 <h1><span class="section-number">1. </span>Einleitung<a class="headerlink" href="#einleitung" title="Link to this heading">¶</a></h1>
+<section id="ziele-dieser-dokumentation">
+<h2><span class="section-number">1.1. </span>Ziele dieser Dokumentation<a class="headerlink" href="#ziele-dieser-dokumentation" title="Link to this heading">¶</a></h2>
+<p>Diese Dokumentation verfolgt das Ziel, einen leicht verständlichen Einstieg in SpinalHDL zu
+geben und die wichtigsten Grundlagen systematisch aufzubereiten. Neben der
+theoretischen Einführung werden praxisnahe Beispiele vorgestellt, die den gesamten
+Entwicklungsworkflow abdecken. Dazu gehören die Komponentenbeschreibung, die
+Simulation und schließlich die Generierung von Verilog- oder VHDL-Code. Auf diese Weise
+soll ein Fundament geschaffen werden, auf dem Leserinnen und Leser sowohl kleine
+Experimente als auch größere Projekte selbstständig entwickeln können. Darüber hinaus
+wird ein Ausblick auf komplexere Designs wie den VexRiscv-Prozessor gegeben, um die
+Skalierbarkeit von SpinalHDL aufzuzeigen.</p>
+</section>
 <section id="motivation">
-<h2><span class="section-number">1.1. </span>Motivation<a class="headerlink" href="#motivation" title="Link to this heading">¶</a></h2>
-<p>SpinalHDL wurde entwickelt, um die Produktivitäts- und Wartbarkeitsprobleme klassischer Hardwarebeschreibungssprachen (HDLs) wie VHDL und Verilog zu beheben. Es ermöglicht Entwicklern, wiederverwendbare und skalierbare digitale Designs in einer modernen, typgesicherten Umgebung zu erstellen – durch die Integration in die Programmiersprache Scala.</p>
+<h2><span class="section-number">1.2. </span>Motivation<a class="headerlink" href="#motivation" title="Link to this heading">¶</a></h2>
+<p>SpinalHDL ist eine moderne Hardwarebeschreibungssprache, die als Domain-Specific
+Language (DSL) in Scala implementiert ist. Sie bietet eine typensichere, modulare und
+ausdrucksstarke Möglichkeit, digitale Schaltungen zu entwerfen, und generiert daraus
+synthetisierbaren Verilog- oder VHDL-Code für etablierte FPGA- und ASIC-Toolchains.</p>
+<p>Das zentrale Anliegen von SpinalHDL ist es, die Entwicklung digitaler Hardware einfacher,
+produktiver und zugleich zuverlässiger zu gestalten. Anstelle der starren und oft
+fehleranfälligen Ansätze klassischer HDLs wie VHDL oder Verilog bietet SpinalHDL eine
+moderne Syntax, die es Entwicklern erlaubt, Schaltungen klar, modular und
+wiederverwendbar zu beschreiben. Durch die Integration bewährter
+Softwareentwicklungsprinzipien (etwa Unit-Tests, parametrisierbare Module und
+IDE-Unterstützung) entsteht eine Arbeitsweise, die sowohl präzise als auch effizient ist.
+Gleichzeitig bleibt die volle Kompatibilität zur etablierten FPGA- und ASIC-Toolchain
+erhalten, da SpinalHDL automatisch synthetisierbaren Verilog- oder VHDL-Code erzeugt.
+Damit schlägt SpinalHDL eine Brücke zwischen den Methoden moderner
+Softwareentwicklung und der Zuverlässigkeit klassischer Hardwarebeschreibung.</p>
 </section>
 <section id="uberblick-uber-traditionelle-hdls-vhdl-verilog">
-<h2><span class="section-number">1.2. </span>Überblick über traditionelle HDLs (VHDL/Verilog)<a class="headerlink" href="#uberblick-uber-traditionelle-hdls-vhdl-verilog" title="Link to this heading">¶</a></h2>
-<p>Traditionelle HDLs wie VHDL und Verilog wurden in den 1980er Jahren entwickelt. Obwohl sie bis heute Standard sind, haben sie erhebliche Nachteile:</p>
+<h2><span class="section-number">1.3. </span>Überblick über traditionelle HDLs (VHDL/Verilog)<a class="headerlink" href="#uberblick-uber-traditionelle-hdls-vhdl-verilog" title="Link to this heading">¶</a></h2>
+<p>Um die Vorteile von SpinalHDL besser einordnen zu können, lohnt sich ein Blick auf die
+traditionellen Hardwarebeschreibungssprachen VHDL und Verilog. Beide wurden in den
+1980er-Jahren entwickelt und haben sich als Industriestandard etabliert. Trotz ihrer
+Verbreitung bringen sie jedoch erhebliche Nachteile mit sich.</p>
 <ul class="simple">
 <li><p><strong>Geringe Abstraktion:</strong> Strukturelle Wiederverwendung und Parametrisierung sind schwierig.</p></li>
 <li><p><strong>Schlechte Fehlerdiagnose:</strong> Kompilierungsfehler liefern oft kryptische Fehlermeldungen.</p></li>
-<li><p><strong>Statischer Code:</strong> Keine Möglichkeit zur dynamischen Erzeugung von Komponenten.</p></li>
-<li><p><strong>Mangelnde Integration moderner Softwarepraktiken:</strong> Keine Unit-Tests, keine IDE-Integration auf hohem Niveau.</p></li>
+<li><p><strong>Statischer Code-Struktur:</strong> Keine Möglichkeit zur dynamischen Erzeugung von Komponenten.</p></li>
+<li><p><strong>Mangelnde Integration moderner Softwarepraktiken:</strong> Unit-Tests, modulare Softwaremuster
+oder IDE-Integration sind nur eingeschränkt möglich.
+Diese Einschränkungen machen klassische HDLs gerade bei komplexen Projekten schwer
+handhabbar und mindern sowohl die Produktivität als auch die Wartbarkeit. Genau an
+dieser Stelle setzt SpinalHDL an.</p></li>
 </ul>
 </section>
 <section id="warum-die-abkehr-sinnvoll-ist">
-<h2><span class="section-number">1.3. </span>Warum die Abkehr sinnvoll ist<a class="headerlink" href="#warum-die-abkehr-sinnvoll-ist" title="Link to this heading">¶</a></h2>
-<p>Moderne Hardwareentwicklungsprojekte profitieren von den Prinzipien der Softwareentwicklung:</p>
-<ul class="simple">
-<li><p>Wiederverwendbarkeit durch Module</p></li>
-<li><p>Testbarkeit durch Simulation und automatisierte Tests</p></li>
-<li><p>Abstraktion durch objektorientierte und funktionale Programmierung</p></li>
-</ul>
-<p>SpinalHDL vereint diese Stärken mit der Möglichkeit, dennoch synthetisierbaren VHDL- oder Verilog-Code zu generieren.</p>
+<h2><span class="section-number">1.4. </span>Warum die Abkehr sinnvoll ist<a class="headerlink" href="#warum-die-abkehr-sinnvoll-ist" title="Link to this heading">¶</a></h2>
+<p>Moderne Hardwareentwicklungsprojekte profitieren zunehmend von Prinzipien der
+Softwareentwicklung. Dazu gehören die Wiederverwendbarkeit durch modulare Bausteine,
+die Testbarkeit durch Simulation und automatisierte Prüfungen sowie die Abstraktion durch
+objektorientierte oder funktionale Programmierung. SpinalHDL vereint diese Stärken und
+ermöglicht gleichzeitig die Generierung von synthetisierbarem Verilog- oder VHDL-Code,
+der problemlos in bestehende Toolchains integriert werden kann.</p>
 </section>
 </section>
 <section id="grundlagen-von-spinalhdl">
@@ -246,6 +278,9 @@
 <h1><span class="section-number">3. </span>Struktur und Aufbau eines SpinalHDL-Projekts<a class="headerlink" href="#struktur-und-aufbau-eines-spinalhdl-projekts" title="Link to this heading">¶</a></h1>
 <section id="ordnerstruktur">
 <h2><span class="section-number">3.1. </span>Ordnerstruktur<a class="headerlink" href="#ordnerstruktur" title="Link to this heading">¶</a></h2>
+<p>Ein SpinalHDL-Projekt orientiert sich in der Regel an der typischen Struktur von Scala-Projekten.
+Die Dateien sind so gegliedert, dass eine klare Trennung zwischen Entwurf, Test und generiertem
+Code besteht. Ein mögliches Projekt kann beispielsweise folgendermaßen aufgebaut sein:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>my-spinal-project/
 ├── build.sbt
 ├── src/
@@ -260,14 +295,14 @@
 </section>
 <section id="entwicklungsumgebung">
 <h2><span class="section-number">3.2. </span>Entwicklungsumgebung<a class="headerlink" href="#entwicklungsumgebung" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p><strong>IDE:</strong> IntelliJ IDEA mit Scala-Plugin</p></li>
-<li><p><strong>Build-Tool:</strong> sbt (Scala Build Tool)</p></li>
-<li><p><strong>Simulation:</strong> Verilator oder GHDL</p></li>
-</ul>
+<p>Für die Arbeit mit SpinalHDL empfiehlt sich die Verwendung einer modernen Entwicklungsumgebung.<br />
+In der Praxis hat sich <strong>IntelliJ IDEA</strong> mit installiertem Scala-Plugin bewährt. Damit stehen Funktionen wie Code-Vervollständigung, Syntaxhervorhebung und Refactoring zur Verfügung, die die Entwicklung deutlich vereinfachen.
+Als Build-Tool wird <strong>sbt (Scala Build Tool)</strong> eingesetzt. Es verwaltet die Abhängigkeiten, kompiliert den Quellcode und führt Programme aus. Dadurch lässt sich der gesamte Entwicklungsprozess strukturiert und reproduzierbar abwickeln.</p>
+<p>Zur Simulation kommen häufig <strong>Verilator</strong> oder <strong>GHDL</strong> zum Einsatz. Diese Werkzeuge ermöglichen eine schnelle und präzise Verifikation des Verhaltens der entworfenen Schaltungen und sind in der Community weit verbreitet.</p>
 </section>
 <section id="beispiel-kommando">
 <h2><span class="section-number">3.3. </span>Beispiel-Kommando<a class="headerlink" href="#beispiel-kommando" title="Link to this heading">¶</a></h2>
+<p>Die folgenden Befehle zeigen einen typischen Ablauf beim Arbeiten mit einem SpinalHDL-Projekt:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sbt<span class="w"> </span>compile
 sbt<span class="w"> </span>run
 </pre></div>
@@ -278,19 +313,19 @@ sbt<span class="w"> </span>run
 <h1><span class="section-number">4. </span>Vorteile von SpinalHDL gegenüber traditionellen HDLs<a class="headerlink" href="#vorteile-von-spinalhdl-gegenuber-traditionellen-hdls" title="Link to this heading">¶</a></h1>
 <section id="syntax-und-typsicherheit">
 <h2><span class="section-number">4.1. </span>Syntax und Typsicherheit<a class="headerlink" href="#syntax-und-typsicherheit" title="Link to this heading">¶</a></h2>
-<p>SpinalHDL basiert auf Scala und profitiert von einer modernen, stark typisierten Syntax. Typfehler oder Verbindungsprobleme werden bereits zur Kompilierzeit erkannt, was typische Laufzeitfehler klassischer HDLs verhindert.</p>
+<p>SpinalHDL basiert auf Scala und profitiert von einer modernen, stark typisierten Syntax. Typfehler oder fehlerhafte Verbindungen zwischen Signalen werden bereits während der Kompilierung erkannt. Dadurch lassen sich viele Probleme ausschließen, die in klassischen HDLs oft erst bei der Simulation oder sogar im Syntheseprozess sichtbar werden.</p>
 </section>
 <section id="abstraktion-und-wiederverwendbarkeit">
 <h2><span class="section-number">4.2. </span>Abstraktion und Wiederverwendbarkeit<a class="headerlink" href="#abstraktion-und-wiederverwendbarkeit" title="Link to this heading">¶</a></h2>
-<p>Mit Vererbung, generischen Klassen und parametrisierten Modulen können Komponenten einfach angepasst und wiederverwendet werden. Schleifen, Funktionen, Bedingungen und sogar Fabriken für Komponenten sind möglich.</p>
+<p>Durch Vererbung, generische Klassen und parametrisierte Module können Komponenten einfach angepasst und wiederverwendet werden. Entwicklerinnen und Entwickler können Schleifen, Funktionen oder Bedingungen einsetzen und sogar Fabriken für Komponenten erstellen. Damit wird eine hohe Flexibilität erreicht, die klassische HDLs in dieser Form nicht bieten.</p>
 </section>
 <section id="fehlerdiagnose">
 <h2><span class="section-number">4.3. </span>Fehlerdiagnose<a class="headerlink" href="#fehlerdiagnose" title="Link to this heading">¶</a></h2>
-<p>Fehlermeldungen in SpinalHDL enthalten vollständige Stacktraces aus Scala und zeigen direkt auf die Quelle des Problems  z. B. eine ungültige Zuweisung oder ein Signal, das mehrfach getrieben wird.</p>
+<p>Fehlermeldungen in SpinalHDL enthalten vollständige Stacktraces aus Scala und zeigen präzise auf die Quelle eines Problems. Wenn beispielsweise eine ungültige Zuweisung oder ein mehrfach getriebenes Signal vorliegt, wird dies direkt sichtbar. Dadurch wird die Fehlersuche erheblich vereinfacht und Entwicklungszeit eingespart.</p>
 </section>
 <section id="simulation-debugging">
 <h2><span class="section-number">4.4. </span>Simulation &amp; Debugging<a class="headerlink" href="#simulation-debugging" title="Link to this heading">¶</a></h2>
-<p>Durch die Integration mit Scala kann SpinalHDL direkt in der JVM simuliert werden. Mit <code class="docutils literal notranslate"><span class="pre">SimConfig</span></code> und <code class="docutils literal notranslate"><span class="pre">ScalaTest</span></code> lassen sich präzise, wiederholbare Testcases erstellen.</p>
+<p>Da SpinalHDL in Scala integriert ist, können Schaltungen direkt in der Java Virtual Machine simuliert werden. Mit Hilfsmitteln wie <code class="docutils literal notranslate"><span class="pre">SimConfig</span></code> und <code class="docutils literal notranslate"><span class="pre">ScalaTest</span></code> lassen sich präzise und wiederholbare Testfälle erstellen. Dies ermöglicht eine enge Verzahnung von Entwicklung, Simulation und Verifikation und erleichtert das Debugging erheblich.</p>
 </section>
 </section>
 <section id="entwicklungsworkflow">
@@ -402,6 +437,8 @@ sbt<span class="w"> </span>run
 </section>
 <section id="praxisbeispiele">
 <h1><span class="section-number">6. </span>Praxisbeispiele<a class="headerlink" href="#praxisbeispiele" title="Link to this heading">¶</a></h1>
+<p>Im Folgenden werden einige typische Praxisbeispiele vorgestellt, die den Einsatz von SpinalHDL verdeutlichen. Jedes Beispiel enthält die Beschreibung des Moduls, eine Testbench zur Simulation sowie die Möglichkeit, eine Verilog-Datei zu generieren. Auf diese Weise wird der komplette Ablauf von der Modellierung über die Verifikation bis
+zur Codegenerierung sichtbar.</p>
 <section id="comparator">
 <h2><span class="section-number">6.1. </span>Comparator<a class="headerlink" href="#comparator" title="Link to this heading">¶</a></h2>
 <p>Ein Comparator vergleicht zwei Werte (<code class="docutils literal notranslate"><span class="pre">a</span></code> und <code class="docutils literal notranslate"><span class="pre">b</span></code>) und erzeugt Ausgänge für:</p>
@@ -410,6 +447,18 @@ sbt<span class="w"> </span>run
 <li><p>Größer-als (<code class="docutils literal notranslate"><span class="pre">greater</span></code>)</p></li>
 <li><p>Kleiner-als (<code class="docutils literal notranslate"><span class="pre">less</span></code>)</p></li>
 </ul>
+<p><strong>Projektstruktur</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>comparator-spinalhdl/
+├── build.sbt
+├── src/
+│   ├── main/scala/
+│   │   ├── Comparator.scala        // Comparator-Modul
+│   │   └── ComparatorVerilog.scala // Verilog-Generierung
+│   └── test/scala/
+│       └── ComparatorSim.scala     // Testbench
+└── README.md
+</pre></div>
+</div>
 <p><strong>Aufbau des Moduls</strong></p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Comparator</span><span class="p">(</span><span class="n">width</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Component</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Bundle</span><span class="w"> </span><span class="p">{</span>
@@ -488,6 +537,18 @@ sbt<span class="w"> </span><span class="s2">&quot;runMain ComparatorVerilog&quot
 <section id="zahler">
 <h2><span class="section-number">6.2. </span>Zähler<a class="headerlink" href="#zahler" title="Link to this heading">¶</a></h2>
 <p>Ein Zähler zählt bei jedem Takt um 1 nach oben. Er kann in vielen Anwendungen eingesetzt werden, z. B. als Zeitgeber, Schleifenzähler oder zur Adressierung.</p>
+<p><strong>Projektstruktur</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>counter-spinalhdl/
+├── build.sbt
+├── src/
+│   ├── main/scala/
+│   │   ├── Counter.scala        // Zähler-Modul
+│   │   └── CounterVerilog.scala // Verilog-Generierung
+│   └── test/scala/
+│       └── CounterSim.scala     // Testbench
+└── README.md
+</pre></div>
+</div>
 <p><strong>Aufbau des Moduls</strong></p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Counter</span><span class="p">(</span><span class="n">width</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Component</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Bundle</span><span class="w"> </span><span class="p">{</span>
@@ -564,6 +625,18 @@ Die Datei <code class="docutils literal notranslate"><span class="pre">Counter.v
 <section id="taktteiler-clock-divider">
 <h2><span class="section-number">6.3. </span>Taktteiler (Clock Divider)<a class="headerlink" href="#taktteiler-clock-divider" title="Link to this heading">¶</a></h2>
 <p>Ein Taktteiler erzeugt aus einem schnellen Eingangstakt einen langsameren Ausgangstakt, indem er Takte zählt und z. B. nur jedes 256. Signal durchlässt.</p>
+<p><strong>Projektstruktur</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>clockdivider-spinalhdl/
+├── build.sbt
+├── src/
+│   ├── main/scala/
+│   │   ├── ClockDivider.scala        // Taktteiler-Modul
+│   │   └── ClockDividerVerilog.scala // Verilog-Generierung
+│   └── test/scala/
+│       └── ClockDividerSim.scala     // Testbench
+└── README.md
+</pre></div>
+</div>
 <p><strong>Aufbau des Moduls</strong></p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ClockDivider</span><span class="p">(</span><span class="n">divisorWidth</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Component</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Bundle</span><span class="w"> </span><span class="p">{</span>
@@ -755,6 +828,203 @@ Dieser Zyklus wiederholt sich ständig.</p>
 </section>
 </section>
 </section>
+<section id="komplexere-designs-der-vexriscv-prozessor">
+<h1><span class="section-number">7. </span>Komplexere Designs: Der VexRiscv-Prozessor<a class="headerlink" href="#komplexere-designs-der-vexriscv-prozessor" title="Link to this heading">¶</a></h1>
+<p>SpinalHDL eignet sich nicht nur für kleine Module wie Zähler oder PWM-Generatoren.
+Es kann auch für sehr große und komplexe Designs verwendet werden. Ein bekanntes Beispiel dafür ist der <strong>VexRiscv-Prozessor</strong>.</p>
+<p>Der VexRiscv ist ein vollständiger 32-Bit-RISC-V-Prozessor, der vollständig in SpinalHDL
+geschrieben wurde. Er wird in vielen FPGA-Projekten eingesetzt und ist in der
+Open-Source-Community weit verbreitet.</p>
+<section id="architektur">
+<h2><span class="section-number">7.1. </span>Architektur<a class="headerlink" href="#architektur" title="Link to this heading">¶</a></h2>
+<p>Der Prozessor basiert auf einer <strong>Pipeline-Architektur</strong>. Das bedeutet, dass die
+Abarbeitung von Instruktionen in mehrere Schritte aufgeteilt wird, die parallel
+ausgeführt werden können.</p>
+<p>Ein einfaches Bild dafür ist eine Fabrikstraße: während ein Arbeitsschritt an einer
+Instruktion gerade ausgeführt wird, befindet sich die nächste Instruktion bereits
+in der folgenden Station. Dadurch wird die Ausführung schneller und effizienter.</p>
+<p><strong>Pipeline-Skizze:</strong>
+<img width="602" height="377" alt="Screenshot 2025-08-22 at 14 09 24" src="https://github.com/user-attachments/assets/91404905-f756-4b6a-950c-4e9791b61e3d" /></p>
+<p>Die Abbildung zeigt eine 5-Stufen-Pipeline, in der mehrere Instruktionen überlappend
+bearbeitet werden.</p>
+<ul class="simple">
+<li><p><strong>IF (Instruction Fetch):</strong> Instruktion wird aus dem Speicher geholt.</p></li>
+<li><p><strong>ID (Instruction Decode):</strong> Die Instruktion wird dekodiert, Register werden gelesen.</p></li>
+<li><p><strong>OF (Operand Fetch):</strong> Operanden werden vorbereitet.</p></li>
+<li><p><strong>IE (Instruction Execute):</strong> Die eigentliche Operation (z. B. Addition) wird ausgeführt.</p></li>
+<li><p><strong>OS (Operand Store):</strong> Ergebnis wird in Register oder Speicher zurückgeschrieben.</p></li>
+</ul>
+<p>Man erkennt, dass während Instruktion 1 noch in der Ausführung ist, bereits weitere
+Instruktionen in früheren Phasen bearbeitet werden. Dadurch steigert die Pipeline den
+Durchsatz erheblich, ohne dass die Taktrate des Prozessors erhöht werden muss.</p>
+</section>
+<section id="das-pluginsystem-in-der-praxis">
+<h2><span class="section-number">7.2. </span>Das Plugin‑System in der Praxis<a class="headerlink" href="#das-pluginsystem-in-der-praxis" title="Link to this heading">¶</a></h2>
+<p>Eine Besonderheit des VexRiscv ist sein <strong>Plugin-System</strong>.
+Anstatt alle Funktionen fest in den Prozessor einzubauen, können Entwickler einzelne Bausteine hinzufügen oder weglassen.</p>
+<p>Beispiel:</p>
+<ul class="simple">
+<li><p>Für ein sehr kleines FPGA kann ein minimaler Prozessor ohne Cache oder Multiplikationseinheit erzeugt werden.</p></li>
+<li><p>Für größere Systeme kann man zusätzliche Plugins einfügen, etwa für Multiplikation,
+Caches oder Debugging.</p></li>
+</ul>
+<p>Im Folgenden stehen drei realistische Konfigurationen: minimal, „microcontroller-artig“ und eine Variante mit zusätzlichen Rechen-Plugins. Anschließend folgt ein schlanker Top-Level, der die vom Core erzeugten Bus-Schnittstellen nach außen führt.</p>
+<p>Übliche Imports:</p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span><span class="w"> </span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
+<span class="o">&gt;</span><span class="w"> </span><span class="k">import</span><span class="w"> </span><span class="nn">vexriscv</span><span class="p">.</span><span class="n">_</span>
+<span class="o">&gt;</span><span class="w"> </span><span class="k">import</span><span class="w"> </span><span class="nn">vexriscv</span><span class="p">.</span><span class="nn">plugin</span><span class="p">.</span><span class="n">_</span>
+</pre></div>
+</div>
+<section id="minimaler-core-einfachste-konfiguration">
+<h3><span class="section-number">7.2.1. </span>Minimaler Core (einfachste Konfiguration)<a class="headerlink" href="#minimaler-core-einfachste-konfiguration" title="Link to this heading">¶</a></h3>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">VexRiscvMinimal</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Component</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">cpu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">VexRiscv</span><span class="p">(</span>
+<span class="w">    </span><span class="nc">VexRiscvConfig</span><span class="p">(</span>
+<span class="w">      </span><span class="n">plugins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nc">IBusSimplePlugin</span><span class="p">(),</span><span class="w">   </span><span class="c1">// Instruktionsbus, einfache Handshake-Schnittstelle</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nc">DBusSimplePlugin</span><span class="p">(),</span><span class="w">   </span><span class="c1">// Datenbus, einfache Handshake-Schnittstelle</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nc">DecoderSimplePlugin</span><span class="p">,</span><span class="w">  </span><span class="c1">// Instruktionsdecoder</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nc">RegFilePlugin</span><span class="p">,</span><span class="w">        </span><span class="c1">// Registerfile</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nc">IntAluPlugin</span><span class="w">          </span><span class="c1">// Ganzzahl-ALU</span>
+<span class="w">      </span><span class="p">)</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="w">  </span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Diese Konfiguration eignet sich für sehr kleine FPGAs und Demonstrationen. Sie hat weder
+Caches noch CSR‑Funktionen und ist dadurch leicht zu verstehen</p>
+<p>In diesem Beispiel wird ein Prozessor mit einem einfachen Instruktionsbus, einem Datenbus, einem Decoder, einem Registerfile und einer arithmetischen Logikeinheit (ALU) erzeugt.</p>
+<p>Der VexRiscv zeigt sehr deutlich, wie mächtig SpinalHDL ist. Während klassische HDLs schnell unübersichtlich werden, wenn man modulare und parametrisierbare Designs bauen möchte, bietet SpinalHDL hier große Vorteile. Dass ein kompletter Prozessor mit Scala und SpinalHDL beschrieben werden kann und anschließend als Verilog oder VHDL generiert wird, beweist die Praxistauglichkeit dieser Sprache.</p>
+</section>
+<section id="mcu-profil-etwas-umfangreicher">
+<h3><span class="section-number">7.2.2. </span>“MCU”-Profil (etwas umfangreicher)<a class="headerlink" href="#mcu-profil-etwas-umfangreicher" title="Link to this heading">¶</a></h3>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">VexRiscvMcu</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Component</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">cpu</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">VexRiscv</span><span class="p">(</span>
+<span class="w">    </span><span class="nc">VexRiscvConfig</span><span class="p">(</span>
+<span class="w">      </span><span class="n">plugins</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">List</span><span class="p">(</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nc">IBusSimplePlugin</span><span class="p">(</span><span class="n">resetVector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x00000000</span><span class="nc">L</span><span class="p">),</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nc">DBusSimplePlugin</span><span class="p">(),</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nc">DecoderSimplePlugin</span><span class="p">,</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nc">RegFilePlugin</span><span class="p">,</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nc">IntAluPlugin</span><span class="p">,</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nc">HazardSimplePlugin</span><span class="p">,</span><span class="w">     </span><span class="c1">// einfaches Hazard-Handling in der Pipeline</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nc">BranchPlugin</span><span class="p">,</span><span class="w">           </span><span class="c1">// Sprunglogik</span>
+<span class="w">        </span><span class="k">new</span><span class="w"> </span><span class="nc">CsrPlugin</span><span class="p">(</span><span class="nc">CsrPluginConfig</span><span class="p">.</span><span class="n">small</span><span class="p">(</span><span class="n">mtvecInit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x00000000</span><span class="nc">L</span><span class="p">))</span>
+<span class="w">      </span><span class="p">)</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="w">  </span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Diese Konfiguration ist bereits deutlich leistungsfähiger.
+Mit Hazard-Handling lassen sich Pipeline-Konflikte automatisch auflösen, und mit dem CSR-Plugin (Control and Status Registers) erhält der Prozessor die Basis für Betriebssystem-ähnliche Software.
+Das ist die Konfiguration, die man in einem kleinen SoC (z. B. mit UART, Timer und On-Chip-RAM) nutzen würde.</p>
+</section>
+<section id="variante-mit-zusatzlichen-recheneinheiten">
+<h3><span class="section-number">7.2.3. </span>Variante mit zusätzlichen Recheneinheiten<a class="headerlink" href="#variante-mit-zusatzlichen-recheneinheiten" title="Link to this heading">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">VexRiscvWithMulDiv</span> <span class="n">extends</span> <span class="n">Component</span> <span class="p">{</span>
+  <span class="n">val</span> <span class="n">cpu</span> <span class="o">=</span> <span class="n">new</span> <span class="n">VexRiscv</span><span class="p">(</span>
+    <span class="n">VexRiscvConfig</span><span class="p">(</span>
+      <span class="n">plugins</span> <span class="o">=</span> <span class="n">List</span><span class="p">(</span>
+        <span class="n">new</span> <span class="n">IBusSimplePlugin</span><span class="p">(</span><span class="n">resetVector</span> <span class="o">=</span> <span class="mh">0x00000000</span><span class="n">L</span><span class="p">),</span>
+        <span class="n">new</span> <span class="n">DBusSimplePlugin</span><span class="p">(),</span>
+        <span class="n">new</span> <span class="n">DecoderSimplePlugin</span><span class="p">,</span>
+        <span class="n">new</span> <span class="n">RegFilePlugin</span><span class="p">,</span>
+        <span class="n">new</span> <span class="n">IntAluPlugin</span><span class="p">,</span>
+        <span class="o">//</span> <span class="n">Zusätzliche</span> <span class="n">Recheneinheiten</span><span class="p">:</span>
+        <span class="n">new</span> <span class="n">MulPlugin</span><span class="p">,</span>              <span class="o">//</span> <span class="n">Multiplikation</span>
+        <span class="n">new</span> <span class="n">DivPlugin</span><span class="p">,</span>              <span class="o">//</span> <span class="n">Division</span>
+        <span class="n">new</span> <span class="n">BranchPlugin</span><span class="p">,</span>
+        <span class="n">new</span> <span class="n">HazardSimplePlugin</span>
+      <span class="p">)</span>
+    <span class="p">)</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Mit dieser Konfiguration erhält der Prozessor Unterstützung für Multiplikation und Division.
+Das ist besonders nützlich, wenn man Anwendungen ausführen möchte, die stark auf mathematische Operationen angewiesen sind (z. B. Signalverarbeitung oder Kryptographie).</p>
+</section>
+<section id="top-level-bus-aus-dem-core-herausfuhren">
+<h3><span class="section-number">7.2.4. </span>Top-Level: Bus aus dem Core herausführen<a class="headerlink" href="#top-level-bus-aus-dem-core-herausfuhren" title="Link to this heading">¶</a></h3>
+<p>Die Bus-Schnittstellen der Plugins lassen sich einfach nach außen führen.
+So kann man den Prozessor mit Speicher, Peripherie oder einem SoC-Framework verbinden.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">VexRiscvTop</span> <span class="n">extends</span> <span class="n">Component</span> <span class="p">{</span>
+  <span class="n">val</span> <span class="n">io</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Bundle</span> <span class="p">{</span>
+    <span class="n">val</span> <span class="n">iBus</span> <span class="o">=</span> <span class="n">master</span><span class="p">(</span><span class="n">IBusSimpleBus</span><span class="p">())</span>   <span class="o">//</span> <span class="n">Instruktionsbus</span>
+    <span class="n">val</span> <span class="n">dBus</span> <span class="o">=</span> <span class="n">master</span><span class="p">(</span><span class="n">DBusSimpleBus</span><span class="p">())</span>   <span class="o">//</span> <span class="n">Datenbus</span>
+  <span class="p">}</span>
+
+  <span class="n">val</span> <span class="n">core</span> <span class="o">=</span> <span class="n">new</span> <span class="n">VexRiscv</span><span class="p">(</span>
+    <span class="n">VexRiscvConfig</span><span class="p">(</span>
+      <span class="n">plugins</span> <span class="o">=</span> <span class="n">List</span><span class="p">(</span>
+        <span class="n">new</span> <span class="n">IBusSimplePlugin</span><span class="p">(</span><span class="n">resetVector</span> <span class="o">=</span> <span class="mh">0x00000000</span><span class="n">L</span><span class="p">),</span>
+        <span class="n">new</span> <span class="n">DBusSimplePlugin</span><span class="p">(),</span>
+        <span class="n">new</span> <span class="n">DecoderSimplePlugin</span><span class="p">,</span>
+        <span class="n">new</span> <span class="n">RegFilePlugin</span><span class="p">,</span>
+        <span class="n">new</span> <span class="n">IntAluPlugin</span>
+      <span class="p">)</span>
+    <span class="p">)</span>
+  <span class="p">)</span>
+
+  <span class="o">//</span> <span class="n">Plugins</span> <span class="n">im</span> <span class="n">Core</span> <span class="n">finden</span> <span class="n">und</span> <span class="n">Interfaces</span> <span class="n">verbinden</span>
+  <span class="n">private</span> <span class="n">val</span> <span class="n">iBusP</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">plugins</span><span class="o">.</span><span class="n">collectFirst</span> <span class="p">{</span> <span class="n">case</span> <span class="n">p</span><span class="p">:</span> <span class="n">IBusSimplePlugin</span> <span class="o">=&gt;</span> <span class="n">p</span> <span class="p">}</span><span class="o">.</span><span class="n">get</span>
+  <span class="n">private</span> <span class="n">val</span> <span class="n">dBusP</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">plugins</span><span class="o">.</span><span class="n">collectFirst</span> <span class="p">{</span> <span class="n">case</span> <span class="n">p</span><span class="p">:</span> <span class="n">DBusSimplePlugin</span> <span class="o">=&gt;</span> <span class="n">p</span> <span class="p">}</span><span class="o">.</span><span class="n">get</span>
+
+  <span class="n">io</span><span class="o">.</span><span class="n">iBus</span> <span class="o">&lt;&gt;</span> <span class="n">iBusP</span><span class="o">.</span><span class="n">iBus</span>
+  <span class="n">io</span><span class="o">.</span><span class="n">dBus</span> <span class="o">&lt;&gt;</span> <span class="n">dBusP</span><span class="o">.</span><span class="n">dBus</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Damit steht ein Prozessor-Top-Level zur Verfügung, der wie eine normale Komponente
+in andere Designs integriert werden kann.</p>
+</section>
+<section id="verilog-generieren">
+<h3><span class="section-number">7.2.5. </span>Verilog generieren<a class="headerlink" href="#verilog-generieren" title="Link to this heading">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">object</span> <span class="n">VexRiscvTopVerilog</span> <span class="p">{</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Array</span><span class="p">[</span><span class="n">String</span><span class="p">]):</span> <span class="n">Unit</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">SpinalVerilog</span><span class="p">(</span><span class="n">new</span> <span class="n">VexRiscvTop</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Dieser kleine Generator erzeugt aus dem SpinalHDL-Design den entsprechenden Verilog-Code,
+der in gängigen FPGA-Toolchains weiterverwendet werden kann.</p>
+</section>
+</section>
+<section id="fazit">
+<h2><span class="section-number">7.3. </span>Fazit<a class="headerlink" href="#fazit" title="Link to this heading">¶</a></h2>
+<p>Die drei Konfigurationen zeigen, wie man mit wenigen Zeilen Code von einem sehr kleinen
+Core zu einem funktionsreicheren Design gelangt. Das Plugin-System ist dabei der Schlüssel:
+Es erlaubt, gezielt Fähigkeiten hinzuzufügen und gleichzeitig die Kontrolle über
+Ressourcenverbrauch und Komplexität zu behalten.
+Der VexRiscv verdeutlicht damit, dass SpinalHDL nicht nur für einfache Module geeignet ist,
+sondern auch für komplette Prozessorarchitekturen praxistauglich eingesetzt werden kann.</p>
+</section>
+</section>
+<section id="zusammenfassung-und-ausblick">
+<h1><span class="section-number">8. </span>Zusammenfassung und Ausblick<a class="headerlink" href="#zusammenfassung-und-ausblick" title="Link to this heading">¶</a></h1>
+<p>In dieser Dokumentation wurden die Grundlagen von SpinalHDL vorgestellt.
+Wir haben gesehen, wie sich einfache Module wie Zähler, PWM-Generatoren oder Comparatoren
+in wenigen Zeilen Code beschreiben lassen. Dabei wurde deutlich, dass SpinalHDL dank
+starker Typisierung, klarer Syntax und nahtloser Integration von Simulation und Test
+einen deutlichen Vorteil gegenüber klassischen HDLs bietet.</p>
+<p>Am Beispiel des VexRiscv-Prozessors wurde gezeigt, dass SpinalHDL auch für
+hochkomplexe Designs geeignet ist. Die modulare Architektur und das Plugin-System
+ermöglichen es, Prozessorvarianten flexibel zu konfigurieren – von sehr kleinen
+Cores bis hin zu vollwertigen Systemen mit Multiplikation, Division und CSR-Unterstützung.
+Damit wird sichtbar, wie SpinalHDL vom Prototyping bis zur realen SoC-Entwicklung
+eingesetzt werden kann.</p>
+<p>Ein möglicher Ausblick ist die weitere Erforschung von <strong>skalierbaren SoC-Architekturen</strong>,
+die mit SpinalHDL entworfen werden. Durch die Kombination mit Open-Source-Projekten
+wie LiteX oder der Integration in FPGA-Toolchains können Entwickler komplette
+Systeme entwerfen, die von der einfachen Steuerlogik bis hin zu
+leistungsfähigen RISC-V-Prozessoren reichen.</p>
+<p>SpinalHDL ist damit nicht nur ein Werkzeug für den Einstieg,
+sondern eine ernstzunehmende Alternative zu VHDL und Verilog,
+die sich in Zukunft noch stärker in der Hardwareentwicklung etablieren dürfte.</p>
+</section>
 
 
           </div>
@@ -785,9 +1055,10 @@ Dieser Zyklus wiederholt sich ständig.</p>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">1. Einleitung</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#motivation">1.1. Motivation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#uberblick-uber-traditionelle-hdls-vhdl-verilog">1.2. Überblick über traditionelle HDLs (VHDL/Verilog)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#warum-die-abkehr-sinnvoll-ist">1.3. Warum die Abkehr sinnvoll ist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ziele-dieser-dokumentation">1.1. Ziele dieser Dokumentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#motivation">1.2. Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uberblick-uber-traditionelle-hdls-vhdl-verilog">1.3. Überblick über traditionelle HDLs (VHDL/Verilog)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#warum-die-abkehr-sinnvoll-ist">1.4. Warum die Abkehr sinnvoll ist</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="#grundlagen-von-spinalhdl">2. Grundlagen von SpinalHDL</a><ul>
@@ -830,6 +1101,13 @@ Dieser Zyklus wiederholt sich ständig.</p>
 <li class="toctree-l2"><a class="reference internal" href="#pwm">6.4. PWM</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="#komplexere-designs-der-vexriscv-prozessor">7. Komplexere Designs: Der VexRiscv-Prozessor</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#architektur">7.1. Architektur</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#das-pluginsystem-in-der-praxis">7.2. Das Plugin‑System in der Praxis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fazit">7.3. Fazit</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#zusammenfassung-und-ausblick">8. Zusammenfassung und Ausblick</a></li>
 </ul>
 
 <div class="relations">
