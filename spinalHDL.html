@@ -565,6 +565,7 @@ Die Datei <code class="docutils literal notranslate"><span class="pre">Counter.v
 <h2><span class="section-number">6.3. </span>Taktteiler (Clock Divider)<a class="headerlink" href="#taktteiler-clock-divider" title="Link to this heading">¶</a></h2>
 <p>Ein Taktteiler erzeugt aus einem schnellen Eingangstakt einen langsameren Ausgangstakt, indem er Takte zählt und z. B. nur jedes 256. Signal durchlässt.</p>
 <p><strong>Aufbau des Moduls</strong></p>
+<p>\nopagebreak</p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ClockDivider</span><span class="p">(</span><span class="n">divisorWidth</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Component</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Bundle</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">clkOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="nc">Bool</span><span class="p">()</span>
