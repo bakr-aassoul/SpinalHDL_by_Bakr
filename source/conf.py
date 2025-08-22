@@ -26,6 +26,18 @@ latex_elements = {
         \usepackage[utf8]{inputenc}
         \usepackage[T1]{fontenc}
         \usepackage{lmodern}
+        \usepackage{fancyhdr}
+
+        % Redefine the 'normal' pagestyle used by Sphinx
+        \fancypagestyle{normal}{
+            \fancyhf{} % clear all header/footer fields
+            % Page number on outer edge
+            \fancyfoot[LE,RO]{\py@HeaderFamily\thepage}
+            % Chapter title on inner edge of footer
+            \fancyfoot[LO,RE]{\py@HeaderFamily\nouppercase{\leftmark}}
+            \renewcommand{\headrulewidth}{0.4pt}
+            \renewcommand{\footrulewidth}{0.4pt}
+        }
     ''',
 }
 language = 'de'   # German
