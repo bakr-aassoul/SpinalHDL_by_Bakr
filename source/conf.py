@@ -43,18 +43,23 @@ latex_elements = {
     ''',
 
     'maketitle': r'''
-        \begin{titlepage}
-            \centering
-            \vspace*{3cm}
-            \includegraphics[width=0.5\textwidth]{spinalhdl-logo.png}\par
-            \vspace{2cm}
-            {\Huge \bfseries SpinalHDL Dokumentation \par}
-            \vspace{1cm}
-            {\Large Bakr Aassoul \par}
-            \vfill
-            {\large \today \par}
-        \end{titlepage}
-    ''',
+    \begin{titlepage}
+        \centering
+        \vspace*{3cm}
+        \includegraphics[width=0.5\textwidth]{spinalhdl-logo.png}\par
+        \vspace{2cm}
+        {\Huge \bfseries SpinalHDL Dokumentation \par}
+        \vspace{1cm}
+        {\Large Bakr Aassoul \par}
+        \vfill
+        {\large \today \par}
+    \end{titlepage}
+
+    \clearpage
+    \null
+    \thispagestyle{empty}
+    \clearpage
+''',
 }
 
 language = 'de'
