@@ -6,36 +6,35 @@ copyright = '2025, Bakr Aassoul'
 author = 'Bakr Aassoul'
 
 # -- General Configuration ---------------------------------------------------
-extensions = ['myst_parser']  # Add extensions here
+extensions = ['myst_parser']  # Markdown via MyST
 
 source_suffix = {
     '.rst': 'restructuredtext',
-    '.md': 'markdown',  # Enable Markdown support
+    '.md': 'markdown',
 }
 
-exclude_patterns = []  # List of patterns to ignore
+exclude_patterns = []  # Nothing excluded
 
 # -- Options for HTML Output -------------------------------------------------
-html_theme = 'alabaster'  # Replace with your desired theme
+html_theme = 'alabaster'
 html_static_path = ['_static']
 
-# -- LaTeX Configurations (Optional) -----------------------------------------
-latex_engine = 'xelatex'  # Use xelatex for better Unicode support
+# -- LaTeX Configurations ----------------------------------------------------
+latex_engine = 'xelatex'
+
+# Tell Sphinx to copy the logo into the LaTeX build dir
+latex_additional_files = ['spinalhdl-logo.png']
+
 latex_elements = {
     'preamble': r'''
-        \usepackage[utf8]{inputenc}
-        \usepackage[T1]{fontenc}
+        % XeLaTeX handles UTF-8 natively, so inputenc/fontenc not needed
         \usepackage{lmodern}
         \usepackage{fancyhdr}
-        \usepackage{graphicx} % needed for \includegraphics
-
+        \usepackage{graphicx}
         \makeatletter
-        % Redefine the 'normal' pagestyle used by Sphinx
         \fancypagestyle{normal}{
-            \fancyhf{} % clear all header/footer fields
-            % Page number on outer edge
+            \fancyhf{}
             \fancyfoot[LE,RO]{\py@HeaderFamily\thepage}
-            % Chapter title on inner edge of footer
             \fancyfoot[LO,RE]{\py@HeaderFamily\nouppercase{\leftmark}}
             \renewcommand{\headrulewidth}{0.4pt}
             \renewcommand{\footrulewidth}{0.4pt}
@@ -43,28 +42,27 @@ latex_elements = {
         \makeatother
     ''',
 
-    # This replaces the default title page
-   'maketitle': r'''
-    \begin{titlepage}
-        \centering
-        \vspace*{3cm}
-        \includegraphics[width=0.5\textwidth]{spinalhdl-logo.png}\par
-        \vspace{2cm}
-        {\Huge \bfseries SpinalHDL Dokumentation \par}
-        \vspace{1cm}
-        {\Large Bakr Aassoul \par}
-        \vfill
-        {\large \today \par}
-    \end{titlepage}
-'''
-
+    'maketitle': r'''
+        \begin{titlepage}
+            \centering
+            \vspace*{3cm}
+            \includegraphics[width=0.5\textwidth]{spinalhdl-logo.png}\par
+            \vspace{2cm}
+            {\Huge \bfseries SpinalHDL Dokumentation \par}
+            \vspace{1cm}
+            {\Large Bakr Aassoul \par}
+            \vfill
+            {\large \today \par}
+        \end{titlepage}
+    ''',
 }
 
-language = 'de'   # German
+language = 'de'
+
 latex_documents = [
-    ('index',               # Your master .rst/.md file (no extension)
-     'SpinalHDL.tex',       # Name of the LaTeX file Sphinx should create
-     'SpinalHDL Dokumentation',  # Document title
-     'Bakr Aassoul',        # Author
-     'manual'),             # 'manual' or 'howto'
+    ('index',
+     'SpinalHDL.tex',
+     'SpinalHDL Dokumentation',
+     'Bakr Aassoul',
+     'manual'),
 ]
