@@ -24,7 +24,7 @@ This repository serves as a comprehensive, beginner-friendly guide to **SpinalHD
   - **IntelliJ IDEA** with Scala plugin
   - **Verilator** or **GHDL** for simulation
 
-Refer to the [Getting Started with SpinalHDL]([https://spinalhdl.github.io/SpinalDoc-RTD/master/SpinalHDL/Getting%20Started) guide for help with setup. 
+Refer to the [Getting Started with SpinalHDL](https://spinalhdl.github.io/SpinalDoc-RTD/master/SpinalHDL/Getting%20Started) guide for help with setup. 
 
 ---
 
