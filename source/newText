@@ -19,3 +19,8 @@ to describe circuits clearly, modularly, and in a reusable way.
 By integrating proven software development principles ( unit tests, parametrizable modules, and IDE support...) we get a workflow that is both precise and efficient.
 At the same time, it is fully compatible with  FPGA and ASIC toolchains. Thanks to autamatically generating Verilog or VHDL code.
 In general SpinalHDL provides the possibily of using modern Software Developement methods and reliable traditional hardware description.
+
+Ziel dieser Dokumentation ist, einen Einführung in SpinalHDL zu 
+geben und die wichtigsten Grundlagen zu erklären. Dazu werden praxisnahe Beispiele vorgestellt, die den gesamten 
+Entwicklungsworkflow abdecken. Dazu gehören die Komponentenbeschreibung, die 
+Simulation und schließlich die Generierung von Verilog- oder VHDL-Code. Neben dieser kleiner PRojektbeispiel wird auch eine beispiel komplexere Designs bechreibt. In unsere Fall  ist es den VexRiscv-Prozessor gegeben.
