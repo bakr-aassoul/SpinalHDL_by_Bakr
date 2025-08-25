@@ -28,3 +28,7 @@ Um die Vorteile von SpinalHDL besser einordnen zu können, lohnt sich ein Blick 
 traditionellen Hardwarebeschreibungssprachen VHDL und Verilog. Beide wurden in den 
 1980er-Jahren entwickelt und haben sich als Industriestandard etabliert. Trotz ihrer 
 Verbreitung bringen sie jedoch erhebliche Nachteile mit sich.
+
+sbt verwaltet die Abhängigkeiten, kompiliert den Quellcode und führt Programme aus. Dadurch lässt sich der gesamte Entwicklungsprozess strukturiert und reproduzierbar abwickeln.
+
+Zur Simulation kommen häufig Verilator oder GHDL zum Einsatz. Diese Werkzeuge ermöglichen eine schnelle und präzise Verifikation des Verhaltens der entworfenen Schaltungen und sind in der Community weit verbreitet.
