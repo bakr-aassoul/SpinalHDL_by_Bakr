@@ -37,33 +37,23 @@
 <h1><span class="section-number">1. </span>Einleitung<a class="headerlink" href="#einleitung" title="Link to this heading">¶</a></h1>
 <section id="ziele-dieser-dokumentation">
 <h2><span class="section-number">1.1. </span>Ziele dieser Dokumentation<a class="headerlink" href="#ziele-dieser-dokumentation" title="Link to this heading">¶</a></h2>
-<p>Diese Dokumentation verfolgt das Ziel, einen leicht verständlichen Einstieg in SpinalHDL zu
-geben und die wichtigsten Grundlagen systematisch aufzubereiten. Neben der
-theoretischen Einführung werden praxisnahe Beispiele vorgestellt, die den gesamten
-Entwicklungsworkflow abdecken. Dazu gehören die Komponentenbeschreibung, die
-Simulation und schließlich die Generierung von Verilog- oder VHDL-Code. Auf diese Weise
-soll ein Fundament geschaffen werden, auf dem Leserinnen und Leser sowohl kleine
-Experimente als auch größere Projekte selbstständig entwickeln können. Darüber hinaus
-wird ein Ausblick auf komplexere Designs wie den VexRiscv-Prozessor gegeben, um die
-Skalierbarkeit von SpinalHDL aufzuzeigen.</p>
+<p>Ziel dieser Dokumentation ist es, eine Einführung in SpinalHDL zu geben und die wichtigsten Grundlagen zu erklären.<br />
+Dazu werden Praxisbeispiele vorgestellt, die den gesamten Entwicklungsprozess abdecken.<br />
+Dazu gehören die Komponentenbeschreibung, die Simulation und schließlich die Generierung von Verilog- oder VHDL-Code.<br />
+Neben diesem kleinen Projektbeispiel wird auch ein Beispiel zum komplexerem Design beschrieben.<br />
+In unserem Fall ist dies der <strong>VexRiscv-Prozessor</strong>.</p>
 </section>
 <section id="motivation">
 <h2><span class="section-number">1.2. </span>Motivation<a class="headerlink" href="#motivation" title="Link to this heading">¶</a></h2>
-<p>SpinalHDL ist eine moderne Hardwarebeschreibungssprache, die als Domain-Specific
-Language (DSL) in Scala implementiert ist. Sie bietet eine typensichere, modulare und
-ausdrucksstarke Möglichkeit, digitale Schaltungen zu entwerfen, und generiert daraus
-synthetisierbaren Verilog- oder VHDL-Code für etablierte FPGA- und ASIC-Toolchains.</p>
-<p>Das zentrale Anliegen von SpinalHDL ist es, die Entwicklung digitaler Hardware einfacher,
-produktiver und zugleich zuverlässiger zu gestalten. Anstelle der starren und oft
-fehleranfälligen Ansätze klassischer HDLs wie VHDL oder Verilog bietet SpinalHDL eine
-moderne Syntax, die es Entwicklern erlaubt, Schaltungen klar, modular und
-wiederverwendbar zu beschreiben. Durch die Integration bewährter
-Softwareentwicklungsprinzipien (etwa Unit-Tests, parametrisierbare Module und
-IDE-Unterstützung) entsteht eine Arbeitsweise, die sowohl präzise als auch effizient ist.
-Gleichzeitig bleibt die volle Kompatibilität zur etablierten FPGA- und ASIC-Toolchain
-erhalten, da SpinalHDL automatisch synthetisierbaren Verilog- oder VHDL-Code erzeugt.
-Damit schlägt SpinalHDL eine Brücke zwischen den Methoden moderner
-Softwareentwicklung und der Zuverlässigkeit klassischer Hardwarebeschreibung.</p>
+<p>SpinalHDL ist eine moderne HDL (Hardwarebeschreibungssprache), die im Jahr 2014 eingeführt wurde und als Domain-Specific
+Language (DSL) in Scala implementiert ist.
+Sie bietet die Möglichkeit, digitale Schaltungen zu entwerfen. Danach können diese als Verilog oder VHDL-Code generiert werden, der einsatzbereit und mit FPGA sowie ASIC-Toolchains kompatibel ist.</p>
+<p>Das Hauptziel von SpinalHDL ist es, die Entwicklung digitaler Schaltung einfacher, produktiver und vor allem zuverlässiger zu machen.<br />
+Im Gegensatz zu alten, traditionellen HDLs wie VHDL oder Verilog, die fehleranfällig und schwerfällig sind, bietet SpinalHDL eine moderne Syntax.<br />
+Damit können Entwickler Schaltungen klar, modular und wiederverwendbar beschreiben.
+Durch die Integration bewährter Prinzipien aus der Softwareentwicklung wie Unit Tests, parametrisierbare Module und IDE Unterstützung entsteht ein Workflow,
+der sowohl präzise als auch effizient ist.<br />
+Gleichzeitig bleibt SpinalHDL voll kompatibel mit FPGA und ASIC Toolchains, da automatisch Verilog oder VHDL Code generiert wird.</p>
 </section>
 <section id="uberblick-uber-traditionelle-hdls-vhdl-verilog">
 <h2><span class="section-number">1.3. </span>Überblick über traditionelle HDLs (VHDL/Verilog)<a class="headerlink" href="#uberblick-uber-traditionelle-hdls-vhdl-verilog" title="Link to this heading">¶</a></h2>
@@ -296,8 +286,8 @@ Code besteht. Ein mögliches Projekt kann beispielsweise folgendermaßen aufgeba
 <section id="entwicklungsumgebung">
 <h2><span class="section-number">3.2. </span>Entwicklungsumgebung<a class="headerlink" href="#entwicklungsumgebung" title="Link to this heading">¶</a></h2>
 <p>Für die Arbeit mit SpinalHDL empfiehlt sich die Verwendung einer modernen Entwicklungsumgebung.<br />
-In der Praxis hat sich <strong>IntelliJ IDEA</strong> mit installiertem Scala-Plugin bewährt. Damit stehen Funktionen wie Code-Vervollständigung, Syntaxhervorhebung und Refactoring zur Verfügung, die die Entwicklung deutlich vereinfachen.
-Als Build-Tool wird <strong>sbt (Scala Build Tool)</strong> eingesetzt. Es verwaltet die Abhängigkeiten, kompiliert den Quellcode und führt Programme aus. Dadurch lässt sich der gesamte Entwicklungsprozess strukturiert und reproduzierbar abwickeln.</p>
+In der Praxis hat sich <strong>IntelliJ IDEA</strong> mit installiertem Scala-Plugin bewährt. Damit stehen Funktionen wie Code-Vervollständigung, Syntaxhervorhebung und Refactoring zur Verfügung, die die Entwicklung deutlich vereinfachen. Als basis werden <strong>Java JDK (Java 17)</strong>, <strong>Scala 2.13</strong> sowie <strong>sbt (Scala Build Tool)</strong> benötigt
+Als Build-Tool wird <strong>sbt (Scala Build Tool)</strong> eingesetzt. <strong>sbt</strong> verwaltet die Abhängigkeiten, kompiliert den Quellcode und führt Programme aus. Dadurch lässt sich der gesamte Entwicklungsprozess strukturiert und reproduzierbar abwickeln.</p>
 <p>Zur Simulation kommen häufig <strong>Verilator</strong> oder <strong>GHDL</strong> zum Einsatz. Diese Werkzeuge ermöglichen eine schnelle und präzise Verifikation des Verhaltens der entworfenen Schaltungen und sind in der Community weit verbreitet.</p>
 </section>
 <section id="beispiel-kommando">
@@ -325,7 +315,7 @@ sbt<span class="w"> </span>run
 </section>
 <section id="simulation-debugging">
 <h2><span class="section-number">4.4. </span>Simulation &amp; Debugging<a class="headerlink" href="#simulation-debugging" title="Link to this heading">¶</a></h2>
-<p>Da SpinalHDL in Scala integriert ist, können Schaltungen direkt in der Java Virtual Machine simuliert werden. Mit Hilfsmitteln wie <code class="docutils literal notranslate"><span class="pre">SimConfig</span></code> und <code class="docutils literal notranslate"><span class="pre">ScalaTest</span></code> lassen sich präzise und wiederholbare Testfälle erstellen. Dies ermöglicht eine enge Verzahnung von Entwicklung, Simulation und Verifikation und erleichtert das Debugging erheblich.</p>
+<p>Da SpinalHDL in Scala integriert ist, können Schaltungen direkt in <strong>IntelliJ IDEA</strong> simuliert werden. Mit Hilfsmitteln wie <code class="docutils literal notranslate"><span class="pre">SimConfig</span></code> und <code class="docutils literal notranslate"><span class="pre">ScalaTest</span></code> lassen sich präzise und wiederholbare Testfälle erstellen. Dies ermöglicht eine enge Verzahnung von Entwicklung, Simulation und Verifikation und erleichtert das Debugging erheblich.</p>
 </section>
 </section>
 <section id="entwicklungsworkflow">
@@ -437,8 +427,7 @@ sbt<span class="w"> </span>run
 </section>
 <section id="praxisbeispiele">
 <h1><span class="section-number">6. </span>Praxisbeispiele<a class="headerlink" href="#praxisbeispiele" title="Link to this heading">¶</a></h1>
-<p>Im Folgenden werden einige typische Praxisbeispiele vorgestellt, die den Einsatz von SpinalHDL verdeutlichen. Jedes Beispiel enthält die Beschreibung des Moduls, eine Testbench zur Simulation sowie die Möglichkeit, eine Verilog-Datei zu generieren. Auf diese Weise wird der komplette Ablauf von der Modellierung über die Verifikation bis
-zur Codegenerierung sichtbar.</p>
+<p>Im Folgenden werden einige typische Praxisbeispiele vorgestellt, die den Einsatz von SpinalHDL verdeutlichen. Jedes Beispiel enthält die Beschreibung des Moduls, eine Testbench zur Simulation sowie die Möglichkeit, eine Verilog-Datei zu generieren. Auf diese Weise wird der komplette Ablauf von der Modellierung über die Verifikation bis zur Codegenerierung sichtbar.</p>
 <section id="comparator">
 <h2><span class="section-number">6.1. </span>Comparator<a class="headerlink" href="#comparator" title="Link to this heading">¶</a></h2>
 <p>Ein Comparator vergleicht zwei Werte (<code class="docutils literal notranslate"><span class="pre">a</span></code> und <code class="docutils literal notranslate"><span class="pre">b</span></code>) und erzeugt Ausgänge für:</p>
@@ -489,7 +478,6 @@ zur Codegenerierung sichtbar.</p>
 </ul>
 <p><strong>Testbench: <code class="docutils literal notranslate"><span class="pre">ComparatorSim.scala</span></code></strong></p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
-<span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">sim</span><span class="p">.</span><span class="n">_</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="nn">sim</span><span class="p">.</span><span class="n">_</span>
 
 <span class="k">object</span><span class="w"> </span><span class="nc">ComparatorSim</span><span class="w"> </span><span class="p">{</span>
@@ -577,7 +565,6 @@ sbt<span class="w"> </span><span class="s2">&quot;runMain ComparatorVerilog&quot
 </ul>
 <p><strong>Testbench: <code class="docutils literal notranslate"><span class="pre">CounterSim.scala</span></code></strong></p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
-<span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">sim</span><span class="p">.</span><span class="n">_</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="nn">sim</span><span class="p">.</span><span class="n">_</span>
 
 <span class="k">object</span><span class="w"> </span><span class="nc">CounterSim</span><span class="w"> </span><span class="p">{</span>
@@ -657,7 +644,6 @@ Die Datei <code class="docutils literal notranslate"><span class="pre">Counter.v
 </ul>
 <p><strong>Testbench: <code class="docutils literal notranslate"><span class="pre">ClockDividerSim.scala</span></code></strong></p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
-<span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">sim</span><span class="p">.</span><span class="n">_</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="nn">sim</span><span class="p">.</span><span class="n">_</span>
 
 <span class="k">object</span><span class="w"> </span><span class="nc">ClockDividerSim</span><span class="w"> </span><span class="p">{</span>
@@ -762,7 +748,6 @@ Dieser Zyklus wiederholt sich ständig.</p>
 <p>Siehe oben unter „Aufbau des Moduls“.</p>
 <p><strong>[2] <code class="docutils literal notranslate"><span class="pre">src/test/scala/PwmSim.scala</span></code></strong></p>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
-<span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">sim</span><span class="p">.</span><span class="n">_</span>
 <span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="nn">sim</span><span class="p">.</span><span class="n">_</span>
 
 <span class="k">object</span><span class="w"> </span><span class="nc">PwmSim</span><span class="w"> </span><span class="p">{</span>
@@ -1012,7 +997,7 @@ starker Typisierung, klarer Syntax und nahtloser Integration von Simulation und 
 einen deutlichen Vorteil gegenüber klassischen HDLs bietet.</p>
 <p>Am Beispiel des VexRiscv-Prozessors wurde gezeigt, dass SpinalHDL auch für
 hochkomplexe Designs geeignet ist. Die modulare Architektur und das Plugin-System
-ermöglichen es, Prozessorvarianten flexibel zu konfigurieren – von sehr kleinen
+ermöglichen es, Prozessorvarianten flexibel zu konfigurieren von sehr kleinen
 Cores bis hin zu vollwertigen Systemen mit Multiplikation, Division und CSR-Unterstützung.
 Damit wird sichtbar, wie SpinalHDL vom Prototyping bis zur realen SoC-Entwicklung
 eingesetzt werden kann.</p>
