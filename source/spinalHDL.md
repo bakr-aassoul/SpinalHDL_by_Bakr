@@ -1,34 +1,24 @@
 # Einleitung
 
 ## Ziele dieser Dokumentation
-Diese Dokumentation verfolgt das Ziel, einen leicht verständlichen Einstieg in SpinalHDL zu 
-geben und die wichtigsten Grundlagen systematisch aufzubereiten. Neben der 
-theoretischen Einführung werden praxisnahe Beispiele vorgestellt, die den gesamten 
-Entwicklungsworkflow abdecken. Dazu gehören die Komponentenbeschreibung, die 
-Simulation und schließlich die Generierung von Verilog- oder VHDL-Code. Auf diese Weise 
-soll ein Fundament geschaffen werden, auf dem Leserinnen und Leser sowohl kleine 
-Experimente als auch größere Projekte selbstständig entwickeln können. Darüber hinaus 
-wird ein Ausblick auf komplexere Designs wie den VexRiscv-Prozessor gegeben, um die 
-Skalierbarkeit von SpinalHDL aufzuzeigen.
+Ziel dieser Dokumentation ist es, eine Einführung in SpinalHDL zu geben und die wichtigsten Grundlagen zu erklären.  
+Dazu werden Praxisbeispiele vorgestellt, die den gesamten Entwicklungsprozess abdecken.  
+Dazu gehören die Komponentenbeschreibung, die Simulation und schließlich die Generierung von Verilog- oder VHDL-Code.  
+Neben diesem kleinen Projektbeispiel wird auch ein Beispiel zum komplexerem Design beschrieben.  
+In unserem Fall ist dies der **VexRiscv-Prozessor**.
 
 
 ## Motivation
-SpinalHDL ist eine moderne Hardwarebeschreibungssprache, die als Domain-Specific 
-Language (DSL) in Scala implementiert ist. Sie bietet eine typensichere, modulare und 
-ausdrucksstarke Möglichkeit, digitale Schaltungen zu entwerfen, und generiert daraus 
-synthetisierbaren Verilog- oder VHDL-Code für etablierte FPGA- und ASIC-Toolchains.  
+SpinalHDL ist eine moderne HDL (Hardwarebeschreibungssprache), die im Jahr 2014 eingeführt wurde und als Domain-Specific 
+Language (DSL) in Scala implementiert ist.
+Sie bietet die Möglichkeit, digitale Schaltungen zu entwerfen. Danach können diese als Verilog oder VHDL-Code generiert werden, der einsatzbereit und mit FPGA sowie ASIC-Toolchains kompatibel ist.  
 
-Das zentrale Anliegen von SpinalHDL ist es, die Entwicklung digitaler Hardware einfacher, 
-produktiver und zugleich zuverlässiger zu gestalten. Anstelle der starren und oft 
-fehleranfälligen Ansätze klassischer HDLs wie VHDL oder Verilog bietet SpinalHDL eine 
-moderne Syntax, die es Entwicklern erlaubt, Schaltungen klar, modular und 
-wiederverwendbar zu beschreiben. Durch die Integration bewährter 
-Softwareentwicklungsprinzipien (etwa Unit-Tests, parametrisierbare Module und 
-IDE-Unterstützung) entsteht eine Arbeitsweise, die sowohl präzise als auch effizient ist. 
-Gleichzeitig bleibt die volle Kompatibilität zur etablierten FPGA- und ASIC-Toolchain 
-erhalten, da SpinalHDL automatisch synthetisierbaren Verilog- oder VHDL-Code erzeugt. 
-Damit schlägt SpinalHDL eine Brücke zwischen den Methoden moderner 
-Softwareentwicklung und der Zuverlässigkeit klassischer Hardwarebeschreibung.
+Das Hauptziel von SpinalHDL ist es, die Entwicklung digitaler Schaltung einfacher, produktiver und vor allem zuverlässiger zu machen.  
+Im Gegensatz zu alten, traditionellen HDLs wie VHDL oder Verilog, die fehleranfällig und schwerfällig sind, bietet SpinalHDL eine moderne Syntax.  
+Damit können Entwickler Schaltungen klar, modular und wiederverwendbar beschreiben.
+Durch die Integration bewährter Prinzipien aus der Softwareentwicklung wie Unit Tests, parametrisierbare Module und IDE Unterstützung entsteht ein Workflow, 
+der sowohl präzise als auch effizient ist.  
+Gleichzeitig bleibt SpinalHDL voll kompatibel mit FPGA und ASIC Toolchains, da automatisch Verilog oder VHDL Code generiert wird.
 
 
 ## Überblick über traditionelle HDLs (VHDL/Verilog)
@@ -201,8 +191,8 @@ my-spinal-project/
 
 ## Entwicklungsumgebung
 Für die Arbeit mit SpinalHDL empfiehlt sich die Verwendung einer modernen Entwicklungsumgebung.  
-In der Praxis hat sich **IntelliJ IDEA** mit installiertem Scala-Plugin bewährt. Damit stehen Funktionen wie Code-Vervollständigung, Syntaxhervorhebung und Refactoring zur Verfügung, die die Entwicklung deutlich vereinfachen.
-Als Build-Tool wird **sbt (Scala Build Tool)** eingesetzt. Es verwaltet die Abhängigkeiten, kompiliert den Quellcode und führt Programme aus. Dadurch lässt sich der gesamte Entwicklungsprozess strukturiert und reproduzierbar abwickeln.
+In der Praxis hat sich **IntelliJ IDEA** mit installiertem Scala-Plugin bewährt. Damit stehen Funktionen wie Code-Vervollständigung, Syntaxhervorhebung und Refactoring zur Verfügung, die die Entwicklung deutlich vereinfachen. Als basis werden **Java JDK (Java 17)**, **Scala 2.13** sowie **sbt (Scala Build Tool)** benötigt
+Als Build-Tool wird **sbt (Scala Build Tool)** eingesetzt. **sbt** verwaltet die Abhängigkeiten, kompiliert den Quellcode und führt Programme aus. Dadurch lässt sich der gesamte Entwicklungsprozess strukturiert und reproduzierbar abwickeln.
 
 Zur Simulation kommen häufig **Verilator** oder **GHDL** zum Einsatz. Diese Werkzeuge ermöglichen eine schnelle und präzise Verifikation des Verhaltens der entworfenen Schaltungen und sind in der Community weit verbreitet.
 
@@ -227,7 +217,7 @@ Durch Vererbung, generische Klassen und parametrisierte Module können Komponent
 Fehlermeldungen in SpinalHDL enthalten vollständige Stacktraces aus Scala und zeigen präzise auf die Quelle eines Problems. Wenn beispielsweise eine ungültige Zuweisung oder ein mehrfach getriebenes Signal vorliegt, wird dies direkt sichtbar. Dadurch wird die Fehlersuche erheblich vereinfacht und Entwicklungszeit eingespart.
 
 ## Simulation & Debugging
-Da SpinalHDL in Scala integriert ist, können Schaltungen direkt in der Java Virtual Machine simuliert werden. Mit Hilfsmitteln wie `SimConfig` und `ScalaTest` lassen sich präzise und wiederholbare Testfälle erstellen. Dies ermöglicht eine enge Verzahnung von Entwicklung, Simulation und Verifikation und erleichtert das Debugging erheblich.
+Da SpinalHDL in Scala integriert ist, können Schaltungen direkt in **IntelliJ IDEA** simuliert werden. Mit Hilfsmitteln wie `SimConfig` und `ScalaTest` lassen sich präzise und wiederholbare Testfälle erstellen. Dies ermöglicht eine enge Verzahnung von Entwicklung, Simulation und Verifikation und erleichtert das Debugging erheblich.
 
 #  Entwicklungsworkflow
 
@@ -313,8 +303,7 @@ SpinalVhdl(new Adder)
 
 
 #  Praxisbeispiele
-Im Folgenden werden einige typische Praxisbeispiele vorgestellt, die den Einsatz von SpinalHDL verdeutlichen. Jedes Beispiel enthält die Beschreibung des Moduls, eine Testbench zur Simulation sowie die Möglichkeit, eine Verilog-Datei zu generieren. Auf diese Weise wird der komplette Ablauf von der Modellierung über die Verifikation bis 
-zur Codegenerierung sichtbar.
+Im Folgenden werden einige typische Praxisbeispiele vorgestellt, die den Einsatz von SpinalHDL verdeutlichen. Jedes Beispiel enthält die Beschreibung des Moduls, eine Testbench zur Simulation sowie die Möglichkeit, eine Verilog-Datei zu generieren. Auf diese Weise wird der komplette Ablauf von der Modellierung über die Verifikation bis zur Codegenerierung sichtbar.
 
 ## Comparator
 
@@ -366,7 +355,6 @@ class Comparator(width: Int) extends Component {
 
 ```scala
 import spinal.core._
-import spinal.sim._
 import spinal.core.sim._
 
 object ComparatorSim {
@@ -465,7 +453,6 @@ class Counter(width: Int) extends Component {
 
 ```scala
 import spinal.core._
-import spinal.sim._
 import spinal.core.sim._
 
 object CounterSim {
@@ -554,7 +541,6 @@ class ClockDivider(divisorWidth: Int) extends Component {
 **Testbench: `ClockDividerSim.scala`**
 ```scala
 import spinal.core._
-import spinal.sim._
 import spinal.core.sim._
 
 object ClockDividerSim {
@@ -671,7 +657,6 @@ Siehe oben unter „Aufbau des Moduls“.
 
 ```scala
 import spinal.core._
-import spinal.sim._
 import spinal.core.sim._
 
 object PwmSim {
@@ -931,7 +916,7 @@ einen deutlichen Vorteil gegenüber klassischen HDLs bietet.
 
 Am Beispiel des VexRiscv-Prozessors wurde gezeigt, dass SpinalHDL auch für 
 hochkomplexe Designs geeignet ist. Die modulare Architektur und das Plugin-System 
-ermöglichen es, Prozessorvarianten flexibel zu konfigurieren – von sehr kleinen 
+ermöglichen es, Prozessorvarianten flexibel zu konfigurieren von sehr kleinen 
 Cores bis hin zu vollwertigen Systemen mit Multiplikation, Division und CSR-Unterstützung. 
 Damit wird sichtbar, wie SpinalHDL vom Prototyping bis zur realen SoC-Entwicklung 
 eingesetzt werden kann.
