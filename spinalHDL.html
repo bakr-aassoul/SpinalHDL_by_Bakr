@@ -443,24 +443,36 @@ sbt<span class="w"> </span>run
 │   ├── main/scala/
 │   │   ├── Comparator.scala        // Comparator-Modul
 │   │   └── ComparatorVerilog.scala // Verilog-Generierung
+│   │   └── ComparatorVhdl.scala    // VHDL-Generierung
 │   └── test/scala/
 │       └── ComparatorSim.scala     // Testbench
 └── README.md
 </pre></div>
 </div>
 <p><strong>Aufbau des Moduls</strong></p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Comparator</span><span class="p">(</span><span class="n">width</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Component</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Comparator</span><span class="p">(</span><span class="n">width</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Component</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">noIoPrefix</span><span class="p">()</span>
+<span class="w">  </span><span class="n">setDefinitionName</span><span class="p">(</span><span class="s">&quot;Comparator&quot;</span><span class="p">)</span>
+
 <span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Bundle</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">a</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="nc">UInt</span><span class="p">(</span><span class="n">width</span><span class="w"> </span><span class="n">bits</span><span class="p">)</span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">b</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="nc">UInt</span><span class="p">(</span><span class="n">width</span><span class="w"> </span><span class="n">bits</span><span class="p">)</span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">equal</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="nc">Bool</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">a</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="w">  </span><span class="nc">UInt</span><span class="p">(</span><span class="n">width</span><span class="w"> </span><span class="n">bits</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">b</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="w">  </span><span class="nc">UInt</span><span class="p">(</span><span class="n">width</span><span class="w"> </span><span class="n">bits</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">equal</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="nc">Bool</span><span class="p">()</span>
 <span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">greater</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="nc">Bool</span><span class="p">()</span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">less</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="nc">Bool</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">less</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="nc">Bool</span><span class="p">()</span>
 <span class="w">  </span><span class="p">}</span>
 
+<span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">a</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">b</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;b&quot;</span><span class="p">)</span>
 <span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">equal</span><span class="w">   </span><span class="o">:=</span><span class="w"> </span><span class="n">io</span><span class="p">.</span><span class="n">a</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="n">io</span><span class="p">.</span><span class="n">b</span>
 <span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">greater</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">io</span><span class="p">.</span><span class="n">a</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">io</span><span class="p">.</span><span class="n">b</span>
 <span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">less</span><span class="w">    </span><span class="o">:=</span><span class="w"> </span><span class="n">io</span><span class="p">.</span><span class="n">a</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">io</span><span class="p">.</span><span class="n">b</span>
+
+<span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">equal</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;eq&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">greater</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;gt&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">less</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;lt&quot;</span><span class="p">)</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -482,24 +494,27 @@ sbt<span class="w"> </span>run
 
 <span class="k">object</span><span class="w"> </span><span class="nc">ComparatorSim</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">String</span><span class="p">]):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nc">SimConfig</span><span class="p">.</span><span class="n">withWave</span><span class="p">.</span><span class="n">compile</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">Comparator</span><span class="p">(</span><span class="mi">4</span><span class="p">)).</span><span class="n">doSim</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">dut</span><span class="w"> </span><span class="o">=&gt;</span>
-<span class="w">      </span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">a</span><span class="w"> </span><span class="o">#=</span><span class="w"> </span><span class="mi">5</span>
-<span class="w">      </span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">b</span><span class="w"> </span><span class="o">#=</span><span class="w"> </span><span class="mi">5</span>
-<span class="w">      </span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="w">      </span><span class="n">assert</span><span class="p">(</span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">equal</span><span class="p">.</span><span class="n">toBoolean</span><span class="p">)</span>
+<span class="w">    </span><span class="nc">SimConfig</span>
+<span class="w">      </span><span class="p">.</span><span class="n">withVcdWave</span>
+<span class="w">      </span><span class="p">.</span><span class="n">compile</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">Comparator</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="w">      </span><span class="p">.</span><span class="n">doSim</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">dut</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">        </span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">a</span><span class="w"> </span><span class="o">#=</span><span class="w"> </span><span class="mi">5</span>
+<span class="w">        </span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">b</span><span class="w"> </span><span class="o">#=</span><span class="w"> </span><span class="mi">5</span>
+<span class="w">        </span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="n">assert</span><span class="p">(</span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">equal</span><span class="p">.</span><span class="n">toBoolean</span><span class="p">)</span>
 
-<span class="w">      </span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">a</span><span class="w"> </span><span class="o">#=</span><span class="w"> </span><span class="mi">7</span>
-<span class="w">      </span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">b</span><span class="w"> </span><span class="o">#=</span><span class="w"> </span><span class="mi">4</span>
-<span class="w">      </span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="w">      </span><span class="n">assert</span><span class="p">(</span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">greater</span><span class="p">.</span><span class="n">toBoolean</span><span class="p">)</span>
+<span class="w">        </span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">a</span><span class="w"> </span><span class="o">#=</span><span class="w"> </span><span class="mi">7</span>
+<span class="w">        </span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">b</span><span class="w"> </span><span class="o">#=</span><span class="w"> </span><span class="mi">4</span>
+<span class="w">        </span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="n">assert</span><span class="p">(</span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">greater</span><span class="p">.</span><span class="n">toBoolean</span><span class="p">)</span>
 
-<span class="w">      </span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">a</span><span class="w"> </span><span class="o">#=</span><span class="w"> </span><span class="mi">2</span>
-<span class="w">      </span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">b</span><span class="w"> </span><span class="o">#=</span><span class="w"> </span><span class="mi">8</span>
-<span class="w">      </span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="w">      </span><span class="n">assert</span><span class="p">(</span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">less</span><span class="p">.</span><span class="n">toBoolean</span><span class="p">)</span>
+<span class="w">        </span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">a</span><span class="w"> </span><span class="o">#=</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">        </span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">b</span><span class="w"> </span><span class="o">#=</span><span class="w"> </span><span class="mi">8</span>
+<span class="w">        </span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">        </span><span class="n">assert</span><span class="p">(</span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">less</span><span class="p">.</span><span class="n">toBoolean</span><span class="p">)</span>
 
-<span class="w">      </span><span class="n">simSuccess</span><span class="p">()</span>
-<span class="w">    </span><span class="p">}</span>
+<span class="w">        </span><span class="n">simSuccess</span><span class="p">()</span>
+<span class="w">      </span><span class="p">}</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -509,7 +524,23 @@ sbt<span class="w"> </span>run
 
 <span class="k">object</span><span class="w"> </span><span class="nc">ComparatorVerilog</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">String</span><span class="p">]):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nc">SpinalVerilog</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">Comparator</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="w">    </span><span class="nc">SpinalConfig</span><span class="p">(</span>
+<span class="w">      </span><span class="n">targetDirectory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;generated/verilog&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">oneFilePerComponent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">).</span><span class="n">generateVerilog</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">Comparator</span><span class="p">(</span><span class="mi">4</span><span class="p">).</span><span class="n">setDefinitionName</span><span class="p">(</span><span class="s">&quot;Comparator&quot;</span><span class="p">))</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>VHDL-Ausgabe: <code class="docutils literal notranslate"><span class="pre">ComparatorVhdl.scala</span></code></strong></p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
+
+<span class="k">object</span><span class="w"> </span><span class="nc">ComparatorVhdl</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">String</span><span class="p">]):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nc">SpinalConfig</span><span class="p">(</span>
+<span class="w">      </span><span class="n">targetDirectory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;generated/vhdl&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">oneFilePerComponent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">).</span><span class="n">generateVhdl</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">Comparator</span><span class="p">(</span><span class="mi">4</span><span class="p">).</span><span class="n">setDefinitionName</span><span class="p">(</span><span class="s">&quot;Comparator&quot;</span><span class="p">))</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -518,9 +549,64 @@ sbt<span class="w"> </span>run
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sbt<span class="w"> </span>compile
 sbt<span class="w"> </span><span class="s2">&quot;runMain ComparatorSim&quot;</span>
 sbt<span class="w"> </span><span class="s2">&quot;runMain ComparatorVerilog&quot;</span>
+sbt<span class="w"> </span><span class="s2">&quot;runMain ComparatorVhdl&quot;</span>
 </pre></div>
 </div>
-<p>Ergebnis: Die Datei <code class="docutils literal notranslate"><span class="pre">Comparator.v</span></code> wird generiert, und die Testbench prüft die Vergleichsfunktionen.</p>
+<p>Ergebnis: Die Dateien <code class="docutils literal notranslate"><span class="pre">Comparator.v</span></code> und <code class="docutils literal notranslate"><span class="pre">Comparator.vhd</span></code> werden generiert, und die Testbench prüft die Vergleichsfunktionen.</p>
+<p><strong>Generierter VHDL-Code: <code class="docutils literal notranslate"><span class="pre">Comparator.vhd</span></code></strong></p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="w"> </span><span class="nc">Generator</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">SpinalHDL</span><span class="w"> </span><span class="n">v1</span><span class="mf">.9.1</span><span class="w">    </span><span class="n">git</span><span class="w"> </span><span class="n">head</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="n">cba1927b2fff87b0d54e8bbecec94e7256520e4</span>
+<span class="o">--</span><span class="w"> </span><span class="nc">Component</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">Comparator</span>
+
+<span class="n">library</span><span class="w"> </span><span class="n">ieee</span><span class="p">;</span>
+<span class="n">use</span><span class="w"> </span><span class="n">ieee</span><span class="p">.</span><span class="n">std_logic_1164</span><span class="p">.</span><span class="n">all</span><span class="p">;</span>
+<span class="n">use</span><span class="w"> </span><span class="n">ieee</span><span class="p">.</span><span class="n">numeric_std</span><span class="p">.</span><span class="n">all</span><span class="p">;</span>
+
+<span class="n">library</span><span class="w"> </span><span class="n">work</span><span class="p">;</span>
+<span class="n">use</span><span class="w"> </span><span class="n">work</span><span class="p">.</span><span class="n">pkg_scala2hdl</span><span class="p">.</span><span class="n">all</span><span class="p">;</span>
+<span class="n">use</span><span class="w"> </span><span class="n">work</span><span class="p">.</span><span class="n">all</span><span class="p">;</span>
+<span class="n">use</span><span class="w"> </span><span class="n">work</span><span class="p">.</span><span class="n">pkg_enum</span><span class="p">.</span><span class="n">all</span><span class="p">;</span>
+
+
+<span class="n">entity</span><span class="w"> </span><span class="nc">Comparator</span><span class="w"> </span><span class="n">is</span>
+<span class="w">  </span><span class="n">port</span><span class="p">(</span>
+<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">unsigned</span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="n">downto</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">unsigned</span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="n">downto</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">eq</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="n">std_logic</span><span class="p">;</span>
+<span class="w">    </span><span class="n">gt</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="n">std_logic</span><span class="p">;</span>
+<span class="w">    </span><span class="n">lt</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="n">std_logic</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="n">end</span><span class="w"> </span><span class="nc">Comparator</span><span class="p">;</span>
+
+<span class="n">architecture</span><span class="w"> </span><span class="n">arch</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="nc">Comparator</span><span class="w"> </span><span class="n">is</span>
+
+<span class="n">begin</span>
+<span class="w">  </span><span class="n">eq</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">pkg_toStdLogic</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="w">  </span><span class="n">gt</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">pkg_toStdLogic</span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">a</span><span class="p">);</span>
+<span class="w">  </span><span class="n">lt</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">pkg_toStdLogic</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="n">end</span><span class="w"> </span><span class="n">arch</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Generierter Verilog-Code: <code class="docutils literal notranslate"><span class="pre">Comparator.v</span></code></strong></p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="c1">// Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4</span>
+<span class="c1">// Component : Comparator</span>
+
+<span class="err">`</span><span class="n">timescale</span><span class="w"> </span><span class="mi">1</span><span class="n">ns</span><span class="o">/</span><span class="mi">1</span><span class="n">ps</span><span class="w"> </span>
+<span class="n">module</span><span class="w"> </span><span class="nc">Comparator</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">input</span><span class="w">      </span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span><span class="w">    </span><span class="n">a</span><span class="p">,</span>
+<span class="w">  </span><span class="n">input</span><span class="w">      </span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span><span class="w">    </span><span class="n">b</span><span class="p">,</span>
+<span class="w">  </span><span class="n">output</span><span class="w">              </span><span class="n">eq</span><span class="p">,</span>
+<span class="w">  </span><span class="n">output</span><span class="w">              </span><span class="n">gt</span><span class="p">,</span>
+<span class="w">  </span><span class="n">output</span><span class="w">              </span><span class="n">lt</span>
+<span class="p">);</span>
+
+
+<span class="w">  </span><span class="n">assign</span><span class="w"> </span><span class="n">eq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="w">  </span><span class="n">assign</span><span class="w"> </span><span class="n">gt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">a</span><span class="p">);</span>
+<span class="w">  </span><span class="n">assign</span><span class="w"> </span><span class="n">lt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+
+<span class="n">endmodule</span>
+</pre></div>
+</div>
 </section>
 <section id="zahler">
 <h2><span class="section-number">6.2. </span>Zähler<a class="headerlink" href="#zahler" title="Link to this heading">¶</a></h2>
@@ -532,13 +618,19 @@ sbt<span class="w"> </span><span class="s2">&quot;runMain ComparatorVerilog&quot
 │   ├── main/scala/
 │   │   ├── Counter.scala        // Zähler-Modul
 │   │   └── CounterVerilog.scala // Verilog-Generierung
+│   │   └── CounterVhdl.scala    // VHDL-Generierung
 │   └── test/scala/
 │       └── CounterSim.scala     // Testbench
 └── README.md
 </pre></div>
 </div>
 <p><strong>Aufbau des Moduls</strong></p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Counter</span><span class="p">(</span><span class="n">width</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Component</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Counter</span><span class="p">(</span><span class="n">width</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Component</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">noIoPrefix</span><span class="p">()</span>
+<span class="w">  </span><span class="n">setDefinitionName</span><span class="p">(</span><span class="s">&quot;Counter&quot;</span><span class="p">)</span>
+
 <span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Bundle</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="nc">Bool</span><span class="p">()</span>
 <span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">reset</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="nc">Bool</span><span class="p">()</span>
@@ -546,14 +638,10 @@ sbt<span class="w"> </span><span class="s2">&quot;runMain ComparatorVerilog&quot
 <span class="w">  </span><span class="p">}</span>
 
 <span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Reg</span><span class="p">(</span><span class="nc">UInt</span><span class="p">(</span><span class="n">width</span><span class="w"> </span><span class="n">bits</span><span class="p">))</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-
-<span class="w">  </span><span class="n">when</span><span class="p">(</span><span class="n">io</span><span class="p">.</span><span class="n">reset</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">count</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="p">.</span><span class="n">elsewhen</span><span class="p">(</span><span class="n">io</span><span class="p">.</span><span class="n">enable</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">count</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">  </span><span class="p">}</span>
-
+<span class="w">  </span><span class="n">when</span><span class="p">(</span><span class="n">io</span><span class="p">.</span><span class="n">reset</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">.</span><span class="n">elsewhen</span><span class="p">(</span><span class="n">io</span><span class="p">.</span><span class="n">enable</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span>
 <span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">count</span>
+
+<span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">enable</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;enable&quot;</span><span class="p">);</span><span class="w"> </span><span class="n">io</span><span class="p">.</span><span class="n">reset</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;reset&quot;</span><span class="p">);</span><span class="w"> </span><span class="n">io</span><span class="p">.</span><span class="n">value</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;value&quot;</span><span class="p">)</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -579,7 +667,7 @@ sbt<span class="w"> </span><span class="s2">&quot;runMain ComparatorVerilog&quot
 <span class="w">      </span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">reset</span><span class="w"> </span><span class="o">#=</span><span class="w"> </span><span class="kc">false</span>
 <span class="w">      </span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">enable</span><span class="w"> </span><span class="o">#=</span><span class="w"> </span><span class="kc">true</span>
 
-<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">until</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="o">-</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">until</span><span class="w"> </span><span class="mi">8</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">dut</span><span class="p">.</span><span class="n">clockDomain</span><span class="p">.</span><span class="n">waitSampling</span><span class="p">()</span>
 <span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">s&quot;Zählerwert = </span><span class="si">${</span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">value</span><span class="p">.</span><span class="n">toBigInt</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span>
 <span class="w">      </span><span class="p">}</span>
@@ -619,20 +707,31 @@ Die Datei <code class="docutils literal notranslate"><span class="pre">Counter.v
 │   ├── main/scala/
 │   │   ├── ClockDivider.scala        // Taktteiler-Modul
 │   │   └── ClockDividerVerilog.scala // Verilog-Generierung
+│   │   └── ClockDividerVhdl.scala    // VHDL-Generierung
 │   └── test/scala/
 │       └── ClockDividerSim.scala     // Testbench
 └── README.md
 </pre></div>
 </div>
 <p><strong>Aufbau des Moduls</strong></p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ClockDivider</span><span class="p">(</span><span class="n">divisorWidth</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Component</span><span class="w"> </span><span class="p">{</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ClockDivider</span><span class="p">(</span><span class="n">divisorWidth</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Component</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">noIoPrefix</span><span class="p">()</span>
+<span class="w">  </span><span class="n">setDefinitionName</span><span class="p">(</span><span class="s">&quot;ClockDivider&quot;</span><span class="p">)</span>
+
 <span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Bundle</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">clkOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="nc">Bool</span><span class="p">()</span>
 <span class="w">  </span><span class="p">}</span>
 
+<span class="w">  </span><span class="c1">// Zähler läuft kontinuierlich</span>
 <span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Reg</span><span class="p">(</span><span class="nc">UInt</span><span class="p">(</span><span class="n">divisorWidth</span><span class="w"> </span><span class="n">bits</span><span class="p">))</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="w">  </span><span class="n">counter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+
+<span class="w">  </span><span class="c1">// höchstwertiges Bit als geteiltes Taktsignal</span>
 <span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">clkOut</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">counter</span><span class="p">.</span><span class="n">msb</span>
+
+<span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">clkOut</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;clkOut&quot;</span><span class="p">)</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -648,12 +747,13 @@ Die Datei <code class="docutils literal notranslate"><span class="pre">Counter.v
 
 <span class="k">object</span><span class="w"> </span><span class="nc">ClockDividerSim</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">String</span><span class="p">]):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nc">SimConfig</span><span class="p">.</span><span class="n">withWave</span><span class="p">.</span><span class="n">compile</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">ClockDivider</span><span class="p">(</span><span class="mi">8</span><span class="p">)).</span><span class="n">doSim</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">dut</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">    </span><span class="nc">SimConfig</span><span class="p">.</span><span class="n">withVcdWave</span><span class="p">.</span><span class="n">compile</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">ClockDivider</span><span class="p">(</span><span class="mi">8</span><span class="p">)).</span><span class="n">doSim</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">dut</span><span class="w"> </span><span class="o">=&gt;</span>
 <span class="w">      </span><span class="n">dut</span><span class="p">.</span><span class="n">clockDomain</span><span class="p">.</span><span class="n">forkStimulus</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 
 <span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">until</span><span class="w"> </span><span class="mi">300</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">dut</span><span class="p">.</span><span class="n">clockDomain</span><span class="p">.</span><span class="n">waitSampling</span><span class="p">()</span>
-<span class="w">        </span><span class="n">println</span><span class="p">(</span><span class="s">s&quot;Takt </span><span class="si">$</span><span class="n">i</span><span class="s">: clkOut = </span><span class="si">${</span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">clkOut</span><span class="p">.</span><span class="n">toBoolean</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">          </span><span class="n">println</span><span class="p">(</span><span class="s">s&quot;Takt </span><span class="si">$</span><span class="n">i</span><span class="s">: clkOut = </span><span class="si">${</span><span class="n">dut</span><span class="p">.</span><span class="n">io</span><span class="p">.</span><span class="n">clkOut</span><span class="p">.</span><span class="n">toBoolean</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span>
 <span class="w">      </span><span class="p">}</span>
 
 <span class="w">      </span><span class="n">simSuccess</span><span class="p">()</span>
@@ -667,7 +767,23 @@ Die Datei <code class="docutils literal notranslate"><span class="pre">Counter.v
 
 <span class="k">object</span><span class="w"> </span><span class="nc">ClockDividerVerilog</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">String</span><span class="p">]):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nc">SpinalVerilog</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">ClockDivider</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+<span class="w">    </span><span class="nc">SpinalConfig</span><span class="p">(</span>
+<span class="w">      </span><span class="n">targetDirectory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;generated/verilog&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">oneFilePerComponent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">).</span><span class="n">generateVerilog</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">ClockDivider</span><span class="p">(</span><span class="mi">8</span><span class="p">).</span><span class="n">setDefinitionName</span><span class="p">(</span><span class="s">&quot;ClockDivider&quot;</span><span class="p">))</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>VHDL-Ausgabe: <code class="docutils literal notranslate"><span class="pre">ClockDividerVhdl.scala</span></code></strong></p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
+
+<span class="k">object</span><span class="w"> </span><span class="nc">ClockDividerVhdl</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">String</span><span class="p">]):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nc">SpinalConfig</span><span class="p">(</span>
+<span class="w">      </span><span class="n">targetDirectory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;generated/vhdl&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">oneFilePerComponent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">).</span><span class="n">generateVhdl</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">ClockDivider</span><span class="p">(</span><span class="mi">8</span><span class="p">).</span><span class="n">setDefinitionName</span><span class="p">(</span><span class="s">&quot;ClockDivider&quot;</span><span class="p">))</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -676,13 +792,69 @@ Die Datei <code class="docutils literal notranslate"><span class="pre">Counter.v
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sbt<span class="w"> </span>compile
 sbt<span class="w"> </span><span class="s2">&quot;runMain ClockDividerSim&quot;</span>
 sbt<span class="w"> </span><span class="s2">&quot;runMain ClockDividerVerilog&quot;</span>
+sbt<span class="w"> </span><span class="s2">&quot;runMain ClockDividerVhfl&quot;</span>
 </pre></div>
 </div>
 <p>Das erzeugt:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">ClockDivider.v</span></code>: die Verilog-Datei</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ClockDivider.vhd</span></code>: die Verilog-Datei</p></li>
 <li><p>und zeigt die Simulation mit <code class="docutils literal notranslate"><span class="pre">clkOut</span></code>, der etwa alle 128 Takte wechselt.</p></li>
 </ul>
+<p><strong>Generierter VHDL-Code: <code class="docutils literal notranslate"><span class="pre">ClockDivider.vhd</span></code></strong></p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="w"> </span><span class="nc">Generator</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">SpinalHDL</span><span class="w"> </span><span class="n">v1</span><span class="mf">.9.1</span><span class="w">    </span><span class="n">git</span><span class="w"> </span><span class="n">head</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="n">cba1927b2fff87b0d54e8bbecec94e7256520e4</span>
+<span class="o">--</span><span class="w"> </span><span class="nc">Component</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">Comparator</span>
+
+<span class="n">library</span><span class="w"> </span><span class="n">ieee</span><span class="p">;</span>
+<span class="n">use</span><span class="w"> </span><span class="n">ieee</span><span class="p">.</span><span class="n">std_logic_1164</span><span class="p">.</span><span class="n">all</span><span class="p">;</span>
+<span class="n">use</span><span class="w"> </span><span class="n">ieee</span><span class="p">.</span><span class="n">numeric_std</span><span class="p">.</span><span class="n">all</span><span class="p">;</span>
+
+<span class="n">library</span><span class="w"> </span><span class="n">work</span><span class="p">;</span>
+<span class="n">use</span><span class="w"> </span><span class="n">work</span><span class="p">.</span><span class="n">pkg_scala2hdl</span><span class="p">.</span><span class="n">all</span><span class="p">;</span>
+<span class="n">use</span><span class="w"> </span><span class="n">work</span><span class="p">.</span><span class="n">all</span><span class="p">;</span>
+<span class="n">use</span><span class="w"> </span><span class="n">work</span><span class="p">.</span><span class="n">pkg_enum</span><span class="p">.</span><span class="n">all</span><span class="p">;</span>
+
+
+<span class="n">entity</span><span class="w"> </span><span class="nc">Comparator</span><span class="w"> </span><span class="n">is</span>
+<span class="w">  </span><span class="n">port</span><span class="p">(</span>
+<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">unsigned</span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="n">downto</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">unsigned</span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="n">downto</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">eq</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="n">std_logic</span><span class="p">;</span>
+<span class="w">    </span><span class="n">gt</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="n">std_logic</span><span class="p">;</span>
+<span class="w">    </span><span class="n">lt</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="n">std_logic</span>
+<span class="w">  </span><span class="p">);</span>
+<span class="n">end</span><span class="w"> </span><span class="nc">Comparator</span><span class="p">;</span>
+
+<span class="n">architecture</span><span class="w"> </span><span class="n">arch</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="nc">Comparator</span><span class="w"> </span><span class="n">is</span>
+
+<span class="n">begin</span>
+<span class="w">  </span><span class="n">eq</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">pkg_toStdLogic</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="w">  </span><span class="n">gt</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">pkg_toStdLogic</span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">a</span><span class="p">);</span>
+<span class="w">  </span><span class="n">lt</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">pkg_toStdLogic</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="n">end</span><span class="w"> </span><span class="n">arch</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Generierter Verilog-Code: <code class="docutils literal notranslate"><span class="pre">Comparator.v</span></code></strong></p>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="c1">// Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4</span>
+<span class="c1">// Component : Comparator</span>
+
+<span class="err">`</span><span class="n">timescale</span><span class="w"> </span><span class="mi">1</span><span class="n">ns</span><span class="o">/</span><span class="mi">1</span><span class="n">ps</span><span class="w"> </span>
+<span class="n">module</span><span class="w"> </span><span class="nc">Comparator</span><span class="w"> </span><span class="p">(</span>
+<span class="w">  </span><span class="n">input</span><span class="w">      </span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span><span class="w">    </span><span class="n">a</span><span class="p">,</span>
+<span class="w">  </span><span class="n">input</span><span class="w">      </span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">0</span><span class="p">]</span><span class="w">    </span><span class="n">b</span><span class="p">,</span>
+<span class="w">  </span><span class="n">output</span><span class="w">              </span><span class="n">eq</span><span class="p">,</span>
+<span class="w">  </span><span class="n">output</span><span class="w">              </span><span class="n">gt</span><span class="p">,</span>
+<span class="w">  </span><span class="n">output</span><span class="w">              </span><span class="n">lt</span>
+<span class="p">);</span>
+
+
+<span class="w">  </span><span class="n">assign</span><span class="w"> </span><span class="n">eq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="w">  </span><span class="n">assign</span><span class="w"> </span><span class="n">gt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">a</span><span class="p">);</span>
+<span class="w">  </span><span class="n">assign</span><span class="w"> </span><span class="n">lt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+
+<span class="n">endmodule</span>
+</pre></div>
+</div>
 </section>
 <section id="pwm">
 <h2><span class="section-number">6.4. </span>PWM<a class="headerlink" href="#pwm" title="Link to this heading">¶</a></h2>
