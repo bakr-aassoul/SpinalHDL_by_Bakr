@@ -542,39 +542,55 @@ class Counter(width: Int) extends Component {
 
 ```scala
 import spinal.core._
+import spinal.sim._
 import spinal.core.sim._
 
 object CounterSim {
   def main(args: Array[String]): Unit = {
-    SimConfig.withWave.compile(new Counter(4)).doSim { dut =>
-      dut.clockDomain.forkStimulus(10)
+    SimConfig
+      .withVcdWave                // VCD für GTKWave
+      .compile(new Counter(4))
+      .doSim { dut =>
+        dut.clockDomain.forkStimulus(10)
 
-      dut.io.reset #= true
-      dut.io.enable #= false
-      dut.clockDomain.waitSampling()
-
-      dut.io.reset #= false
-      dut.io.enable #= true
-
-      for (- 0 until 8) {
+        dut.io.reset  #= true
+        dut.io.enable #= false
         dut.clockDomain.waitSampling()
-        println(s"Zählerwert = ${dut.io.value.toBigInt}")
-      }
 
-      simSuccess()
-    }
+        dut.io.reset  #= false
+        dut.io.enable #= true
+
+        for (_ <- 0 until 8) {
+          dut.clockDomain.waitSampling()
+          println(s"Zählerwert = ${dut.io.value.toBigInt}")
+        }
+
+        simSuccess()
+      }
   }
 }
 ```
+
 **Verilog-Ausgabe: `CounterVerilog.scala`**
 
 ```scala
 import spinal.core._
 
 object CounterVerilog {
-  def main(args: Array[String]): Unit = {
-    SpinalVerilog(new Counter(4))
-  }
+  def main(args: Array[String]): Unit =
+    SpinalConfig(targetDirectory="generated/verilog", oneFilePerComponent=true)
+      .generateVerilog(new Counter(4).setDefinitionName("Counter"))
+}
+```
+
+**VHDL-Ausgabe: `CounterVhdl.scala`**
+
+```scala
+import spinal.core._
+object CounterVhdl {
+  def main(args: Array[String]): Unit =
+    SpinalConfig(targetDirectory="generated/vhdl", oneFilePerComponent=true)
+      .generateVhdl(new Counter(4).setDefinitionName("Counter"))
 }
 ```
 **Verwendung**
@@ -586,9 +602,89 @@ sbt "runMain CounterVerilog"
 ```
 
 **Ergebnis:**
-Die Datei `Counter.v` wird generiert. In der Simulation zählt der Wert bei `enable = true` hoch.
+Die Dateien `Counter.v` und `Counter.vhd` werden generiert. In der Simulation zählt der Wert bei `enable = true` hoch.
+
+**Generierter VHDL-Code: `Counter.vhd`** 
+```scala
+-- Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
+-- Component : Counter
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+library work;
+use work.pkg_scala2hdl.all;
+use work.all;
+use work.pkg_enum.all;
 
 
+entity Counter is
+  port(
+    enable : in std_logic;
+    reset : in std_logic;
+    value : out unsigned(3 downto 0);
+    clk : in std_logic;
+    reset_1 : in std_logic
+  );
+end Counter;
+
+architecture arch of Counter is
+
+  signal zz_value : unsigned(3 downto 0);
+begin
+  value <= zz_value;
+  process(clk, reset_1)
+  begin
+    if reset_1 = '1' then
+      zz_value <= pkg_unsigned("0000");
+    elsif rising_edge(clk) then
+      if reset = '1' then
+        zz_value <= pkg_unsigned("0000");
+      else
+        if enable = '1' then
+          zz_value <= (zz_value + pkg_unsigned("0001"));
+        end if;
+      end if;
+    end if;
+  end process;
+
+end arch;
+```
+**Generierter Verilog-Code: `Counter.v`** 
+```scala
+// Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
+// Component : Counter
+
+`timescale 1ns/1ps 
+module Counter (
+  input               enable,
+  input               reset,
+  output     [3:0]    value,
+  input               clk,
+  input               reset_1
+);
+
+  reg        [3:0]    _zz_value;
+
+  assign value = _zz_value;
+  always @(posedge clk or posedge reset_1) begin
+    if(reset_1) begin
+      _zz_value <= 4'b0000;
+    end else begin
+      if(reset) begin
+        _zz_value <= 4'b0000;
+      end else begin
+        if(enable) begin
+          _zz_value <= (_zz_value + 4'b0001);
+        end
+      end
+    end
+  end
+
+
+endmodule
+```
 
 ## Taktteiler (Clock Divider)
 
@@ -693,7 +789,7 @@ object ClockDividerVhdl {
 sbt compile
 sbt "runMain ClockDividerSim"
 sbt "runMain ClockDividerVerilog"
-sbt "runMain ClockDividerVhfl"
+sbt "runMain ClockDividerVhdl"
 ```
 
 Das erzeugt:
