@@ -763,6 +763,8 @@ Dies ist ein einfaches SpinalHDL-Projekt, das ein parametrierbares PWM-Modul (Pu
 - eine Hardwarebeschreibung (`Pwm.scala`)
 - eine Testbench (`PwmSim.scala`)
 - eine Verilog-Ausgabe (`PwmVerilog.scala`)
+- eine VHDL-Ausgabe (`PwmVhdl.scala`)
+- die Hilfsskripte `scripts/sim.sh` (Simulation) und `scripts/gen.sh` (HDL-Generierung)
 - und eine verständliche Erklärung des Funktionsprinzips
 
 **Projektstruktur**
@@ -775,12 +777,20 @@ pwm-spinalhdl/
 ├── src/
 │   ├── main/
 │   │   └── scala/
-│   │       ├── Pwm.scala           ← [1] PWM-Modul
-│   │       └── PwmVerilog.scala    ← [3] Verilog-Ausgabe
+│   │       ├── Pwm.scala                 ← [1] PWM-Modul
+│   │       └── PwmVerilog.scala          ← [3] Verilog-Generierung
+│   │       └── PwmVhdl.scala             ← [4] VHDL-Generierung
 │   └── test/
 │       └── scala/
-│           └── PwmSim.scala        ← [2] Simulation
-└── README.md
+│           └── PwmSim.scala              ← [2] Simulation
+├── scripts/
+│   ├── sim.sh                            ←  Simulation
+│   └── gen.sh                            ←  HDL-Generierung
+└── generated/
+│   ├── verilog/
+│       └── Pwm.v
+│   └── vhdl/
+│       └── Pwm.vhd
 ```
 
 **Erklärung des PWM-Moduls**
@@ -791,16 +801,35 @@ Wie lange das Signal „an“ bleibt, hängt vom **Duty-Cycle** ab – einem Ein
 **Aufbau des Moduls**
 
 ```scala
+import spinal.core._
+
 class Pwm(width: Int) extends Component {
+  noIoPrefix()
+  setDefinitionName("Pwm")
+
   val io = new Bundle {
-    val enable = in Bool()
-    val duty   = in UInt(width bits)
-    val pwmOut = out Bool()
+    val enable  = in  Bool()
+    val duty    = in  UInt(width bits)  
+    val pwmOut  = out Bool()
+    val dutyPct = out UInt(7 bits)       
   }
 
   val counter = Reg(UInt(width bits)) init(0)
   counter := counter + 1
   io.pwmOut := io.enable && (counter < io.duty)
+
+  // Percentage 0..100 using exact divide (2^width - 1), rounded
+  val numWidth = width + 7
+  val num      = io.duty.resize(numWidth) * U(100)
+  val den      = U((1 << width) - 1, numWidth bits)
+  val pctWide  = (num + (den >> 1)) / den
+  io.dutyPct   := pctWide.resized          // drive the output
+
+  
+  io.enable.setName("enable")
+  io.duty.setName("duty")
+  io.pwmOut.setName("pwmOut")
+  io.dutyPct.setName("dutyPct")
 }
 ```
 
@@ -811,16 +840,17 @@ class Pwm(width: Int) extends Component {
 - `duty`: Bestimmt, wie lange das Signal „an“ sein soll (je höher der Wert, desto länger).
 - `counter`: Zählt von 0 bis zum Maximalwert und beginnt dann wieder von vorn.
 - `pwmOut`: Wird „an“, solange `counter < duty`.
+- `dutyPct`: Zeigt den Duty-Cycle direkt in Prozent (20%, 50%, 75%, 0% oder 100%)
 
 ###  Beispiel (bei 8 Bit Auflösung)
 
-- `duty = 0` → Signal ist immer aus
+- `duty = 0` → Signal ist immer aus → 0%
 - `duty = 128` → Signal ist 50 % der Zeit an
-- `duty = 255` → Signal ist immer an
+- `duty = 255` → Signal ist immer an → 100%
 
 Das Modul vergleicht einen Zähler mit einem Zielwert (`duty`).  
 Solange der Zähler kleiner ist, ist das Signal **an**  danach **aus**.  
-Dieser Zyklus wiederholt sich ständig.
+Dieser Zyklus wiederholt sich kontinuierlich.
 
 **[1] `src/main/scala/Pwm.scala` (Code wie oben)**
 
@@ -834,77 +864,141 @@ import spinal.core.sim._
 
 object PwmSim {
   def main(args: Array[String]): Unit = {
-    SimConfig
-      .withWave
-      .compile(new Pwm(8)) // 8-Bit PWM
-      .doSim { dut =>
-        dut.clockDomain.forkStimulus(10)
+    SimConfig.withVcdWave.compile(new Pwm(8)).doSim { dut =>
+      dut.clockDomain.forkStimulus(10)
 
-        dut.io.enable #= true
-        dut.io.duty   #= 128 // 50% Duty Cycle
+      // enable PWM
+      dut.io.enable #= true
 
-        for (cycle <- 0 until 300) {
-          dut.clockDomain.waitSampling()
-        }
+      // 25% duty
+      dut.io.duty #= 64
+      for (_ <- 0 until 300) dut.clockDomain.waitSampling()
 
-        simSuccess()
-      }
+      // 50% duty
+      dut.io.duty #= 128
+      for (_ <- 0 until 300) dut.clockDomain.waitSampling()
+
+      // 75% duty
+      dut.io.duty #= 192
+      for (_ <- 0 until 300) dut.clockDomain.waitSampling()
+
+      // 0% duty
+      dut.io.duty #= 0
+      for (_ <- 0 until 150) dut.clockDomain.waitSampling()
+
+      // 100% duty
+      dut.io.duty #= 255
+      for (_ <- 0 until 150) dut.clockDomain.waitSampling()
+
+      simSuccess()
+    }
   }
 }
 ```
-**`[3]PwmVerilog.scala`**
 
+**`[3]PwmVerilog.scala`**
 ```scala
 import spinal.core._
-
 object PwmVerilog {
-  def main(args: Array[String]): Unit = {
-    SpinalVerilog(new Pwm(8))
-  }
+  def main(args: Array[String]): Unit =
+    SpinalConfig(targetDirectory="generated/verilog", oneFilePerComponent=true)
+      .generateVerilog(new Pwm(8).setDefinitionName("Pwm"))
 }
 ```
 
-
-
-**`build.sbt`**
-
+**`[4]PwmVhdl.scala`**
 ```scala
-name := "pwm-spinalhdl"
-
-version := "0.1"
-
-scalaVersion := "2.13.12"
-
-libraryDependencies ++= Seq(
-  "com.github.spinalhdl" %% "spinalhdl-core" % "1.9.1",
-  "com.github.spinalhdl" %% "spinalhdl-sim"  % "1.9.1" % Test
-)
+import spinal.core._
+object PwmVhdl {
+  def main(args: Array[String]): Unit =
+    SpinalConfig(targetDirectory="generated/vhdl", oneFilePerComponent=true)
+      .generateVhdl(new Pwm(8).setDefinitionName("Pwm"))
+}
 ```
 
+**`sim.sh`**
+```scala
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+docker run --rm -it \
+  -u $(id -u):$(id -g) -e HOME=/tmp \
+  -v "$PWD":/workspace -w /workspace \
+  spinalhdl:dev \
+  sbt "Test / runMain PwmSim"
+echo "✅ PWM: VCD under simWorkspace/Pwm/"
+```
+
+**`gen.sh`**
+```scala
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$(dirname "$0")/.."
+docker run --rm -it \
+  -u $(id -u):$(id -g) -e HOME=/tmp \
+  -v "$PWD":/workspace -w /workspace \
+  spinalhdl:dev \
+  sbt "runMain PwmVerilog" "runMain PwmVhdl"
+echo "✅ PWM: HDL under generated/{verilog,vhdl}/"
+```
 
 
 **Projekt kompilieren und starten**
-
-
-
 ```bash
-sbt compile
+./scripts/sim.sh  #Simulation mit VCD
+```
+```bash
+./scripts/gen.sh  #HDL-Ausgabe (Verilog und VHDL)
 ```
 
-```bash
-sbt "runMain PwmVerilog"
+**Generierter Verilog-Code: `Pwm.v`** 
+```scala
+// Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
+// Component : Comparator
+
+`timescale 1ns/1ps 
+module Comparator (
+  input      [3:0]    a,
+  input      [3:0]    b,
+  output              eq,
+  output              gt,
+  output              lt
+);
+
+
+  assign eq = (a == b);
+  assign gt = (b < a);
+  assign lt = (a < b);
+
+endmodule
 ```
 
-```bash
-sbt "runMain PwmSim"
+**Generierter VHDL-Code: `Pwm.vhd`** 
+```scala
+// Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
+// Component : Comparator
+
+`timescale 1ns/1ps 
+module Comparator (
+  input      [3:0]    a,
+  input      [3:0]    b,
+  output              eq,
+  output              gt,
+  output              lt
+);
+
+
+  assign eq = (a == b);
+  assign gt = (b < a);
+  assign lt = (a < b);
+
+endmodule
 ```
-
-
 **Ergebnis**
 
 - Wir erhalten ein synthetisierbares PWM-Modul  
 - Wir können das Verhalten direkt simulieren  
-- Der generierte Verilog-Code (`Pwm.v`) ist für FPGA/ASIC verwendbar
+- Die generierte Verilog-Code (`Pwm.v`) und VHDL-Code (`Pwm.vhd`) sind für FPGA/ASIC verwendbar
 
 # Komplexere Designs: Der VexRiscv-Prozessor
 SpinalHDL eignet sich nicht nur für kleine Module wie Zähler oder PWM-Generatoren. 
