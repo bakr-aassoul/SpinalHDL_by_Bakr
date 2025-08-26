@@ -320,6 +320,7 @@ comparator-spinalhdl/
 │   ├── main/scala/
 │   │   ├── Comparator.scala        // Comparator-Modul
 │   │   └── ComparatorVerilog.scala // Verilog-Generierung
+│   │   └── ComparatorVhdl.scala    // VHDL-Generierung
 │   └── test/scala/
 │       └── ComparatorSim.scala     // Testbench
 └── README.md
@@ -328,18 +329,29 @@ comparator-spinalhdl/
 **Aufbau des Moduls**
 
 ```scala
+import spinal.core._
+
 class Comparator(width: Int) extends Component {
+  noIoPrefix()
+  setDefinitionName("Comparator")
+
   val io = new Bundle {
-    val a      = in UInt(width bits)
-    val b      = in UInt(width bits)
-    val equal  = out Bool()
+    val a       = in  UInt(width bits)
+    val b       = in  UInt(width bits)
+    val equal   = out Bool()
     val greater = out Bool()
-    val less   = out Bool()
+    val less    = out Bool()
   }
 
+  io.a.setName("a")
+  io.b.setName("b")
   io.equal   := io.a === io.b
   io.greater := io.a > io.b
   io.less    := io.a < io.b
+
+  io.equal.setName("eq")
+  io.greater.setName("gt")
+  io.less.setName("lt")
 }
 ```
 **Was macht das Modul?**
@@ -359,24 +371,27 @@ import spinal.core.sim._
 
 object ComparatorSim {
   def main(args: Array[String]): Unit = {
-    SimConfig.withWave.compile(new Comparator(4)).doSim { dut =>
-      dut.io.a #= 5
-      dut.io.b #= 5
-      sleep(1)
-      assert(dut.io.equal.toBoolean)
+    SimConfig
+      .withVcdWave
+      .compile(new Comparator(4))
+      .doSim { dut =>
+        dut.io.a #= 5
+        dut.io.b #= 5
+        sleep(1)
+        assert(dut.io.equal.toBoolean)
 
-      dut.io.a #= 7
-      dut.io.b #= 4
-      sleep(1)
-      assert(dut.io.greater.toBoolean)
+        dut.io.a #= 7
+        dut.io.b #= 4
+        sleep(1)
+        assert(dut.io.greater.toBoolean)
 
-      dut.io.a #= 2
-      dut.io.b #= 8
-      sleep(1)
-      assert(dut.io.less.toBoolean)
+        dut.io.a #= 2
+        dut.io.b #= 8
+        sleep(1)
+        assert(dut.io.less.toBoolean)
 
-      simSuccess()
-    }
+        simSuccess()
+      }
   }
 }
 ```
@@ -389,11 +404,27 @@ import spinal.core._
 
 object ComparatorVerilog {
   def main(args: Array[String]): Unit = {
-    SpinalVerilog(new Comparator(4))
+    SpinalConfig(
+      targetDirectory = "generated/verilog",
+      oneFilePerComponent = true
+    ).generateVerilog(new Comparator(4).setDefinitionName("Comparator"))
   }
 }
 ```
 
+**VHDL-Ausgabe: `ComparatorVhdl.scala`**
+```scala
+import spinal.core._
+
+object ComparatorVhdl {
+  def main(args: Array[String]): Unit = {
+    SpinalConfig(
+      targetDirectory = "generated/vhdl",
+      oneFilePerComponent = true
+    ).generateVhdl(new Comparator(4).setDefinitionName("Comparator"))
+  }
+}
+```
 
 **Verwendung**
 
@@ -401,9 +432,65 @@ object ComparatorVerilog {
 sbt compile
 sbt "runMain ComparatorSim"
 sbt "runMain ComparatorVerilog"
+sbt "runMain ComparatorVhdl"
 ```
 
-Ergebnis: Die Datei `Comparator.v` wird generiert, und die Testbench prüft die Vergleichsfunktionen.
+Ergebnis: Die Dateien `Comparator.v` und `Comparator.vhd` werden generiert, und die Testbench prüft die Vergleichsfunktionen.
+
+**Generierter VHDL-Code: `Comparator.vhd`** 
+```scala
+-- Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
+-- Component : Comparator
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+library work;
+use work.pkg_scala2hdl.all;
+use work.all;
+use work.pkg_enum.all;
+
+
+entity Comparator is
+  port(
+    a : in unsigned(3 downto 0);
+    b : in unsigned(3 downto 0);
+    eq : out std_logic;
+    gt : out std_logic;
+    lt : out std_logic
+  );
+end Comparator;
+
+architecture arch of Comparator is
+
+begin
+  eq <= pkg_toStdLogic(a = b);
+  gt <= pkg_toStdLogic(b < a);
+  lt <= pkg_toStdLogic(a < b);
+end arch;
+```
+**Generierter Verilog-Code: `Comparator.v`** 
+```scala
+// Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
+// Component : Comparator
+
+`timescale 1ns/1ps 
+module Comparator (
+  input      [3:0]    a,
+  input      [3:0]    b,
+  output              eq,
+  output              gt,
+  output              lt
+);
+
+
+  assign eq = (a == b);
+  assign gt = (b < a);
+  assign lt = (a < b);
+
+endmodule
+```
 
 ## Zähler
 
@@ -417,6 +504,7 @@ counter-spinalhdl/
 │   ├── main/scala/
 │   │   ├── Counter.scala        // Zähler-Modul
 │   │   └── CounterVerilog.scala // Verilog-Generierung
+│   │   └── CounterVhdl.scala    // VHDL-Generierung
 │   └── test/scala/
 │       └── CounterSim.scala     // Testbench
 └── README.md
@@ -425,7 +513,12 @@ counter-spinalhdl/
 **Aufbau des Moduls**
 
 ```scala
+import spinal.core._
+
 class Counter(width: Int) extends Component {
+  noIoPrefix()
+  setDefinitionName("Counter")
+
   val io = new Bundle {
     val enable = in Bool()
     val reset  = in Bool()
@@ -433,14 +526,10 @@ class Counter(width: Int) extends Component {
   }
 
   val count = Reg(UInt(width bits)) init(0)
-
-  when(io.reset) {
-    count := 0
-  } .elsewhen(io.enable) {
-    count := count + 1
-  }
-
+  when(io.reset) { count := 0 } .elsewhen(io.enable) { count := count + 1 }
   io.value := count
+
+  io.enable.setName("enable"); io.reset.setName("reset"); io.value.setName("value")
 }
 ```
 **Was macht das Modul?**
@@ -467,7 +556,7 @@ object CounterSim {
       dut.io.reset #= false
       dut.io.enable #= true
 
-      for (i <- 0 until 5) {
+      for (- 0 until 8) {
         dut.clockDomain.waitSampling()
         println(s"Zählerwert = ${dut.io.value.toBigInt}")
       }
@@ -513,6 +602,7 @@ clockdivider-spinalhdl/
 │   ├── main/scala/
 │   │   ├── ClockDivider.scala        // Taktteiler-Modul
 │   │   └── ClockDividerVerilog.scala // Verilog-Generierung
+│   │   └── ClockDividerVhdl.scala    // VHDL-Generierung
 │   └── test/scala/
 │       └── ClockDividerSim.scala     // Testbench
 └── README.md
@@ -521,14 +611,24 @@ clockdivider-spinalhdl/
 **Aufbau des Moduls**
 
 ```scala
+import spinal.core._
+
 class ClockDivider(divisorWidth: Int) extends Component {
+  noIoPrefix()
+  setDefinitionName("ClockDivider")
+
   val io = new Bundle {
     val clkOut = out Bool()
   }
 
+  // Zähler läuft kontinuierlich
   val counter = Reg(UInt(divisorWidth bits)) init(0)
   counter := counter + 1
+
+  // höchstwertiges Bit als geteiltes Taktsignal
   io.clkOut := counter.msb
+
+  io.clkOut.setName("clkOut")
 }
 ```
 **Was macht das Modul?**
@@ -545,12 +645,13 @@ import spinal.core.sim._
 
 object ClockDividerSim {
   def main(args: Array[String]): Unit = {
-    SimConfig.withWave.compile(new ClockDivider(8)).doSim { dut =>
+    SimConfig.withVcdWave.compile(new ClockDivider(8)).doSim { dut =>
       dut.clockDomain.forkStimulus(10)
 
       for (i <- 0 until 300) {
         dut.clockDomain.waitSampling()
-        println(s"Takt $i: clkOut = ${dut.io.clkOut.toBoolean}")
+        if (i % 50 == 0)
+          println(s"Takt $i: clkOut = ${dut.io.clkOut.toBoolean}")
       }
 
       simSuccess()
@@ -565,23 +666,95 @@ import spinal.core._
 
 object ClockDividerVerilog {
   def main(args: Array[String]): Unit = {
-    SpinalVerilog(new ClockDivider(8))
+    SpinalConfig(
+      targetDirectory = "generated/verilog",
+      oneFilePerComponent = true
+    ).generateVerilog(new ClockDivider(8).setDefinitionName("ClockDivider"))
+  }
+}
+```
+
+**VHDL-Ausgabe: `ClockDividerVhdl.scala`**
+```scala
+import spinal.core._
+
+object ClockDividerVhdl {
+  def main(args: Array[String]): Unit = {
+    SpinalConfig(
+      targetDirectory = "generated/vhdl",
+      oneFilePerComponent = true
+    ).generateVhdl(new ClockDivider(8).setDefinitionName("ClockDivider"))
   }
 }
 ```
 
 **Verwendung**
-
 ```bash
 sbt compile
 sbt "runMain ClockDividerSim"
 sbt "runMain ClockDividerVerilog"
+sbt "runMain ClockDividerVhfl"
 ```
 
 Das erzeugt:
 - `ClockDivider.v`: die Verilog-Datei
+- `ClockDivider.vhd`: die Verilog-Datei
 - und zeigt die Simulation mit `clkOut`, der etwa alle 128 Takte wechselt.
 
+**Generierter VHDL-Code: `ClockDivider.vhd`** 
+```scala
+-- Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
+-- Component : Comparator
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+library work;
+use work.pkg_scala2hdl.all;
+use work.all;
+use work.pkg_enum.all;
+
+
+entity Comparator is
+  port(
+    a : in unsigned(3 downto 0);
+    b : in unsigned(3 downto 0);
+    eq : out std_logic;
+    gt : out std_logic;
+    lt : out std_logic
+  );
+end Comparator;
+
+architecture arch of Comparator is
+
+begin
+  eq <= pkg_toStdLogic(a = b);
+  gt <= pkg_toStdLogic(b < a);
+  lt <= pkg_toStdLogic(a < b);
+end arch;
+```
+**Generierter Verilog-Code: `Comparator.v`** 
+```scala
+// Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
+// Component : Comparator
+
+`timescale 1ns/1ps 
+module Comparator (
+  input      [3:0]    a,
+  input      [3:0]    b,
+  output              eq,
+  output              gt,
+  output              lt
+);
+
+
+  assign eq = (a == b);
+  assign gt = (b < a);
+  assign lt = (a < b);
+
+endmodule
+```
 
 ## PWM
 
