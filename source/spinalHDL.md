@@ -715,6 +715,7 @@ class ClockDivider(divisorWidth: Int) extends Component {
 
   val io = new Bundle {
     val clkOut = out Bool()
+     val counterO = out UInt(divisorWidth bits)   //  internal counter
   }
 
   // Zähler läuft kontinuierlich
@@ -723,8 +724,10 @@ class ClockDivider(divisorWidth: Int) extends Component {
 
   // höchstwertiges Bit als geteiltes Taktsignal
   io.clkOut := counter.msb
+  io.counterO := counter
 
   io.clkOut.setName("clkOut")
+  io.counterO.setName("counter")
 }
 ```
 **Was macht das Modul?**
@@ -800,7 +803,7 @@ Das erzeugt:
 **Generierter VHDL-Code: `ClockDivider.vhd`** 
 ```scala
 -- Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
--- Component : Comparator
+-- Component : ClockDivider
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -812,42 +815,54 @@ use work.all;
 use work.pkg_enum.all;
 
 
-entity Comparator is
+entity ClockDivider is
   port(
-    a : in unsigned(3 downto 0);
-    b : in unsigned(3 downto 0);
-    eq : out std_logic;
-    gt : out std_logic;
-    lt : out std_logic
+    clkOut : out std_logic;
+    clk : in std_logic;
+    reset : in std_logic
   );
-end Comparator;
+end ClockDivider;
 
-architecture arch of Comparator is
+architecture arch of ClockDivider is
 
+  signal zz_clkOut : unsigned(7 downto 0);
 begin
-  eq <= pkg_toStdLogic(a = b);
-  gt <= pkg_toStdLogic(b < a);
-  lt <= pkg_toStdLogic(a < b);
+  clkOut <= pkg_extract(zz_clkOut,7);
+  process(clk, reset)
+  begin
+    if reset = '1' then
+      zz_clkOut <= pkg_unsigned("00000000");
+    elsif rising_edge(clk) then
+      zz_clkOut <= (zz_clkOut + pkg_unsigned("00000001"));
+    end if;
+  end process;
+
 end arch;
 ```
-**Generierter Verilog-Code: `Comparator.v`** 
+
+**Generierter Verilog-Code: `ClockDivider.v`** 
 ```scala
 // Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
-// Component : Comparator
+// Component : ClockDivider
 
 `timescale 1ns/1ps 
-module Comparator (
-  input      [3:0]    a,
-  input      [3:0]    b,
-  output              eq,
-  output              gt,
-  output              lt
+module ClockDivider (
+  output              clkOut,
+  input               clk,
+  input               reset
 );
 
+  reg        [7:0]    _zz_clkOut;
 
-  assign eq = (a == b);
-  assign gt = (b < a);
-  assign lt = (a < b);
+  assign clkOut = _zz_clkOut[7];
+  always @(posedge clk or posedge reset) begin
+    if(reset) begin
+      _zz_clkOut <= 8'h00;
+    end else begin
+      _zz_clkOut <= (_zz_clkOut + 8'h01);
+    end
+  end
+
 
 endmodule
 ```
@@ -905,21 +920,21 @@ class Pwm(width: Int) extends Component {
 
   val io = new Bundle {
     val enable  = in  Bool()
-    val duty    = in  UInt(width bits)  
+    val duty    = in  UInt(width bits)   // 0 .. 2^width-1
     val pwmOut  = out Bool()
-    val dutyPct = out UInt(7 bits)       
+    val dutyPct = out UInt(7 bits)       // <-- OUTPUT as percentage
   }
 
   val counter = Reg(UInt(width bits)) init(0)
   counter := counter + 1
   io.pwmOut := io.enable && (counter < io.duty)
 
-  // Percentage 0..100 using exact divide (2^width - 1), rounded
+  
   val numWidth = width + 7
   val num      = io.duty.resize(numWidth) * U(100)
   val den      = U((1 << width) - 1, numWidth bits)
   val pctWide  = (num + (den >> 1)) / den
-  io.dutyPct   := pctWide.resized          // drive the output
+  io.dutyPct   := pctWide.resized          
 
   
   io.enable.setName("enable")
@@ -1050,46 +1065,94 @@ echo "✅ PWM: HDL under generated/{verilog,vhdl}/"
 **Generierter Verilog-Code: `Pwm.v`** 
 ```scala
 // Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
-// Component : Comparator
+// Component : Pwm
 
 `timescale 1ns/1ps 
-module Comparator (
-  input      [3:0]    a,
-  input      [3:0]    b,
-  output              eq,
-  output              gt,
-  output              lt
+module Pwm (
+  input               enable,
+  input      [7:0]    duty,
+  output              pwmOut,
+  output     [6:0]    dutyPct,
+  input               clk,
+  input               reset
 );
 
+  wire       [21:0]   _zz_dutyPct_1;
+  wire       [21:0]   _zz_dutyPct_2;
+  wire       [21:0]   _zz_dutyPct_3;
+  wire       [14:0]   _zz_dutyPct_4;
+  wire       [21:0]   _zz_dutyPct_5;
+  wire       [13:0]   _zz_dutyPct_6;
+  reg        [7:0]    _zz_pwmOut;
+  wire       [14:0]   _zz_dutyPct;
 
-  assign eq = (a == b);
-  assign gt = (b < a);
-  assign lt = (a < b);
+  assign _zz_dutyPct_1 = (_zz_dutyPct_2 / _zz_dutyPct);
+  assign _zz_dutyPct_2 = (_zz_dutyPct_3 + _zz_dutyPct_5);
+  assign _zz_dutyPct_3 = (_zz_dutyPct_4 * 7'h64);
+  assign _zz_dutyPct_4 = {7'd0, duty};
+  assign _zz_dutyPct_6 = (_zz_dutyPct >>> 1'd1);
+  assign _zz_dutyPct_5 = {8'd0, _zz_dutyPct_6};
+  assign pwmOut = (enable && (_zz_pwmOut < duty));
+  assign _zz_dutyPct = 15'h00ff;
+  assign dutyPct = _zz_dutyPct_1[6:0];
+  always @(posedge clk or posedge reset) begin
+    if(reset) begin
+      _zz_pwmOut <= 8'h00;
+    end else begin
+      _zz_pwmOut <= (_zz_pwmOut + 8'h01);
+    end
+  end
+
 
 endmodule
 ```
 
 **Generierter VHDL-Code: `Pwm.vhd`** 
 ```scala
-// Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
-// Component : Comparator
+-- Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
+-- Component : Pwm
 
-`timescale 1ns/1ps 
-module Comparator (
-  input      [3:0]    a,
-  input      [3:0]    b,
-  output              eq,
-  output              gt,
-  output              lt
-);
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+library work;
+use work.pkg_scala2hdl.all;
+use work.all;
+use work.pkg_enum.all;
 
 
-  assign eq = (a == b);
-  assign gt = (b < a);
-  assign lt = (a < b);
+entity Pwm is
+  port(
+    enable : in std_logic;
+    duty : in unsigned(7 downto 0);
+    pwmOut : out std_logic;
+    dutyPct : out unsigned(6 downto 0);
+    clk : in std_logic;
+    reset : in std_logic
+  );
+end Pwm;
 
-endmodule
+architecture arch of Pwm is
+
+  signal zz_pwmOut : unsigned(7 downto 0);
+  signal zz_dutyPct : unsigned(14 downto 0);
+begin
+  pwmOut <= (enable and pkg_toStdLogic(zz_pwmOut < duty));
+  zz_dutyPct <= pkg_unsigned("000000011111111");
+  dutyPct <= pkg_resize((((pkg_resize(duty,15) * pkg_unsigned("1100100")) + pkg_resize(pkg_shiftRight(zz_dutyPct,1),22)) / zz_dutyPct),7);
+  process(clk, reset)
+  begin
+    if reset = '1' then
+      zz_pwmOut <= pkg_unsigned("00000000");
+    elsif rising_edge(clk) then
+      zz_pwmOut <= (zz_pwmOut + pkg_unsigned("00000001"));
+    end if;
+  end process;
+
+end arch;
 ```
+
 **Ergebnis**
 
 - Wir erhalten ein synthetisierbares PWM-Modul  
