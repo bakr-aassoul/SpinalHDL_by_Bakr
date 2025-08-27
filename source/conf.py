@@ -26,11 +26,23 @@ latex_engine = 'xelatex'
 latex_additional_files = ['spinalhdl-logo.png']
 
 latex_elements = {
+    # NEW: wrap long lines & frame code blocks in LaTeX; avoids overflow
+    'sphinxsetup': 'verbatimwithframe=true, verbatimwrapslines=true',
+
     'preamble': r'''
-        % XeLaTeX handles UTF-8 natively, so inputenc/fontenc not needed
+        % Fonts/headers you already had
         \usepackage{lmodern}
         \usepackage{fancyhdr}
         \usepackage{graphicx}
+
+        % NEW: better verbatim handling and keep code on one page when possible
+        \usepackage{fvextra}
+        \fvset{
+          breaklines=true,      % allow wrapping
+          breakanywhere=true,   % allow breaking anywhere if needed
+          samepage=true         % try to keep each code block on one page
+        }
+
         \makeatletter
         \fancypagestyle{normal}{
             \fancyhf{}
