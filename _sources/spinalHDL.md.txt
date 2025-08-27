@@ -364,7 +364,6 @@ class Comparator(width: Int) extends Component {
   - `less`: wenn `a < b`
 
 **Testbench: `ComparatorSim.scala`**
-
 ```scala
 import spinal.core._
 import spinal.core.sim._
@@ -398,7 +397,6 @@ object ComparatorSim {
 
 
 **Verilog-Ausgabe: `ComparatorVerilog.scala`**
-
 ```scala
 import spinal.core._
 
@@ -427,7 +425,6 @@ object ComparatorVhdl {
 ```
 
 **Verwendung**
-
 ```bash
 sbt compile
 sbt "runMain ComparatorSim"
