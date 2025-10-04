@@ -79,6 +79,7 @@ Wie in Scala aber spezialisiert für Hardwarelogik:
 
 ```{code-block} scala
 :linenos:
+:caption: Beispiel einer Steuerstruktur
 
 when(cond) {
   // true-Zweig
