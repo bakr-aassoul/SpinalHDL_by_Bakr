@@ -468,7 +468,7 @@ begin
 end arch;
 ```
 **Generierter Verilog-Code: `Comparator.v`** 
-```scala
+```verilog
 // Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
 // Component : Comparator
 
@@ -649,7 +649,7 @@ begin
 end arch;
 ```
 **Generierter Verilog-Code: `Counter.v`** 
-```scala
+```verilog
 // Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
 // Component : Counter
 
@@ -838,7 +838,7 @@ end arch;
 ```
 
 **Generierter Verilog-Code: `ClockDivider.v`** 
-```scala
+```verilog
 // Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
 // Component : ClockDivider
 
@@ -1060,7 +1060,7 @@ echo "✅ PWM: HDL under generated/{verilog,vhdl}/"
 ```
 
 **Generierter Verilog-Code: `Pwm.v`** 
-```scala
+```verilog
 // Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
 // Component : Pwm
 
