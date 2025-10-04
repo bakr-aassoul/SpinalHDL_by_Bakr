@@ -77,10 +77,7 @@ val count = Reg(UInt(4 bits)) init(0)
 
 Wie in Scala aber spezialisiert für Hardwarelogik:
 
-```{code-block} scala
-:linenos:
-:caption: Beispiel einer Steuerstruktur
-
+```scala
 when(cond) {
   // true-Zweig
 } elsewhen(otherCond) {
