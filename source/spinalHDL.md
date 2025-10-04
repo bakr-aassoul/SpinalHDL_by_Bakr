@@ -77,7 +77,9 @@ val count = Reg(UInt(4 bits)) init(0)
 
 Wie in Scala aber spezialisiert für Hardwarelogik:
 
-~~~scala
+```{code-block} scala
+:linenos:
+
 when(cond) {
   // true-Zweig
 } elsewhen(otherCond) {
@@ -85,7 +87,7 @@ when(cond) {
 } otherwise {
   // fallback-Zweig
 }
-~~~
+```
 
 Beispiel:
 
