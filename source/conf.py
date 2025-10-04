@@ -27,30 +27,32 @@ latex_engine = 'xelatex'
 latex_additional_files = ['spinalhdl-logo.png']
 
 latex_elements = {
-    # Wrap long lines in verbatim, draw a frame around code blocks
     'sphinxsetup': 'verbatimwithframe=true, verbatimwrapslines=true',
 
     'preamble': r'''
-        % --- Fonts & headers ---
-        \usepackage{fontspec} % XeLaTeX: allow system fonts
-        % Fonts that include box-drawing characters and U+202F
+        % --- fonts & headers ---
+        \usepackage{fontspec}
         \setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
         \setmainfont{Noto Serif}[Scale=MatchLowercase]
 
         \usepackage{fancyhdr}
         \usepackage{graphicx}
 
-        % --- Verbatim handling (code blocks) ---
+        % --- verbatim handling ---
         \usepackage{fvextra}
+        % Remove "samepage" which can hide code content
         \fvset{
-          breaklines=true,      % wrap long lines
-          breakanywhere=true,   % allow breaks anywhere if needed
-          samepage=true         % try to keep each code block on one page
+          breaklines=true,
+          breakanywhere=true
         }
 
-        % Map U+202F NARROW NO-BREAK SPACE to a thin space to avoid "Missing character"
+        % Unicode safety
         \usepackage{newunicodechar}
-        \newunicodechar{^^^^202f}{\,} % U+202F → \, (thin space)
+        \newunicodechar{^^^^202f}{\,}
+        \newunicodechar{│}{|}
+        \newunicodechar{├}{+}
+        \newunicodechar{└}{+}
+        \newunicodechar{─}{-}
 
         \makeatletter
         \fancypagestyle{normal}{
