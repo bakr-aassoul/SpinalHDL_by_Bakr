@@ -7,7 +7,8 @@ author = 'Bakr Aassoul'
 
 # -- General Configuration ---------------------------------------------------
 extensions = ['myst_parser']  # Markdown via MyST
-myst_enable_extensions = ["colon_fence"]  # enables ```{code-block} / {literalinclude}
+# Enable MyST directive fences like ```{code-block} and ```{literalinclude}
+myst_enable_extensions = ["colon_fence"]
 
 source_suffix = {
     '.rst': 'restructuredtext',
@@ -22,33 +23,34 @@ html_static_path = ['_static']
 
 # -- LaTeX Configurations ----------------------------------------------------
 latex_engine = 'xelatex'
+# Ensure the logo image is available to LaTeX build
 latex_additional_files = ['spinalhdl-logo.png']
 
 latex_elements = {
-    # wrap long lines in verbatim blocks
+    # Wrap long lines in verbatim, draw a frame around code blocks
     'sphinxsetup': 'verbatimwithframe=true, verbatimwrapslines=true',
 
     'preamble': r'''
-        % --- fonts & headers ---
-        \usepackage{fontspec} % allow system fonts with XeLaTeX
-        % Use fonts that include box-drawing and U+202F
+        % --- Fonts & headers ---
+        \usepackage{fontspec} % XeLaTeX: allow system fonts
+        % Fonts that include box-drawing characters and U+202F
         \setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
         \setmainfont{Noto Serif}[Scale=MatchLowercase]
 
         \usepackage{fancyhdr}
         \usepackage{graphicx}
 
-        % --- verbatim handling ---
+        % --- Verbatim handling (code blocks) ---
         \usepackage{fvextra}
         \fvset{
-          breaklines=true,
-          breakanywhere=true,
-          samepage=true
+          breaklines=true,      % wrap long lines
+          breakanywhere=true,   % allow breaks anywhere if needed
+          samepage=true         % try to keep each code block on one page
         }
 
-        % Map narrow no-break space U+202F to a thin space (prevents "Missing character" warnings)
+        % Map U+202F NARROW NO-BREAK SPACE to a thin space to avoid "Missing character"
         \usepackage{newunicodechar}
-        \newunicodechar{ }{\,} % U+202F
+        \newunicodechar{^^^^202f}{\,} % U+202F → \, (thin space)
 
         \makeatletter
         \fancypagestyle{normal}{
