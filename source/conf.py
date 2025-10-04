@@ -1,4 +1,4 @@
-here is the code where should i add it : # Configuration file for the Sphinx documentation builder.
+# Configuration file for the Sphinx documentation builder.
 
 # -- Project Information -----------------------------------------------------
 project = 'SpinalHDL Dokumentation'
