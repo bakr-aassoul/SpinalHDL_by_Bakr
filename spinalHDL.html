@@ -134,13 +134,13 @@ der problemlos in bestehende Toolchains integriert werden kann.</p>
 <section id="steuerstrukturen">
 <h2><span class="section-number">2.3. </span>Steuerstrukturen<a class="headerlink" href="#steuerstrukturen" title="Link to this heading">¶</a></h2>
 <p>Wie in Scala aber spezialisiert für Hardwarelogik:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="n">when</span><span class="p">(</span><span class="n">cond</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1">// true-Zweig</span>
-<span class="p">}</span><span class="w"> </span><span class="n">elsewhen</span><span class="p">(</span><span class="n">otherCond</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1">// anderer Zweig</span>
-<span class="p">}</span><span class="w"> </span><span class="n">otherwise</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1">// fallback-Zweig</span>
-<span class="p">}</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">when</span><span class="p">(</span><span class="n">cond</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">2</span><span class="w">  </span><span class="c1">// true-Zweig</span>
+<span class="linenos">3</span><span class="p">}</span><span class="w"> </span><span class="n">elsewhen</span><span class="p">(</span><span class="n">otherCond</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">4</span><span class="w">  </span><span class="c1">// anderer Zweig</span>
+<span class="linenos">5</span><span class="p">}</span><span class="w"> </span><span class="n">otherwise</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">6</span><span class="w">  </span><span class="c1">// fallback-Zweig</span>
+<span class="linenos">7</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>Beispiel:</p>
