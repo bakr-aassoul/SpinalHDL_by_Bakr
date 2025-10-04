@@ -7,13 +7,14 @@ author = 'Bakr Aassoul'
 
 # -- General Configuration ---------------------------------------------------
 extensions = ['myst_parser']  # Markdown via MyST
+myst_enable_extensions = ["colon_fence"]  # enables ```{code-block} / {literalinclude}
 
 source_suffix = {
     '.rst': 'restructuredtext',
     '.md': 'markdown',
 }
 
-exclude_patterns = []  # Nothing excluded
+exclude_patterns = []
 
 # -- Options for HTML Output -------------------------------------------------
 html_theme = 'alabaster'
@@ -21,27 +22,33 @@ html_static_path = ['_static']
 
 # -- LaTeX Configurations ----------------------------------------------------
 latex_engine = 'xelatex'
-
-# Tell Sphinx to copy the logo into the LaTeX build dir
 latex_additional_files = ['spinalhdl-logo.png']
 
 latex_elements = {
-    # NEW: wrap long lines & frame code blocks in LaTeX; avoids overflow
+    # wrap long lines in verbatim blocks
     'sphinxsetup': 'verbatimwithframe=true, verbatimwrapslines=true',
 
     'preamble': r'''
-        % Fonts/headers you already had
-        \usepackage{lmodern}
+        % --- fonts & headers ---
+        \usepackage{fontspec} % allow system fonts with XeLaTeX
+        % Use fonts that include box-drawing and U+202F
+        \setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
+        \setmainfont{Noto Serif}[Scale=MatchLowercase]
+
         \usepackage{fancyhdr}
         \usepackage{graphicx}
 
-        % NEW: better verbatim handling and keep code on one page when possible
+        % --- verbatim handling ---
         \usepackage{fvextra}
         \fvset{
-          breaklines=true,      % allow wrapping
-          breakanywhere=true,   % allow breaking anywhere if needed
-          samepage=true         % try to keep each code block on one page
+          breaklines=true,
+          breakanywhere=true,
+          samepage=true
         }
+
+        % Map narrow no-break space U+202F to a thin space (prevents "Missing character" warnings)
+        \usepackage{newunicodechar}
+        \newunicodechar{ }{\,} % U+202F
 
         \makeatletter
         \fancypagestyle{normal}{
