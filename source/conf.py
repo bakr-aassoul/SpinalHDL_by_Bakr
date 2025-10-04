@@ -26,11 +26,36 @@ latex_engine = 'xelatex'
 latex_additional_files = ['spinalhdl-logo.png']
 
 latex_elements = {
+    # keep the nice frame and soft wrapping Sphinx provides
+    'sphinxsetup': 'verbatimwithframe=true, verbatimwrapslines=true',
+
     'preamble': r'''
-        % XeLaTeX handles UTF-8 natively, so inputenc/fontenc not needed
+        % XeLaTeX + fonts
         \usepackage{lmodern}
+        \usepackage{fontspec} % (optional; comment out if you prefer lmodern only)
+        % \setmainfont{Noto Serif}[Scale=MatchLowercase]
+        % \setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
+
         \usepackage{fancyhdr}
         \usepackage{graphicx}
+
+        % Verbatim handling + soft wrapping
+        \usepackage{fvextra}     % extends fancyvrb
+        \fvset{
+          breaklines=true,
+          breakanywhere=true
+        }
+
+        % NEW: avoid splitting code blocks across pages
+        \usepackage{needspace}
+        % Ask LaTeX to keep at least N lines together; adjust N if you like
+        \AtBeginEnvironment{Verbatim}{\Needspace{10\baselineskip}}
+        \AtBeginEnvironment{sphinxVerbatim}{\Needspace{10\baselineskip}}
+
+        % (Optional) Unicode niceties; safe to leave in
+        \usepackage{newunicodechar}
+        \newunicodechar{^^^^202f}{\,} % map U+202F narrow NBSP to thin space
+
         \makeatletter
         \fancypagestyle{normal}{
             \fancyhf{}
