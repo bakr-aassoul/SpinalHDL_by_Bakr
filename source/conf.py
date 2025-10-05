@@ -26,16 +26,12 @@ latex_engine = 'xelatex'
 latex_additional_files = ['spinalhdl-logo.png']
 
 latex_elements = {
+    'sphinxsetup': 'verbatimwithframe=true, verbatimwrapslines=true',
     'preamble': r'''
         % XeLaTeX handles UTF-8 natively, so inputenc/fontenc not needed
         \usepackage{lmodern}
         \usepackage{fancyhdr}
         \usepackage{graphicx}
-        \usepackage{fvextra}
-        \fvset{
-          breaklines=true,
-          breakanywhere=true
-        }
         \makeatletter
         \fancypagestyle{normal}{
             \fancyhf{}
@@ -46,7 +42,6 @@ latex_elements = {
         }
         \makeatother
     ''',
-
     'maketitle': r'''
     \begin{titlepage}
         \centering
