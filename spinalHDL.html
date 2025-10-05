@@ -492,6 +492,8 @@ Als Build-Tool wird <strong>sbt (Scala Build Tool)</strong> eingesetzt. <strong>
 </ul>
 </li>
 </ul>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text"><strong>Testbench: <code class="docutils literal notranslate"><span class="pre">ComparatorSim.scala</span></code></strong></span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
 <span class="linenos"> 2</span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="nn">sim</span><span class="p">.</span><span class="n">_</span>
 <span class="linenos"> 3</span>
@@ -522,8 +524,9 @@ Als Build-Tool wird <strong>sbt (Scala Build Tool)</strong> eingesetzt. <strong>
 <span class="linenos">28</span><span class="p">}</span>
 </pre></div>
 </div>
-<div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text"><strong>Verilog-Ausgabe: <code class="docutils literal notranslate"><span class="pre">ComparatorVerilog.scala</span></code></strong></span><a class="headerlink" href="#id4" title="Link to this code">¶</a></div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text"><strong>Verilog-Ausgabe: <code class="docutils literal notranslate"><span class="pre">ComparatorVerilog.scala</span></code></strong></span><a class="headerlink" href="#id5" title="Link to this code">¶</a></div>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">object</span><span class="w"> </span><span class="nc">ComparatorVerilog</span><span class="w"> </span><span class="p">{</span>
@@ -537,8 +540,8 @@ Als Build-Tool wird <strong>sbt (Scala Build Tool)</strong> eingesetzt. <strong>
 </pre></div>
 </div>
 </div>
-<div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text"><strong>VHDL-Ausgabe: <code class="docutils literal notranslate"><span class="pre">ComparatorVhdl.scala</span></code></strong></span><a class="headerlink" href="#id5" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text"><strong>VHDL-Ausgabe: <code class="docutils literal notranslate"><span class="pre">ComparatorVhdl.scala</span></code></strong></span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">object</span><span class="w"> </span><span class="nc">ComparatorVhdl</span><span class="w"> </span><span class="p">{</span>
@@ -560,8 +563,8 @@ Als Build-Tool wird <strong>sbt (Scala Build Tool)</strong> eingesetzt. <strong>
 </pre></div>
 </div>
 <p>Ergebnis: Die Dateien <code class="docutils literal notranslate"><span class="pre">Comparator.v</span></code> und <code class="docutils literal notranslate"><span class="pre">Comparator.vhd</span></code> werden generiert, und die Testbench prüft die Vergleichsfunktionen.</p>
-<div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text"><strong>Generierter VHDL-Code: <code class="docutils literal notranslate"><span class="pre">Comparator.vhd</span></code></strong></span><a class="headerlink" href="#id6" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text"><strong>Generierter VHDL-Code: <code class="docutils literal notranslate"><span class="pre">Comparator.vhd</span></code></strong></span><a class="headerlink" href="#id7" title="Link to this code">¶</a></div>
 <div class="highlight-vhdl notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">-- Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4</span>
 <span class="linenos"> 2</span><span class="c1">-- Component : Comparator</span>
 <span class="linenos"> 3</span>
@@ -595,6 +598,8 @@ Als Build-Tool wird <strong>sbt (Scala Build Tool)</strong> eingesetzt. <strong>
 </pre></div>
 </div>
 </div>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text"><strong>Generierter Verilog-Code: <code class="docutils literal notranslate"><span class="pre">Comparator.v</span></code></strong></span><a class="headerlink" href="#id8" title="Link to this code">¶</a></div>
 <div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4</span>
 <span class="linenos"> 2</span><span class="c1">// Component : Comparator</span>
 <span class="linenos"> 3</span>
@@ -615,41 +620,48 @@ Als Build-Tool wird <strong>sbt (Scala Build Tool)</strong> eingesetzt. <strong>
 <span class="linenos">18</span><span class="k">endmodule</span>
 </pre></div>
 </div>
+</div>
 </section>
 <section id="zahler">
 <h2><span class="section-number">6.2. </span>Zähler<a class="headerlink" href="#zahler" title="Link to this heading">¶</a></h2>
 <p>Ein Zähler zählt bei jedem Takt um 1 nach oben. Er kann in vielen Anwendungen eingesetzt werden, z. B. als Zeitgeber, Schleifenzähler oder zur Adressierung.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>counter-spinalhdl/
-├── build.sbt
-├── src/
-│   ├── main/scala/
-│   │   ├── Counter.scala        // Zähler-Modul
-│   │   └── CounterVerilog.scala // Verilog-Generierung
-│   │   └── CounterVhdl.scala    // VHDL-Generierung
-│   └── test/scala/
-│       └── CounterSim.scala     // Testbench
-└── README.md
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text"><strong>Projektstruktur</strong></span><a class="headerlink" href="#id9" title="Link to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>counter-spinalhdl/
+<span class="linenos"> 2</span>├── build.sbt
+<span class="linenos"> 3</span>├── src/
+<span class="linenos"> 4</span>│   ├── main/scala/
+<span class="linenos"> 5</span>│   │   ├── Counter.scala        // Zähler-Modul
+<span class="linenos"> 6</span>│   │   └── CounterVerilog.scala // Verilog-Generierung
+<span class="linenos"> 7</span>│   │   └── CounterVhdl.scala    // VHDL-Generierung
+<span class="linenos"> 8</span>│   └── test/scala/
+<span class="linenos"> 9</span>│       └── CounterSim.scala     // Testbench
+<span class="linenos">10</span>└── README.md
 </pre></div>
 </div>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">Counter</span><span class="p">(</span><span class="n">width</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Component</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">noIoPrefix</span><span class="p">()</span>
-<span class="w">  </span><span class="n">setDefinitionName</span><span class="p">(</span><span class="s">&quot;Counter&quot;</span><span class="p">)</span>
-
-<span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Bundle</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="nc">Bool</span><span class="p">()</span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">reset</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="nc">Bool</span><span class="p">()</span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">value</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="nc">UInt</span><span class="p">(</span><span class="n">width</span><span class="w"> </span><span class="n">bits</span><span class="p">)</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Reg</span><span class="p">(</span><span class="nc">UInt</span><span class="p">(</span><span class="n">width</span><span class="w"> </span><span class="n">bits</span><span class="p">))</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="w">  </span><span class="n">when</span><span class="p">(</span><span class="n">io</span><span class="p">.</span><span class="n">reset</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">.</span><span class="n">elsewhen</span><span class="p">(</span><span class="n">io</span><span class="p">.</span><span class="n">enable</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span>
-<span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">count</span>
-
-<span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">enable</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;enable&quot;</span><span class="p">);</span><span class="w"> </span><span class="n">io</span><span class="p">.</span><span class="n">reset</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;reset&quot;</span><span class="p">);</span><span class="w"> </span><span class="n">io</span><span class="p">.</span><span class="n">value</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;value&quot;</span><span class="p">)</span>
-<span class="p">}</span>
+</div>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text"><strong>Aufbau des Moduls</strong></span><a class="headerlink" href="#id10" title="Link to this code">¶</a></div>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Counter</span><span class="p">(</span><span class="n">width</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Component</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 4</span><span class="w">  </span><span class="n">noIoPrefix</span><span class="p">()</span>
+<span class="linenos"> 5</span><span class="w">  </span><span class="n">setDefinitionName</span><span class="p">(</span><span class="s">&quot;Counter&quot;</span><span class="p">)</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Bundle</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="nc">Bool</span><span class="p">()</span>
+<span class="linenos"> 9</span><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">reset</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="nc">Bool</span><span class="p">()</span>
+<span class="linenos">10</span><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">value</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="nc">UInt</span><span class="p">(</span><span class="n">width</span><span class="w"> </span><span class="n">bits</span><span class="p">)</span>
+<span class="linenos">11</span><span class="w">  </span><span class="p">}</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Reg</span><span class="p">(</span><span class="nc">UInt</span><span class="p">(</span><span class="n">width</span><span class="w"> </span><span class="n">bits</span><span class="p">))</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos">14</span><span class="w">  </span><span class="n">when</span><span class="p">(</span><span class="n">io</span><span class="p">.</span><span class="n">reset</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">.</span><span class="n">elsewhen</span><span class="p">(</span><span class="n">io</span><span class="p">.</span><span class="n">enable</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span>
+<span class="linenos">15</span><span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">count</span>
+<span class="linenos">16</span>
+<span class="linenos">17</span><span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">enable</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;enable&quot;</span><span class="p">);</span><span class="w"> </span><span class="n">io</span><span class="p">.</span><span class="n">reset</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;reset&quot;</span><span class="p">);</span><span class="w"> </span><span class="n">io</span><span class="p">.</span><span class="n">value</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;value&quot;</span><span class="p">)</span>
+<span class="linenos">18</span><span class="p">}</span>
 </pre></div>
+</div>
 </div>
 <p><strong>Was macht das Modul?</strong></p>
 <ul class="simple">
@@ -657,6 +669,8 @@ Als Build-Tool wird <strong>sbt (Scala Build Tool)</strong> eingesetzt. <strong>
 <li><p><code class="docutils literal notranslate"><span class="pre">reset</span></code>: Wenn aktiv, wird der Zähler auf 0 gesetzt.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: Der aktuelle Zählerwert.</p></li>
 </ul>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text"><strong>Testbench: <code class="docutils literal notranslate"><span class="pre">CounterSim.scala</span></code></strong></span><a class="headerlink" href="#id11" title="Link to this code">¶</a></div>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
 <span class="linenos"> 2</span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">sim</span><span class="p">.</span><span class="n">_</span>
 <span class="linenos"> 3</span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="nn">sim</span><span class="p">.</span><span class="n">_</span>
@@ -687,6 +701,9 @@ Als Build-Tool wird <strong>sbt (Scala Build Tool)</strong> eingesetzt. <strong>
 <span class="linenos">28</span><span class="p">}</span>
 </pre></div>
 </div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-text"><strong>Verilog-Ausgabe: <code class="docutils literal notranslate"><span class="pre">CounterVerilog.scala</span></code></strong></span><a class="headerlink" href="#id12" title="Link to this code">¶</a></div>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
 <span class="linenos">2</span>
 <span class="linenos">3</span><span class="k">object</span><span class="w"> </span><span class="nc">CounterVerilog</span><span class="w"> </span><span class="p">{</span>
@@ -696,6 +713,9 @@ Als Build-Tool wird <strong>sbt (Scala Build Tool)</strong> eingesetzt. <strong>
 <span class="linenos">7</span><span class="p">}</span>
 </pre></div>
 </div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-text"><strong>VHDL-Ausgabe: <code class="docutils literal notranslate"><span class="pre">CounterVhdl.scala</span></code></strong></span><a class="headerlink" href="#id13" title="Link to this code">¶</a></div>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
 <span class="linenos">2</span><span class="k">object</span><span class="w"> </span><span class="nc">CounterVhdl</span><span class="w"> </span><span class="p">{</span>
 <span class="linenos">3</span><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">String</span><span class="p">]):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span>
@@ -703,6 +723,7 @@ Als Build-Tool wird <strong>sbt (Scala Build Tool)</strong> eingesetzt. <strong>
 <span class="linenos">5</span><span class="w">      </span><span class="p">.</span><span class="n">generateVhdl</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">Counter</span><span class="p">(</span><span class="mi">4</span><span class="p">).</span><span class="n">setDefinitionName</span><span class="p">(</span><span class="s">&quot;Counter&quot;</span><span class="p">))</span>
 <span class="linenos">6</span><span class="p">}</span>
 </pre></div>
+</div>
 </div>
 <p><strong>Verwendung</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>sbt<span class="w"> </span>compile
@@ -712,6 +733,8 @@ Als Build-Tool wird <strong>sbt (Scala Build Tool)</strong> eingesetzt. <strong>
 </div>
 <p><strong>Ergebnis:</strong>
 Die Dateien <code class="docutils literal notranslate"><span class="pre">Counter.v</span></code> und <code class="docutils literal notranslate"><span class="pre">Counter.vhd</span></code> werden generiert. In der Simulation zählt der Wert bei <code class="docutils literal notranslate"><span class="pre">enable</span> <span class="pre">=</span> <span class="pre">true</span></code> hoch.</p>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-text"><strong>Generierter VHDL-Code: <code class="docutils literal notranslate"><span class="pre">Counter.vhd</span></code></strong></span><a class="headerlink" href="#id14" title="Link to this code">¶</a></div>
 <div class="highlight-vhdl notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">-- Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4</span>
 <span class="linenos"> 2</span><span class="c1">-- Component : Counter</span>
 <span class="linenos"> 3</span>
@@ -758,6 +781,9 @@ Die Dateien <code class="docutils literal notranslate"><span class="pre">Counter
 <span class="linenos">44</span><span class="k">end</span><span class="w"> </span><span class="nc">arch</span><span class="p">;</span>
 </pre></div>
 </div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id15">
+<div class="code-block-caption"><span class="caption-text"><strong>Generierter Verilog-Code: <code class="docutils literal notranslate"><span class="pre">Counter.v</span></code></strong></span><a class="headerlink" href="#id15" title="Link to this code">¶</a></div>
 <div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4</span>
 <span class="linenos"> 2</span><span class="c1">// Component : Counter</span>
 <span class="linenos"> 3</span>
@@ -791,45 +817,52 @@ Die Dateien <code class="docutils literal notranslate"><span class="pre">Counter
 <span class="linenos">31</span><span class="k">endmodule</span>
 </pre></div>
 </div>
+</div>
 </section>
 <section id="taktteiler-clock-divider">
 <h2><span class="section-number">6.3. </span>Taktteiler (Clock Divider)<a class="headerlink" href="#taktteiler-clock-divider" title="Link to this heading">¶</a></h2>
 <p>Ein Taktteiler erzeugt aus einem schnellen Eingangstakt einen langsameren Ausgangstakt, indem er Takte zählt und z. B. nur jedes 256. Signal durchlässt.</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>clockdivider-spinalhdl/
-├── build.sbt
-├── src/
-│   ├── main/scala/
-│   │   ├── ClockDivider.scala        // Taktteiler-Modul
-│   │   └── ClockDividerVerilog.scala // Verilog-Generierung
-│   │   └── ClockDividerVhdl.scala    // VHDL-Generierung
-│   └── test/scala/
-│       └── ClockDividerSim.scala     // Testbench
-└── README.md
+<div class="literal-block-wrapper docutils container" id="id16">
+<div class="code-block-caption"><span class="caption-text"><strong>Projektstruktur</strong></span><a class="headerlink" href="#id16" title="Link to this code">¶</a></div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>clockdivider-spinalhdl/
+<span class="linenos"> 2</span>├── build.sbt
+<span class="linenos"> 3</span>├── src/
+<span class="linenos"> 4</span>│   ├── main/scala/
+<span class="linenos"> 5</span>│   │   ├── ClockDivider.scala        // Taktteiler-Modul
+<span class="linenos"> 6</span>│   │   └── ClockDividerVerilog.scala // Verilog-Generierung
+<span class="linenos"> 7</span>│   │   └── ClockDividerVhdl.scala    // VHDL-Generierung
+<span class="linenos"> 8</span>│   └── test/scala/
+<span class="linenos"> 9</span>│       └── ClockDividerSim.scala     // Testbench
+<span class="linenos">10</span>└── README.md
 </pre></div>
 </div>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">ClockDivider</span><span class="p">(</span><span class="n">divisorWidth</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Component</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">noIoPrefix</span><span class="p">()</span>
-<span class="w">  </span><span class="n">setDefinitionName</span><span class="p">(</span><span class="s">&quot;ClockDivider&quot;</span><span class="p">)</span>
-
-<span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Bundle</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">clkOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="nc">Bool</span><span class="p">()</span>
-<span class="w">     </span><span class="kd">val</span><span class="w"> </span><span class="n">counterO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="nc">UInt</span><span class="p">(</span><span class="n">divisorWidth</span><span class="w"> </span><span class="n">bits</span><span class="p">)</span><span class="w">   </span><span class="c1">//  internal counter</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="c1">// Zähler läuft kontinuierlich</span>
-<span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Reg</span><span class="p">(</span><span class="nc">UInt</span><span class="p">(</span><span class="n">divisorWidth</span><span class="w"> </span><span class="n">bits</span><span class="p">))</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="w">  </span><span class="n">counter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
-
-<span class="w">  </span><span class="c1">// höchstwertiges Bit als geteiltes Taktsignal</span>
-<span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">clkOut</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">counter</span><span class="p">.</span><span class="n">msb</span>
-<span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">counterO</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">counter</span>
-
-<span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">clkOut</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;clkOut&quot;</span><span class="p">)</span>
-<span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">counterO</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;counter&quot;</span><span class="p">)</span>
-<span class="p">}</span>
+</div>
+<div class="literal-block-wrapper docutils container" id="id17">
+<div class="code-block-caption"><span class="caption-text"><strong>Aufbau des Moduls</strong></span><a class="headerlink" href="#id17" title="Link to this code">¶</a></div>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">ClockDivider</span><span class="p">(</span><span class="n">divisorWidth</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Component</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 4</span><span class="w">  </span><span class="n">noIoPrefix</span><span class="p">()</span>
+<span class="linenos"> 5</span><span class="w">  </span><span class="n">setDefinitionName</span><span class="p">(</span><span class="s">&quot;ClockDivider&quot;</span><span class="p">)</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Bundle</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">clkOut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="nc">Bool</span><span class="p">()</span>
+<span class="linenos"> 9</span><span class="w">     </span><span class="kd">val</span><span class="w"> </span><span class="n">counterO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="nc">UInt</span><span class="p">(</span><span class="n">divisorWidth</span><span class="w"> </span><span class="n">bits</span><span class="p">)</span><span class="w">   </span><span class="c1">//  internal counter</span>
+<span class="linenos">10</span><span class="w">  </span><span class="p">}</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="w">  </span><span class="c1">// Zähler läuft kontinuierlich</span>
+<span class="linenos">13</span><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Reg</span><span class="p">(</span><span class="nc">UInt</span><span class="p">(</span><span class="n">divisorWidth</span><span class="w"> </span><span class="n">bits</span><span class="p">))</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos">14</span><span class="w">  </span><span class="n">counter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="w">  </span><span class="c1">// höchstwertiges Bit als geteiltes Taktsignal</span>
+<span class="linenos">17</span><span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">clkOut</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">counter</span><span class="p">.</span><span class="n">msb</span>
+<span class="linenos">18</span><span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">counterO</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">counter</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">clkOut</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;clkOut&quot;</span><span class="p">)</span>
+<span class="linenos">21</span><span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">counterO</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;counter&quot;</span><span class="p">)</span>
+<span class="linenos">22</span><span class="p">}</span>
 </pre></div>
+</div>
 </div>
 <p><strong>Was macht das Modul?</strong></p>
 <ul class="simple">
@@ -837,6 +870,8 @@ Die Dateien <code class="docutils literal notranslate"><span class="pre">Counter
 <li><p><code class="docutils literal notranslate"><span class="pre">msb</span></code>: Der höchste Bitwert des Zählers (Most Significant Bit) wird als geteilter Takt ausgegeben.</p></li>
 <li><p><strong>Beispiel</strong>: Bei <code class="docutils literal notranslate"><span class="pre">divisorWidth</span> <span class="pre">=</span> <span class="pre">8</span></code> ergibt sich ein Teiler von 256 (halbe Periode = 128 Takte).</p></li>
 </ul>
+<div class="literal-block-wrapper docutils container" id="id18">
+<div class="code-block-caption"><span class="caption-text"><strong>Testbench: <code class="docutils literal notranslate"><span class="pre">ClockDividerSim.scala</span></code></strong></span><a class="headerlink" href="#id18" title="Link to this code">¶</a></div>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
 <span class="linenos"> 2</span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="nn">sim</span><span class="p">.</span><span class="n">_</span>
 <span class="linenos"> 3</span>
@@ -857,6 +892,9 @@ Die Dateien <code class="docutils literal notranslate"><span class="pre">Counter
 <span class="linenos">18</span><span class="p">}</span>
 </pre></div>
 </div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id19">
+<div class="code-block-caption"><span class="caption-text"><strong>Verilog-Ausgabe: <code class="docutils literal notranslate"><span class="pre">ClockDividerVerilog.scala</span></code></strong></span><a class="headerlink" href="#id19" title="Link to this code">¶</a></div>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">object</span><span class="w"> </span><span class="nc">ClockDividerVerilog</span><span class="w"> </span><span class="p">{</span>
@@ -869,6 +907,9 @@ Die Dateien <code class="docutils literal notranslate"><span class="pre">Counter
 <span class="linenos">10</span><span class="p">}</span>
 </pre></div>
 </div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id20">
+<div class="code-block-caption"><span class="caption-text"><strong>VHDL-Ausgabe: <code class="docutils literal notranslate"><span class="pre">ClockDividerVhdl.scala</span></code></strong></span><a class="headerlink" href="#id20" title="Link to this code">¶</a></div>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">object</span><span class="w"> </span><span class="nc">ClockDividerVhdl</span><span class="w"> </span><span class="p">{</span>
@@ -880,6 +921,7 @@ Die Dateien <code class="docutils literal notranslate"><span class="pre">Counter
 <span class="linenos"> 9</span><span class="w">  </span><span class="p">}</span>
 <span class="linenos">10</span><span class="p">}</span>
 </pre></div>
+</div>
 </div>
 <p><strong>Verwendung</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>sbt<span class="w"> </span>compile
@@ -894,6 +936,8 @@ Die Dateien <code class="docutils literal notranslate"><span class="pre">Counter
 <li><p><code class="docutils literal notranslate"><span class="pre">ClockDivider.vhd</span></code>: die Verilog-Datei</p></li>
 <li><p>und zeigt die Simulation mit <code class="docutils literal notranslate"><span class="pre">clkOut</span></code>, der etwa alle 128 Takte wechselt.</p></li>
 </ul>
+<div class="literal-block-wrapper docutils container" id="id21">
+<div class="code-block-caption"><span class="caption-text"><strong>Generierter VHDL-Code: <code class="docutils literal notranslate"><span class="pre">ClockDivider.vhd</span></code></strong></span><a class="headerlink" href="#id21" title="Link to this code">¶</a></div>
 <div class="highlight-vhdl notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">-- Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4</span>
 <span class="linenos"> 2</span><span class="c1">-- Component : ClockDivider</span>
 <span class="linenos"> 3</span>
@@ -932,6 +976,9 @@ Die Dateien <code class="docutils literal notranslate"><span class="pre">Counter
 <span class="linenos">36</span><span class="k">end</span><span class="w"> </span><span class="nc">arch</span><span class="p">;</span>
 </pre></div>
 </div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id22">
+<div class="code-block-caption"><span class="caption-text"><strong>Generierter Verilog-Code: <code class="docutils literal notranslate"><span class="pre">ClockDivider.v</span></code></strong></span><a class="headerlink" href="#id22" title="Link to this code">¶</a></div>
 <div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4</span>
 <span class="linenos"> 2</span><span class="c1">// Component : ClockDivider</span>
 <span class="linenos"> 3</span>
@@ -957,6 +1004,7 @@ Die Dateien <code class="docutils literal notranslate"><span class="pre">Counter
 <span class="linenos">23</span><span class="k">endmodule</span>
 </pre></div>
 </div>
+</div>
 </section>
 <section id="pwm">
 <h2><span class="section-number">6.4. </span>PWM<a class="headerlink" href="#pwm" title="Link to this heading">¶</a></h2>
@@ -969,63 +1017,69 @@ Die Dateien <code class="docutils literal notranslate"><span class="pre">Counter
 <li><p>die Hilfsskripte <code class="docutils literal notranslate"><span class="pre">scripts/sim.sh</span></code> (Simulation) und <code class="docutils literal notranslate"><span class="pre">scripts/gen.sh</span></code> (HDL-Generierung)</p></li>
 <li><p>und eine verständliche Erklärung des Funktionsprinzips</p></li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pwm-spinalhdl/
-├──<span class="w"> </span>build.sbt
-├──<span class="w"> </span>project/
-│<span class="w">   </span>└──<span class="w"> </span>build.properties
-├──<span class="w"> </span>src/
-│<span class="w">   </span>├──<span class="w"> </span>main/
-│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>scala/
-│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>Pwm.scala<span class="w">                 </span>←<span class="w"> </span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w"> </span>PWM-Modul
-│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>PwmVerilog.scala<span class="w">          </span>←<span class="w"> </span><span class="o">[</span><span class="m">3</span><span class="o">]</span><span class="w"> </span>Verilog-Generierung
-│<span class="w">   </span>│<span class="w">       </span>└──<span class="w"> </span>PwmVhdl.scala<span class="w">             </span>←<span class="w"> </span><span class="o">[</span><span class="m">4</span><span class="o">]</span><span class="w"> </span>VHDL-Generierung
-│<span class="w">   </span>└──<span class="w"> </span>test/
-│<span class="w">       </span>└──<span class="w"> </span>scala/
-│<span class="w">           </span>└──<span class="w"> </span>PwmSim.scala<span class="w">              </span>←<span class="w"> </span><span class="o">[</span><span class="m">2</span><span class="o">]</span><span class="w"> </span>Simulation
-├──<span class="w"> </span>scripts/
-│<span class="w">   </span>├──<span class="w"> </span>sim.sh<span class="w">                            </span>←<span class="w">  </span>Simulation
-│<span class="w">   </span>└──<span class="w"> </span>gen.sh<span class="w">                            </span>←<span class="w">  </span>HDL-Generierung
-└──<span class="w"> </span>generated/
-<span class="w">    </span>├──<span class="w"> </span>verilog/
-<span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>Pwm.v
-<span class="w">    </span>└──<span class="w"> </span>vhdl/
-<span class="w">        </span>└──<span class="w"> </span>Pwm.vhd
+<div class="literal-block-wrapper docutils container" id="id23">
+<div class="code-block-caption"><span class="caption-text"><strong>Projektstruktur</strong></span><a class="headerlink" href="#id23" title="Link to this code">¶</a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>pwm-spinalhdl/
+<span class="linenos"> 2</span>├──<span class="w"> </span>build.sbt
+<span class="linenos"> 3</span>├──<span class="w"> </span>project/
+<span class="linenos"> 4</span>│<span class="w">   </span>└──<span class="w"> </span>build.properties
+<span class="linenos"> 5</span>├──<span class="w"> </span>src/
+<span class="linenos"> 6</span>│<span class="w">   </span>├──<span class="w"> </span>main/
+<span class="linenos"> 7</span>│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>scala/
+<span class="linenos"> 8</span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>Pwm.scala<span class="w">                 </span>←<span class="w"> </span><span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w"> </span>PWM-Modul
+<span class="linenos"> 9</span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>PwmVerilog.scala<span class="w">          </span>←<span class="w"> </span><span class="o">[</span><span class="m">3</span><span class="o">]</span><span class="w"> </span>Verilog-Generierung
+<span class="linenos">10</span>│<span class="w">   </span>│<span class="w">       </span>└──<span class="w"> </span>PwmVhdl.scala<span class="w">             </span>←<span class="w"> </span><span class="o">[</span><span class="m">4</span><span class="o">]</span><span class="w"> </span>VHDL-Generierung
+<span class="linenos">11</span>│<span class="w">   </span>└──<span class="w"> </span>test/
+<span class="linenos">12</span>│<span class="w">       </span>└──<span class="w"> </span>scala/
+<span class="linenos">13</span>│<span class="w">           </span>└──<span class="w"> </span>PwmSim.scala<span class="w">              </span>←<span class="w"> </span><span class="o">[</span><span class="m">2</span><span class="o">]</span><span class="w"> </span>Simulation
+<span class="linenos">14</span>├──<span class="w"> </span>scripts/
+<span class="linenos">15</span>│<span class="w">   </span>├──<span class="w"> </span>sim.sh<span class="w">                            </span>←<span class="w">  </span>Simulation
+<span class="linenos">16</span>│<span class="w">   </span>└──<span class="w"> </span>gen.sh<span class="w">                            </span>←<span class="w">  </span>HDL-Generierung
+<span class="linenos">17</span>└──<span class="w"> </span>generated/
+<span class="linenos">18</span><span class="w">    </span>├──<span class="w"> </span>verilog/
+<span class="linenos">19</span><span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>Pwm.v
+<span class="linenos">20</span><span class="w">    </span>└──<span class="w"> </span>vhdl/
+<span class="linenos">21</span><span class="w">        </span>└──<span class="w"> </span>Pwm.vhd
 </pre></div>
+</div>
 </div>
 <p><strong>Erklärung des PWM-Moduls</strong></p>
 <p>Das PWM-Modul erzeugt ein Signal, das schnell zwischen <strong>an (1)</strong> und <strong>aus (0)</strong> wechselt.<br />
 Wie lange das Signal „an“ bleibt, hängt vom <strong>Duty-Cycle</strong> ab – einem Eingabewert, der angibt, wie viel Prozent der Zeit das Signal „an“ sein soll.</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">Pwm</span><span class="p">(</span><span class="n">width</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Component</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">noIoPrefix</span><span class="p">()</span>
-<span class="w">  </span><span class="n">setDefinitionName</span><span class="p">(</span><span class="s">&quot;Pwm&quot;</span><span class="p">)</span>
-
-<span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Bundle</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">enable</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="w">  </span><span class="nc">Bool</span><span class="p">()</span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">duty</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="w">  </span><span class="nc">UInt</span><span class="p">(</span><span class="n">width</span><span class="w"> </span><span class="n">bits</span><span class="p">)</span><span class="w">   </span><span class="c1">// 0 .. 2^width-1</span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">pwmOut</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="nc">Bool</span><span class="p">()</span>
-<span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">dutyPct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="nc">UInt</span><span class="p">(</span><span class="mi">7</span><span class="w"> </span><span class="n">bits</span><span class="p">)</span><span class="w">       </span><span class="c1">// &lt;-- OUTPUT as percentage</span>
-<span class="w">  </span><span class="p">}</span>
-
-<span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Reg</span><span class="p">(</span><span class="nc">UInt</span><span class="p">(</span><span class="n">width</span><span class="w"> </span><span class="n">bits</span><span class="p">))</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="w">  </span><span class="n">counter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">pwmOut</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">io</span><span class="p">.</span><span class="n">enable</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">counter</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">io</span><span class="p">.</span><span class="n">duty</span><span class="p">)</span>
-
-<span class="w">  </span>
-<span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">numWidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">7</span>
-<span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">num</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">io</span><span class="p">.</span><span class="n">duty</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">numWidth</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nc">U</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
-<span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">den</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="nc">U</span><span class="p">((</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">width</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">numWidth</span><span class="w"> </span><span class="n">bits</span><span class="p">)</span>
-<span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">pctWide</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">num</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">den</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">den</span>
-<span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">dutyPct</span><span class="w">   </span><span class="o">:=</span><span class="w"> </span><span class="n">pctWide</span><span class="p">.</span><span class="n">resized</span><span class="w">          </span>
-
-<span class="w">  </span>
-<span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">enable</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;enable&quot;</span><span class="p">)</span>
-<span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">duty</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;duty&quot;</span><span class="p">)</span>
-<span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">pwmOut</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;pwmOut&quot;</span><span class="p">)</span>
-<span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">dutyPct</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;dutyPct&quot;</span><span class="p">)</span>
-<span class="p">}</span>
+<div class="literal-block-wrapper docutils container" id="id24">
+<div class="code-block-caption"><span class="caption-text"><strong>Aufbau des Moduls</strong></span><a class="headerlink" href="#id24" title="Link to this code">¶</a></div>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Pwm</span><span class="p">(</span><span class="n">width</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Component</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 4</span><span class="w">  </span><span class="n">noIoPrefix</span><span class="p">()</span>
+<span class="linenos"> 5</span><span class="w">  </span><span class="n">setDefinitionName</span><span class="p">(</span><span class="s">&quot;Pwm&quot;</span><span class="p">)</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Bundle</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">enable</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="w">  </span><span class="nc">Bool</span><span class="p">()</span>
+<span class="linenos"> 9</span><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">duty</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="w">  </span><span class="nc">UInt</span><span class="p">(</span><span class="n">width</span><span class="w"> </span><span class="n">bits</span><span class="p">)</span><span class="w">   </span><span class="c1">// 0 .. 2^width-1</span>
+<span class="linenos">10</span><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">pwmOut</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="nc">Bool</span><span class="p">()</span>
+<span class="linenos">11</span><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">dutyPct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="nc">UInt</span><span class="p">(</span><span class="mi">7</span><span class="w"> </span><span class="n">bits</span><span class="p">)</span><span class="w">       </span><span class="c1">// &lt;-- OUTPUT as percentage</span>
+<span class="linenos">12</span><span class="w">  </span><span class="p">}</span>
+<span class="linenos">13</span>
+<span class="linenos">14</span><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Reg</span><span class="p">(</span><span class="nc">UInt</span><span class="p">(</span><span class="n">width</span><span class="w"> </span><span class="n">bits</span><span class="p">))</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="linenos">15</span><span class="w">  </span><span class="n">counter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">counter</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="linenos">16</span><span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">pwmOut</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">io</span><span class="p">.</span><span class="n">enable</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">counter</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">io</span><span class="p">.</span><span class="n">duty</span><span class="p">)</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="w">  </span>
+<span class="linenos">19</span><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">numWidth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">width</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">7</span>
+<span class="linenos">20</span><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">num</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">io</span><span class="p">.</span><span class="n">duty</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="n">numWidth</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nc">U</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="linenos">21</span><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">den</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="nc">U</span><span class="p">((</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">width</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">numWidth</span><span class="w"> </span><span class="n">bits</span><span class="p">)</span>
+<span class="linenos">22</span><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">pctWide</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">num</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">den</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">den</span>
+<span class="linenos">23</span><span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">dutyPct</span><span class="w">   </span><span class="o">:=</span><span class="w"> </span><span class="n">pctWide</span><span class="p">.</span><span class="n">resized</span><span class="w">          </span>
+<span class="linenos">24</span>
+<span class="linenos">25</span><span class="w">  </span>
+<span class="linenos">26</span><span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">enable</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;enable&quot;</span><span class="p">)</span>
+<span class="linenos">27</span><span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">duty</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;duty&quot;</span><span class="p">)</span>
+<span class="linenos">28</span><span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">pwmOut</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;pwmOut&quot;</span><span class="p">)</span>
+<span class="linenos">29</span><span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">dutyPct</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;dutyPct&quot;</span><span class="p">)</span>
+<span class="linenos">30</span><span class="p">}</span>
 </pre></div>
+</div>
 </div>
 <p><strong>Was macht das Modul?</strong></p>
 <ul class="simple">
@@ -1048,8 +1102,8 @@ Solange der Zähler kleiner ist, ist das Signal <strong>an</strong>  danach <str
 Dieser Zyklus wiederholt sich kontinuierlich.</p>
 <p><strong>[1] <code class="docutils literal notranslate"><span class="pre">src/main/scala/Pwm.scala</span></code> (Code wie oben)</strong></p>
 <p>Siehe oben unter „Aufbau des Moduls“.</p>
-<div class="literal-block-wrapper docutils container" id="id7">
-<div class="code-block-caption"><span class="caption-text"><strong>[2] <code class="docutils literal notranslate"><span class="pre">src/test/scala/PwmSim.scala</span></code></strong></span><a class="headerlink" href="#id7" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id25">
+<div class="code-block-caption"><span class="caption-text"><strong>[2] <code class="docutils literal notranslate"><span class="pre">src/test/scala/PwmSim.scala</span></code></strong></span><a class="headerlink" href="#id25" title="Link to this code">¶</a></div>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
 <span class="linenos"> 2</span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="nn">sim</span><span class="p">.</span><span class="n">_</span>
 <span class="linenos"> 3</span>
@@ -1088,50 +1142,67 @@ Dieser Zyklus wiederholt sich kontinuierlich.</p>
 </pre></div>
 </div>
 </div>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
-<span class="k">object</span><span class="w"> </span><span class="nc">PwmVerilog</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">String</span><span class="p">]):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span>
-<span class="w">    </span><span class="nc">SpinalConfig</span><span class="p">(</span><span class="n">targetDirectory</span><span class="o">=</span><span class="s">&quot;generated/verilog&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">oneFilePerComponent</span><span class="o">=</span><span class="kc">true</span><span class="p">)</span>
-<span class="w">      </span><span class="p">.</span><span class="n">generateVerilog</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">Pwm</span><span class="p">(</span><span class="mi">8</span><span class="p">).</span><span class="n">setDefinitionName</span><span class="p">(</span><span class="s">&quot;Pwm&quot;</span><span class="p">))</span>
-<span class="p">}</span>
+<div class="literal-block-wrapper docutils container" id="id26">
+<div class="code-block-caption"><span class="caption-text"><strong><code class="docutils literal notranslate"><span class="pre">[3]PwmVerilog.scala</span></code></strong></span><a class="headerlink" href="#id26" title="Link to this code">¶</a></div>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
+<span class="linenos">2</span><span class="k">object</span><span class="w"> </span><span class="nc">PwmVerilog</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">3</span><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">String</span><span class="p">]):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span>
+<span class="linenos">4</span><span class="w">    </span><span class="nc">SpinalConfig</span><span class="p">(</span><span class="n">targetDirectory</span><span class="o">=</span><span class="s">&quot;generated/verilog&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">oneFilePerComponent</span><span class="o">=</span><span class="kc">true</span><span class="p">)</span>
+<span class="linenos">5</span><span class="w">      </span><span class="p">.</span><span class="n">generateVerilog</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">Pwm</span><span class="p">(</span><span class="mi">8</span><span class="p">).</span><span class="n">setDefinitionName</span><span class="p">(</span><span class="s">&quot;Pwm&quot;</span><span class="p">))</span>
+<span class="linenos">6</span><span class="p">}</span>
 </pre></div>
 </div>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
-<span class="k">object</span><span class="w"> </span><span class="nc">PwmVhdl</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">String</span><span class="p">]):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span>
-<span class="w">    </span><span class="nc">SpinalConfig</span><span class="p">(</span><span class="n">targetDirectory</span><span class="o">=</span><span class="s">&quot;generated/vhdl&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">oneFilePerComponent</span><span class="o">=</span><span class="kc">true</span><span class="p">)</span>
-<span class="w">      </span><span class="p">.</span><span class="n">generateVhdl</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">Pwm</span><span class="p">(</span><span class="mi">8</span><span class="p">).</span><span class="n">setDefinitionName</span><span class="p">(</span><span class="s">&quot;Pwm&quot;</span><span class="p">))</span>
-<span class="p">}</span>
+</div>
+<div class="literal-block-wrapper docutils container" id="id27">
+<div class="code-block-caption"><span class="caption-text"><strong><code class="docutils literal notranslate"><span class="pre">[4]PwmVhdl.scala</span></code></strong></span><a class="headerlink" href="#id27" title="Link to this code">¶</a></div>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
+<span class="linenos">2</span><span class="k">object</span><span class="w"> </span><span class="nc">PwmVhdl</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">3</span><span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">String</span><span class="p">]):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span>
+<span class="linenos">4</span><span class="w">    </span><span class="nc">SpinalConfig</span><span class="p">(</span><span class="n">targetDirectory</span><span class="o">=</span><span class="s">&quot;generated/vhdl&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">oneFilePerComponent</span><span class="o">=</span><span class="kc">true</span><span class="p">)</span>
+<span class="linenos">5</span><span class="w">      </span><span class="p">.</span><span class="n">generateVhdl</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">Pwm</span><span class="p">(</span><span class="mi">8</span><span class="p">).</span><span class="n">setDefinitionName</span><span class="p">(</span><span class="s">&quot;Pwm&quot;</span><span class="p">))</span>
+<span class="linenos">6</span><span class="p">}</span>
 </pre></div>
 </div>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
-<span class="n">set</span><span class="w"> </span><span class="o">-</span><span class="n">euo</span><span class="w"> </span><span class="n">pipefail</span>
-<span class="n">cd</span><span class="w"> </span><span class="s">&quot;$(dirname &quot;</span><span class="n">$0</span><span class="s">&quot;)/..&quot;</span>
-<span class="n">docker</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="o">--</span><span class="n">rm</span><span class="w"> </span><span class="o">-</span><span class="n">it</span><span class="w"> </span><span class="o">\</span>
-<span class="w">  </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">$</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="p">):</span><span class="n">$</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">-</span><span class="n">g</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="n">e</span><span class="w"> </span><span class="nc">HOME</span><span class="o">=/</span><span class="n">tmp</span><span class="w"> </span><span class="o">\</span>
-<span class="w">  </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="s">&quot;$PWD&quot;</span><span class="p">:</span><span class="o">/</span><span class="n">workspace</span><span class="w"> </span><span class="o">-</span><span class="n">w</span><span class="w"> </span><span class="o">/</span><span class="n">workspace</span><span class="w"> </span><span class="o">\</span>
-<span class="w">  </span><span class="n">spinalhdl</span><span class="p">:</span><span class="n">dev</span><span class="w"> </span><span class="o">\</span>
-<span class="w">  </span><span class="n">sbt</span><span class="w"> </span><span class="s">&quot;Test / runMain PwmSim&quot;</span>
-<span class="n">echo</span><span class="w"> </span><span class="s">&quot;✅ PWM: VCD under simWorkspace/Pwm/&quot;</span>
+</div>
+<div class="literal-block-wrapper docutils container" id="id28">
+<div class="code-block-caption"><span class="caption-text"><strong><code class="docutils literal notranslate"><span class="pre">sim.sh</span></code></strong></span><a class="headerlink" href="#id28" title="Link to this code">¶</a></div>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="ch">#!/usr/bin/env bash</span>
+<span class="linenos">2</span><span class="n">set</span><span class="w"> </span><span class="o">-</span><span class="n">euo</span><span class="w"> </span><span class="n">pipefail</span>
+<span class="linenos">3</span><span class="n">cd</span><span class="w"> </span><span class="s">&quot;$(dirname &quot;</span><span class="n">$0</span><span class="s">&quot;)/..&quot;</span>
+<span class="linenos">4</span><span class="n">docker</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="o">--</span><span class="n">rm</span><span class="w"> </span><span class="o">-</span><span class="n">it</span><span class="w"> </span><span class="o">\</span>
+<span class="linenos">5</span><span class="w">  </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">$</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="p">):</span><span class="n">$</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">-</span><span class="n">g</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="n">e</span><span class="w"> </span><span class="nc">HOME</span><span class="o">=/</span><span class="n">tmp</span><span class="w"> </span><span class="o">\</span>
+<span class="linenos">6</span><span class="w">  </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="s">&quot;$PWD&quot;</span><span class="p">:</span><span class="o">/</span><span class="n">workspace</span><span class="w"> </span><span class="o">-</span><span class="n">w</span><span class="w"> </span><span class="o">/</span><span class="n">workspace</span><span class="w"> </span><span class="o">\</span>
+<span class="linenos">7</span><span class="w">  </span><span class="n">spinalhdl</span><span class="p">:</span><span class="n">dev</span><span class="w"> </span><span class="o">\</span>
+<span class="linenos">8</span><span class="w">  </span><span class="n">sbt</span><span class="w"> </span><span class="s">&quot;Test / runMain PwmSim&quot;</span>
+<span class="linenos">9</span><span class="n">echo</span><span class="w"> </span><span class="s">&quot;✅ PWM: VCD under simWorkspace/Pwm/&quot;</span>
 </pre></div>
 </div>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env bash</span>
-<span class="n">set</span><span class="w"> </span><span class="o">-</span><span class="n">euo</span><span class="w"> </span><span class="n">pipefail</span>
-<span class="n">cd</span><span class="w"> </span><span class="s">&quot;$(dirname &quot;</span><span class="n">$0</span><span class="s">&quot;)/..&quot;</span>
-<span class="n">docker</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="o">--</span><span class="n">rm</span><span class="w"> </span><span class="o">-</span><span class="n">it</span><span class="w"> </span><span class="o">\</span>
-<span class="w">  </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">$</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="p">):</span><span class="n">$</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">-</span><span class="n">g</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="n">e</span><span class="w"> </span><span class="nc">HOME</span><span class="o">=/</span><span class="n">tmp</span><span class="w"> </span><span class="o">\</span>
-<span class="w">  </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="s">&quot;$PWD&quot;</span><span class="p">:</span><span class="o">/</span><span class="n">workspace</span><span class="w"> </span><span class="o">-</span><span class="n">w</span><span class="w"> </span><span class="o">/</span><span class="n">workspace</span><span class="w"> </span><span class="o">\</span>
-<span class="w">  </span><span class="n">spinalhdl</span><span class="p">:</span><span class="n">dev</span><span class="w"> </span><span class="o">\</span>
-<span class="w">  </span><span class="n">sbt</span><span class="w"> </span><span class="s">&quot;runMain PwmVerilog&quot;</span><span class="w"> </span><span class="s">&quot;runMain PwmVhdl&quot;</span>
-<span class="n">echo</span><span class="w"> </span><span class="s">&quot;✅ PWM: HDL under generated/{verilog,vhdl}/&quot;</span>
+</div>
+<div class="literal-block-wrapper docutils container" id="id29">
+<div class="code-block-caption"><span class="caption-text"><strong><code class="docutils literal notranslate"><span class="pre">gen.sh</span></code></strong></span><a class="headerlink" href="#id29" title="Link to this code">¶</a></div>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="ch">#!/usr/bin/env bash</span>
+<span class="linenos">2</span><span class="n">set</span><span class="w"> </span><span class="o">-</span><span class="n">euo</span><span class="w"> </span><span class="n">pipefail</span>
+<span class="linenos">3</span><span class="n">cd</span><span class="w"> </span><span class="s">&quot;$(dirname &quot;</span><span class="n">$0</span><span class="s">&quot;)/..&quot;</span>
+<span class="linenos">4</span><span class="n">docker</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="o">--</span><span class="n">rm</span><span class="w"> </span><span class="o">-</span><span class="n">it</span><span class="w"> </span><span class="o">\</span>
+<span class="linenos">5</span><span class="w">  </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">$</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="p">):</span><span class="n">$</span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="o">-</span><span class="n">g</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="n">e</span><span class="w"> </span><span class="nc">HOME</span><span class="o">=/</span><span class="n">tmp</span><span class="w"> </span><span class="o">\</span>
+<span class="linenos">6</span><span class="w">  </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="s">&quot;$PWD&quot;</span><span class="p">:</span><span class="o">/</span><span class="n">workspace</span><span class="w"> </span><span class="o">-</span><span class="n">w</span><span class="w"> </span><span class="o">/</span><span class="n">workspace</span><span class="w"> </span><span class="o">\</span>
+<span class="linenos">7</span><span class="w">  </span><span class="n">spinalhdl</span><span class="p">:</span><span class="n">dev</span><span class="w"> </span><span class="o">\</span>
+<span class="linenos">8</span><span class="w">  </span><span class="n">sbt</span><span class="w"> </span><span class="s">&quot;runMain PwmVerilog&quot;</span><span class="w"> </span><span class="s">&quot;runMain PwmVhdl&quot;</span>
+<span class="linenos">9</span><span class="n">echo</span><span class="w"> </span><span class="s">&quot;✅ PWM: HDL under generated/{verilog,vhdl}/&quot;</span>
 </pre></div>
 </div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./scripts/sim.sh<span class="w">  </span><span class="c1">#Simulation mit VCD</span>
+</div>
+<div class="literal-block-wrapper docutils container" id="id30">
+<div class="code-block-caption"><span class="caption-text"><strong>Projekt kompilieren und starten</strong></span><a class="headerlink" href="#id30" title="Link to this code">¶</a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>./scripts/sim.sh<span class="w">  </span><span class="c1">#Simulation mit VCD</span>
 </pre></div>
+</div>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>./scripts/gen.sh<span class="w">  </span><span class="c1">#HDL-Ausgabe (Verilog und VHDL)</span>
 </pre></div>
 </div>
+<div class="literal-block-wrapper docutils container" id="id31">
+<div class="code-block-caption"><span class="caption-text"><strong>Generierter Verilog-Code: <code class="docutils literal notranslate"><span class="pre">Pwm.v</span></code></strong></span><a class="headerlink" href="#id31" title="Link to this code">¶</a></div>
 <div class="highlight-verilog notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">// Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4</span>
 <span class="linenos"> 2</span><span class="c1">// Component : Pwm</span>
 <span class="linenos"> 3</span>
@@ -1175,6 +1246,9 @@ Dieser Zyklus wiederholt sich kontinuierlich.</p>
 <span class="linenos">41</span><span class="k">endmodule</span>
 </pre></div>
 </div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id32">
+<div class="code-block-caption"><span class="caption-text"><strong>Generierter VHDL-Code: <code class="docutils literal notranslate"><span class="pre">Pwm.vhd</span></code></strong></span><a class="headerlink" href="#id32" title="Link to this code">¶</a></div>
 <div class="highlight-vhdl notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1">-- Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4</span>
 <span class="linenos"> 2</span><span class="c1">-- Component : Pwm</span>
 <span class="linenos"> 3</span>
@@ -1218,6 +1292,7 @@ Dieser Zyklus wiederholt sich kontinuierlich.</p>
 <span class="linenos">41</span>
 <span class="linenos">42</span><span class="k">end</span><span class="w"> </span><span class="nc">arch</span><span class="p">;</span>
 </pre></div>
+</div>
 </div>
 <p><strong>Ergebnis</strong></p>
 <ul class="simple">
