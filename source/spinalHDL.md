@@ -134,7 +134,14 @@ Vektoren erlauben z. B. Busse, Speicher, Registergruppen.
 
 Eine Hardwareeinheit (Modul) ist eine Klasse, die von `Component` erbt:
 
-```scala
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} scala
+:linenos:
+:caption: Beispiel eines Moduls, das nicht über Seiten getrennt wird
+
 class MyModule extends Component {
   val io = new Bundle {
     val a = in UInt(8 bits)
@@ -144,6 +151,10 @@ class MyModule extends Component {
 
   io.result := io.a + io.b
 }
+```
+
+```{raw} latex
+\end{minipage}
 ```
 
 ## Top-Level mit Verilog-Ausgabe
