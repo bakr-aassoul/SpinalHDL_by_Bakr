@@ -120,22 +120,20 @@ der problemlos in bestehende Toolchains integriert werden kann.</p>
 </section>
 <section id="signale-vs-register">
 <h2><span class="section-number">2.2. </span>Signale vs. Register<a class="headerlink" href="#signale-vs-register" title="Link to this heading">¶</a></h2>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">UInt</span><span class="p">(</span><span class="mi">8</span><span class="w"> </span><span class="n">bits</span><span class="p">)</span><span class="w">       </span><span class="c1">// Kombinatorisch (wire)</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Reg</span><span class="p">(</span><span class="nc">UInt</span><span class="p">(</span><span class="mi">8</span><span class="w"> </span><span class="n">bits</span><span class="p">))</span><span class="w">  </span><span class="c1">// Getaktetes Register</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kd">val</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">UInt</span><span class="p">(</span><span class="mi">8</span><span class="w"> </span><span class="n">bits</span><span class="p">)</span><span class="w">       </span><span class="c1">// Kombinatorisch (wire)</span>
+<span class="linenos">2</span><span class="kd">val</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Reg</span><span class="p">(</span><span class="nc">UInt</span><span class="p">(</span><span class="mi">8</span><span class="w"> </span><span class="n">bits</span><span class="p">))</span><span class="w">  </span><span class="c1">// Getaktetes Register</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Reg(...)</span></code> erzeugt ein Flip-Flop (Register) mit Initialwert:</p></li>
 </ul>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Reg</span><span class="p">(</span><span class="nc">UInt</span><span class="p">(</span><span class="mi">4</span><span class="w"> </span><span class="n">bits</span><span class="p">))</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kd">val</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Reg</span><span class="p">(</span><span class="nc">UInt</span><span class="p">(</span><span class="mi">4</span><span class="w"> </span><span class="n">bits</span><span class="p">))</span><span class="w"> </span><span class="n">init</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
 <section id="steuerstrukturen">
 <h2><span class="section-number">2.3. </span>Steuerstrukturen<a class="headerlink" href="#steuerstrukturen" title="Link to this heading">¶</a></h2>
 <p>Wie in Scala aber spezialisiert für Hardwarelogik:</p>
-<div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">Beispiel einer Steuerstruktur</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">when</span><span class="p">(</span><span class="n">cond</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="linenos">2</span><span class="w">  </span><span class="c1">// true-Zweig</span>
 <span class="linenos">3</span><span class="p">}</span><span class="w"> </span><span class="n">elsewhen</span><span class="p">(</span><span class="n">otherCond</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -145,33 +143,32 @@ der problemlos in bestehende Toolchains integriert werden kann.</p>
 <span class="linenos">7</span><span class="p">}</span>
 </pre></div>
 </div>
-</div>
 <p>Beispiel:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Bool</span><span class="p">()</span>
-<span class="n">when</span><span class="p">(</span><span class="n">io</span><span class="p">.</span><span class="n">a</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="n">io</span><span class="p">.</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">out</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nc">True</span>
-<span class="p">}</span><span class="w"> </span><span class="n">otherwise</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="n">out</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nc">False</span>
-<span class="p">}</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kd">val</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Bool</span><span class="p">()</span>
+<span class="linenos">2</span><span class="n">when</span><span class="p">(</span><span class="n">io</span><span class="p">.</span><span class="n">a</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="n">io</span><span class="p">.</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">3</span><span class="w">  </span><span class="n">out</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nc">True</span>
+<span class="linenos">4</span><span class="p">}</span><span class="w"> </span><span class="n">otherwise</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">5</span><span class="w">  </span><span class="n">out</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nc">False</span>
+<span class="linenos">6</span><span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="bundles-schnittstellen">
 <h2><span class="section-number">2.4. </span>Bundles (Schnittstellen)<a class="headerlink" href="#bundles-schnittstellen" title="Link to this heading">¶</a></h2>
 <p>Ein <code class="docutils literal notranslate"><span class="pre">Bundle</span></code> ist wie ein <code class="docutils literal notranslate"><span class="pre">struct</span></code>:</p>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span><span class="w"> </span><span class="n">io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Bundle</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="nc">Bool</span><span class="p">()</span>
-<span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">done</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="nc">Bool</span><span class="p">()</span>
-<span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="nc">UInt</span><span class="p">(</span><span class="mi">8</span><span class="w"> </span><span class="n">bits</span><span class="p">)</span>
-<span class="p">}</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kd">val</span><span class="w"> </span><span class="n">io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Bundle</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">2</span><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="nc">Bool</span><span class="p">()</span>
+<span class="linenos">3</span><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">done</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="nc">Bool</span><span class="p">()</span>
+<span class="linenos">4</span><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="nc">UInt</span><span class="p">(</span><span class="mi">8</span><span class="w"> </span><span class="n">bits</span><span class="p">)</span>
+<span class="linenos">5</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>Alle Signale im Bundle sind typisiert (<code class="docutils literal notranslate"><span class="pre">in</span></code>, <code class="docutils literal notranslate"><span class="pre">out</span></code>, <code class="docutils literal notranslate"><span class="pre">inout</span></code>).</p>
 </section>
 <section id="vektoren-und-arrays">
 <h2><span class="section-number">2.5. </span>Vektoren und Arrays<a class="headerlink" href="#vektoren-und-arrays" title="Link to this heading">¶</a></h2>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="kd">val</span><span class="w"> </span><span class="n">vec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Vec</span><span class="p">(</span><span class="nc">UInt</span><span class="p">(</span><span class="mi">8</span><span class="w"> </span><span class="n">bits</span><span class="p">),</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Array</span><span class="p">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">4</span><span class="p">)(</span><span class="nc">UInt</span><span class="p">(</span><span class="mi">8</span><span class="w"> </span><span class="n">bits</span><span class="p">))</span>
+<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kd">val</span><span class="w"> </span><span class="n">vec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Vec</span><span class="p">(</span><span class="nc">UInt</span><span class="p">(</span><span class="mi">8</span><span class="w"> </span><span class="n">bits</span><span class="p">),</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
+<span class="linenos">2</span><span class="kd">val</span><span class="w"> </span><span class="n">arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Array</span><span class="p">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">4</span><span class="p">)(</span><span class="nc">UInt</span><span class="p">(</span><span class="mi">8</span><span class="w"> </span><span class="n">bits</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>Vektoren erlauben z. B. Busse, Speicher, Registergruppen.</p>
@@ -179,8 +176,8 @@ der problemlos in bestehende Toolchains integriert werden kann.</p>
 <section id="komponentenstruktur">
 <h2><span class="section-number">2.6. </span>Komponentenstruktur<a class="headerlink" href="#komponentenstruktur" title="Link to this heading">¶</a></h2>
 <p>Eine Hardwareeinheit (Modul) ist eine Klasse, die von <code class="docutils literal notranslate"><span class="pre">Component</span></code> erbt:</p>
-<div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">Beispiel eines Moduls, das nicht über Seiten getrennt wird</span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">Beispiel eines Moduls, das nicht über Seiten getrennt wird</span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">class</span><span class="w"> </span><span class="nc">MyModule</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Component</span><span class="w"> </span><span class="p">{</span>
 <span class="linenos">2</span><span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Bundle</span><span class="w"> </span><span class="p">{</span>
 <span class="linenos">3</span><span class="w">    </span><span class="kd">val</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="nc">UInt</span><span class="p">(</span><span class="mi">8</span><span class="w"> </span><span class="n">bits</span><span class="p">)</span>
@@ -196,11 +193,11 @@ der problemlos in bestehende Toolchains integriert werden kann.</p>
 </section>
 <section id="top-level-mit-verilog-ausgabe">
 <h2><span class="section-number">2.7. </span>Top-Level mit Verilog-Ausgabe<a class="headerlink" href="#top-level-mit-verilog-ausgabe" title="Link to this heading">¶</a></h2>
-<div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="k">object</span><span class="w"> </span><span class="nc">MyModuleVerilog</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">String</span><span class="p">]):</span><span class="w"> </span><span class="nc">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nc">SpinalVerilog</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="nc">MyModule</span><span class="p">)</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
+<div class="highlight-Verilog notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">object</span><span class="w"> </span><span class="n">MyModuleVerilog</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">2</span><span class="w">  </span><span class="n">def</span><span class="w"> </span><span class="n">main</span><span class="p">(</span><span class="nl">args:</span><span class="w"> </span><span class="n">Array</span><span class="p">[</span><span class="n">String</span><span class="p">])</span><span class="o">:</span><span class="w"> </span><span class="n">Unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="linenos">3</span><span class="w">    </span><span class="n">SpinalVerilog</span><span class="p">(</span><span class="n">new</span><span class="w"> </span><span class="n">MyModule</span><span class="p">)</span>
+<span class="linenos">4</span><span class="w">  </span><span class="p">}</span>
+<span class="linenos">5</span><span class="p">}</span>
 </pre></div>
 </div>
 </section>
@@ -277,15 +274,15 @@ der problemlos in bestehende Toolchains integriert werden kann.</p>
 <p>Ein SpinalHDL-Projekt orientiert sich in der Regel an der typischen Struktur von Scala-Projekten.
 Die Dateien sind so gegliedert, dass eine klare Trennung zwischen Entwurf, Test und generiertem
 Code besteht. Ein mögliches Projekt kann beispielsweise folgendermaßen aufgebaut sein:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>my-spinal-project/
-├── build.sbt
-├── src/
-│   ├── main/
-│   │   └── scala/           // SpinalHDL-Komponenten
-│   └── test/
-│       └── scala/           // Simulation und Unit-Tests
-├── generated/               // generierter Verilog/VHDL
-└── README.md
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>my-spinal-project/
+<span class="linenos">2</span>├── build.sbt
+<span class="linenos">3</span>├── src/
+<span class="linenos">4</span>│   ├── main/
+<span class="linenos">5</span>│   │   └── scala/           // SpinalHDL-Komponenten
+<span class="linenos">6</span>│   └── test/
+<span class="linenos">7</span>│       └── scala/           // Simulation und Unit-Tests
+<span class="linenos">8</span>├── generated/               // generierter Verilog/VHDL
+<span class="linenos">9</span>└── README.md
 </pre></div>
 </div>
 </section>
@@ -299,8 +296,8 @@ Als Build-Tool wird <strong>sbt (Scala Build Tool)</strong> eingesetzt. <strong>
 <section id="beispiel-kommando">
 <h2><span class="section-number">3.3. </span>Beispiel-Kommando<a class="headerlink" href="#beispiel-kommando" title="Link to this heading">¶</a></h2>
 <p>Die folgenden Befehle zeigen einen typischen Ablauf beim Arbeiten mit einem SpinalHDL-Projekt:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sbt<span class="w"> </span>compile
-sbt<span class="w"> </span>run
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>sbt<span class="w"> </span>compile
+<span class="linenos">2</span>sbt<span class="w"> </span>run
 </pre></div>
 </div>
 </section>

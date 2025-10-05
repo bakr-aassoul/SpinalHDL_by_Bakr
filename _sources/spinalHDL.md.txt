@@ -60,30 +60,49 @@ Die wichtigsten Typen zur Signalbeschreibung:
 | `Bits` | Bit-Vektor ohne Interpretation | `val raw = Bits(4 bits)`     |
 
 > In SpinalHDL beschreibt `val` eine **konstante Referenz auf ein Signalobjekt** – nicht das Signal selbst wie in Verilog.
+
 ## Signale vs. Register
-
-```scala
-val a = UInt(8 bits)       // Kombinatorisch (wire)
-val b = Reg(UInt(8 bits))  // Getaktetes Register
-```
-
-- `Reg(...)` erzeugt ein Flip-Flop (Register) mit Initialwert:  
-
-```scala
-val count = Reg(UInt(4 bits)) init(0)
-```
-
-## Steuerstrukturen
-
-Wie in Scala aber spezialisiert für Hardwarelogik:
-
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} scala
 :linenos:
-:caption: Beispiel einer Steuerstruktur
+:caption:
+
+val a = UInt(8 bits)       // Kombinatorisch (wire)
+val b = Reg(UInt(8 bits))  // Getaktetes Register
+```
+
+```{raw} latex
+\end{minipage}
+```
+
+- `Reg(...)` erzeugt ein Flip-Flop (Register) mit Initialwert:  
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} scala
+:linenos:
+:caption:
+
+val count = Reg(UInt(4 bits)) init(0)
+```
+```{raw} latex
+\end{minipage}
+```
+
+## Steuerstrukturen
+
+Wie in Scala aber spezialisiert für Hardwarelogik:
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} scala
+:linenos:
+:caption: 
 
 when(cond) {
   // true-Zweig
@@ -99,8 +118,13 @@ when(cond) {
 ```
 
 Beispiel:
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
 
-```scala
+```{code-block} scala
+:linenos:
+:caption: 
 val out = Bool()
 when(io.a === io.b) {
   out := True
@@ -109,31 +133,55 @@ when(io.a === io.b) {
 }
 ```
 
+```{raw} latex
+\end{minipage}
+```
+
 ## Bundles (Schnittstellen)
 
 Ein `Bundle` ist wie ein `struct`:
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
 
-```scala
+```{code-block} scala
+:linenos:
+:caption:
+
 val io = new Bundle {
   val start = in Bool()
   val done  = out Bool()
   val value = in UInt(8 bits)
 }
 ```
+
+```{raw} latex
+\end{minipage}
+```
+
  Alle Signale im Bundle sind typisiert (`in`, `out`, `inout`).
 
 ## Vektoren und Arrays
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
 
-```scala
+```{code-block} scala
+:linenos:
+:caption:
+
 val vec = Vec(UInt(8 bits), 4)
 val arr = Array.fill(4)(UInt(8 bits))
+```
+
+```{raw} latex
+\end{minipage}
 ```
 Vektoren erlauben z. B. Busse, Speicher, Registergruppen.
 
 ## Komponentenstruktur
 
 Eine Hardwareeinheit (Modul) ist eine Klasse, die von `Component` erbt:
-
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
@@ -158,13 +206,23 @@ class MyModule extends Component {
 ```
 
 ## Top-Level mit Verilog-Ausgabe
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
 
-```scala
+```{code-block} Verilog
+:linenos:
+:caption:
+
 object MyModuleVerilog {
   def main(args: Array[String]): Unit = {
     SpinalVerilog(new MyModule)
   }
 }
+```
+
+```{raw} latex
+\end{minipage}
 ```
 
 ## Typisches Verhalten vs. VHDL
@@ -199,7 +257,14 @@ object MyModuleVerilog {
 Ein SpinalHDL-Projekt orientiert sich in der Regel an der typischen Struktur von Scala-Projekten. 
 Die Dateien sind so gegliedert, dass eine klare Trennung zwischen Entwurf, Test und generiertem 
 Code besteht. Ein mögliches Projekt kann beispielsweise folgendermaßen aufgebaut sein:
-```text
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} text
+:linenos:
+:caption: 
+
 my-spinal-project/
 ├── build.sbt
 ├── src/
@@ -209,6 +274,10 @@ my-spinal-project/
 │       └── scala/           // Simulation und Unit-Tests
 ├── generated/               // generierter Verilog/VHDL
 └── README.md
+```
+
+```{raw} latex
+\end{minipage}
 ```
 
 ## Entwicklungsumgebung
@@ -221,11 +290,21 @@ Zur Simulation kommen häufig **Verilator** oder **GHDL** zum Einsatz. Diese Wer
 
 ## Beispiel-Kommando
 Die folgenden Befehle zeigen einen typischen Ablauf beim Arbeiten mit einem SpinalHDL-Projekt:
-```bash
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} bash
+:linenos:
+:caption: 
+
 sbt compile
 sbt run
 ```
 
+```{raw} latex
+\end{minipage}
+```
 
 #  Vorteile von SpinalHDL gegenüber traditionellen HDLs
 
