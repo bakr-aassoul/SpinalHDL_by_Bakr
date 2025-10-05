@@ -188,7 +188,7 @@ Eine Hardwareeinheit (Modul) ist eine Klasse, die von `Component` erbt:
 
 ```{code-block} scala
 :linenos:
-:caption: Beispiel eines Moduls, das nicht über Seiten getrennt wird
+:caption:
 
 class MyModule extends Component {
   val io = new Bundle {
@@ -331,8 +331,14 @@ In SpinalHDL folgt ein typischer Designprozess drei Phasen:
 ##   Komponentenbeschreibung
 
 Hier wird das gewünschte Verhalten in einem Modul (Component) beschrieben.
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
 
-```scala
+```{code-block} scala
+:linenos:
+:caption:
+
 class Adder extends Component {
   val io = new Bundle {
     val a, b = in UInt(8 bits)
@@ -340,6 +346,10 @@ class Adder extends Component {
   }
   io.result := io.a + io.b
 }
+```
+
+```{raw} latex
+\end{minipage}
 ```
 ###  Erklärung :
 
@@ -354,8 +364,14 @@ class Adder extends Component {
 ##   Simulationsmöglichkeiten
 
 Mit SpinalHDL kannst du direkt in Scala simulieren.
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
 
-```scala
+```{code-block} scala
+:linenos:
+:caption: 
+
 SimConfig.withWave.compile(new Adder).doSim { dut =>
   dut.io.a #= 4
   dut.io.b #= 7
@@ -364,6 +380,11 @@ SimConfig.withWave.compile(new Adder).doSim { dut =>
   assert(dut.io.result.toInt == 11)
 }
 ```
+
+```{raw} latex
+\end{minipage}
+```
+
 ###  Erklärung :
 
 - `SimConfig.withWave`: Aktiviert Wellenform-Ausgabe (`.vcd`).
@@ -382,11 +403,22 @@ SimConfig.withWave.compile(new Adder).doSim { dut =>
 ## Code generieren (Verilog/VHDL)
 
 Mit einem einfachen Aufruf generierst du RTL-Code:
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
 
-```scala
+```{code-block} scala
+:linenos:
+:caption: 
+
 SpinalVerilog(new Adder)
 SpinalVhdl(new Adder)
 ```
+
+```{raw} latex
+\end{minipage}
+```
+
 - `SpinalVerilog(...)`: erzeugt eine `.v`-Datei (Verilog)
 - `SpinalVhdl(...)`: erzeugt eine `.vhd`-Datei (VHDL)
 - Die Datei enthält exakt das, was von Tools wie **Vivado**, **Quartus**, **Yosys**, etc. verarbeitet werden kann
@@ -414,7 +446,14 @@ Ein Comparator vergleicht zwei Werte (`a` und `b`) und erzeugt Ausgänge für:
 - Kleiner-als (`less`)
   
 **Projektstruktur**
+```{raw} latex
+\begin{minipage}{\linewidth}
 ```
+
+```{code-block} text
+:linenos:
+:caption: 
+
 comparator-spinalhdl/
 ├── build.sbt
 ├── src/
@@ -427,9 +466,19 @@ comparator-spinalhdl/
 └── README.md
 ```
 
-**Aufbau des Moduls**
+```{raw} latex
+\end{minipage}
+```
 
-```scala
+**Aufbau des Moduls**
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} scala
+:linenos:
+:caption:
+
 import spinal.core._
 
 class Comparator(width: Int) extends Component {
@@ -455,6 +504,11 @@ class Comparator(width: Int) extends Component {
   io.less.setName("lt")
 }
 ```
+
+```{raw} latex
+\end{minipage}
+```
+
 **Was macht das Modul?**
 
 - Es nimmt zwei `UInt`-Eingänge `a` und `b`.
@@ -465,7 +519,14 @@ class Comparator(width: Int) extends Component {
   - `less`: wenn `a < b`
 
 **Testbench: `ComparatorSim.scala`**
-```scala
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} scala
+:linenos:
+:caption:
+
 import spinal.core._
 import spinal.core.sim._
 
@@ -496,9 +557,19 @@ object ComparatorSim {
 }
 ```
 
+```{raw} latex
+\end{minipage}
+```
 
 **Verilog-Ausgabe: `ComparatorVerilog.scala`**
-```scala
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} scala
+:linenos:
+:caption: 
+
 import spinal.core._
 
 object ComparatorVerilog {
@@ -511,8 +582,19 @@ object ComparatorVerilog {
 }
 ```
 
+```{raw} latex
+\end{minipage}
+```
+
 **VHDL-Ausgabe: `ComparatorVhdl.scala`**
-```scala
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} scala
+:linenos:
+:caption: 
+
 import spinal.core._
 
 object ComparatorVhdl {
@@ -525,18 +607,40 @@ object ComparatorVhdl {
 }
 ```
 
+```{raw} latex
+\end{minipage}
+```
+
 **Verwendung**
-```bash
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} bash
+:linenos:
+:caption: 
+
 sbt compile
 sbt "runMain ComparatorSim"
 sbt "runMain ComparatorVerilog"
 sbt "runMain ComparatorVhdl"
 ```
 
+```{raw} latex
+\end{minipage}
+```
+
 Ergebnis: Die Dateien `Comparator.v` und `Comparator.vhd` werden generiert, und die Testbench prüft die Vergleichsfunktionen.
 
 **Generierter VHDL-Code: `Comparator.vhd`** 
-```scala
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} vhdl
+:linenos:
+:caption:
+
 -- Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
 -- Component : Comparator
 
@@ -568,8 +672,20 @@ begin
   lt <= pkg_toStdLogic(a < b);
 end arch;
 ```
+
+```{raw} latex
+\end{minipage}
+```
+
 **Generierter Verilog-Code: `Comparator.v`** 
-```verilog
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} verilog
+:linenos:
+:caption:
+
 // Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
 // Component : Comparator
 
@@ -590,12 +706,23 @@ module Comparator (
 endmodule
 ```
 
+```{raw} latex
+\end{minipage}
+```
+
 ## Zähler
 
 Ein Zähler zählt bei jedem Takt um 1 nach oben. Er kann in vielen Anwendungen eingesetzt werden, z. B. als Zeitgeber, Schleifenzähler oder zur Adressierung.
 
 **Projektstruktur**
+```{raw} latex
+\begin{minipage}{\linewidth}
 ```
+
+```{code-block} text
+:linenos:
+:caption:
+
 counter-spinalhdl/
 ├── build.sbt
 ├── src/
@@ -608,9 +735,19 @@ counter-spinalhdl/
 └── README.md
 ```
 
-**Aufbau des Moduls**
+```{raw} latex
+\end{minipage}
+```
 
-```scala
+**Aufbau des Moduls**
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} scala
+:linenos:
+:caption:
+
 import spinal.core._
 
 class Counter(width: Int) extends Component {
@@ -630,6 +767,11 @@ class Counter(width: Int) extends Component {
   io.enable.setName("enable"); io.reset.setName("reset"); io.value.setName("value")
 }
 ```
+
+```{raw} latex
+\end{minipage}
+```
+
 **Was macht das Modul?**
 
 - `enable`: Wenn aktiv, zählt der Zähler hoch.
@@ -637,8 +779,14 @@ class Counter(width: Int) extends Component {
 - `value`: Der aktuelle Zählerwert.
 
 **Testbench: `CounterSim.scala`**
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
 
-```scala
+```{code-block} scala
+:linenos:
+:caption:
+
 import spinal.core._
 import spinal.sim._
 import spinal.core.sim._
@@ -669,9 +817,19 @@ object CounterSim {
 }
 ```
 
-**Verilog-Ausgabe: `CounterVerilog.scala`**
+```{raw} latex
+\end{minipage}
+```
 
-```scala
+**Verilog-Ausgabe: `CounterVerilog.scala`**
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} scala
+:linenos:
+:caption:
+
 import spinal.core._
 
 object CounterVerilog {
@@ -681,9 +839,19 @@ object CounterVerilog {
 }
 ```
 
-**VHDL-Ausgabe: `CounterVhdl.scala`**
+```{raw} latex
+\end{minipage}
+```
 
-```scala
+**VHDL-Ausgabe: `CounterVhdl.scala`**
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} scala
+:linenos:
+:caption:
+
 import spinal.core._
 object CounterVhdl {
   def main(args: Array[String]): Unit =
@@ -691,19 +859,40 @@ object CounterVhdl {
       .generateVhdl(new Counter(4).setDefinitionName("Counter"))
 }
 ```
-**Verwendung**
 
-```bash
+```{raw} latex
+\end{minipage}
+```
+
+**Verwendung**
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} bash
+:linenos:
+:caption:
 sbt compile
 sbt "runMain CounterSim"
 sbt "runMain CounterVerilog"
+```
+
+```{raw} latex
+\end{minipage}
 ```
 
 **Ergebnis:**
 Die Dateien `Counter.v` und `Counter.vhd` werden generiert. In der Simulation zählt der Wert bei `enable = true` hoch.
 
 **Generierter VHDL-Code: `Counter.vhd`** 
-```scala
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} vhdl
+:linenos:
+:caption:
+
 -- Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
 -- Component : Counter
 
@@ -749,8 +938,20 @@ begin
 
 end arch;
 ```
+
+```{raw} latex
+\end{minipage}
+```
+
 **Generierter Verilog-Code: `Counter.v`** 
-```verilog
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} verilog
+:linenos:
+:caption:
+
 // Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
 // Component : Counter
 
@@ -784,12 +985,23 @@ module Counter (
 endmodule
 ```
 
+```{raw} latex
+\end{minipage}
+```
+
 ## Taktteiler (Clock Divider)
 
 Ein Taktteiler erzeugt aus einem schnellen Eingangstakt einen langsameren Ausgangstakt, indem er Takte zählt und z. B. nur jedes 256. Signal durchlässt.
 
 **Projektstruktur**
+```{raw} latex
+\begin{minipage}{\linewidth}
 ```
+
+```{code-block} text
+:linenos:
+:caption:
+
 clockdivider-spinalhdl/
 ├── build.sbt
 ├── src/
@@ -802,9 +1014,20 @@ clockdivider-spinalhdl/
 └── README.md
 ```
 
-**Aufbau des Moduls**
 
-```scala
+```{raw} latex
+\end{minipage}
+```
+
+**Aufbau des Moduls**
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} scala
+:linenos:
+:caption:
+
 import spinal.core._
 
 class ClockDivider(divisorWidth: Int) extends Component {
@@ -828,6 +1051,11 @@ class ClockDivider(divisorWidth: Int) extends Component {
   io.counterO.setName("counter")
 }
 ```
+
+```{raw} latex
+\end{minipage}
+```
+
 **Was macht das Modul?**
 
 - `counter`: Zählt kontinuierlich bei jedem Takt.
@@ -836,7 +1064,14 @@ class ClockDivider(divisorWidth: Int) extends Component {
 
 
 **Testbench: `ClockDividerSim.scala`**
-```scala
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} scala
+:linenos:
+:caption:
+
 import spinal.core._
 import spinal.core.sim._
 
@@ -856,9 +1091,19 @@ object ClockDividerSim {
   }
 }
 ```
-**Verilog-Ausgabe: `ClockDividerVerilog.scala`**
 
-```scala
+```{raw} latex
+\end{minipage}
+```
+**Verilog-Ausgabe: `ClockDividerVerilog.scala`**
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} scala
+:linenos:
+:caption:
+
 import spinal.core._
 
 object ClockDividerVerilog {
@@ -871,8 +1116,19 @@ object ClockDividerVerilog {
 }
 ```
 
+```{raw} latex
+\end{minipage}
+```
+
 **VHDL-Ausgabe: `ClockDividerVhdl.scala`**
-```scala
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} scala
+:linenos:
+:caption:
+
 import spinal.core._
 
 object ClockDividerVhdl {
@@ -885,12 +1141,27 @@ object ClockDividerVhdl {
 }
 ```
 
+```{raw} latex
+\end{minipage}
+```
+
 **Verwendung**
-```bash
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} bash
+:linenos:
+:caption:
+
 sbt compile
 sbt "runMain ClockDividerSim"
 sbt "runMain ClockDividerVerilog"
 sbt "runMain ClockDividerVhdl"
+```
+
+```{raw} latex
+\end{minipage}
 ```
 
 Das erzeugt:
@@ -899,7 +1170,14 @@ Das erzeugt:
 - und zeigt die Simulation mit `clkOut`, der etwa alle 128 Takte wechselt.
 
 **Generierter VHDL-Code: `ClockDivider.vhd`** 
-```scala
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} vhdl
+:linenos:
+:caption:
+
 -- Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
 -- Component : ClockDivider
 
@@ -938,8 +1216,19 @@ begin
 end arch;
 ```
 
+```{raw} latex
+\end{minipage}
+```
+
 **Generierter Verilog-Code: `ClockDivider.v`** 
-```verilog
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} verilog
+:linenos:
+:caption:
+
 // Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
 // Component : ClockDivider
 
@@ -965,6 +1254,10 @@ module ClockDivider (
 endmodule
 ```
 
+```{raw} latex
+\end{minipage}
+```
+
 ## PWM
 
 Dies ist ein einfaches SpinalHDL-Projekt, das ein parametrierbares PWM-Modul (Pulsweitenmodulation) implementiert. Es enthält:
@@ -977,8 +1270,14 @@ Dies ist ein einfaches SpinalHDL-Projekt, das ein parametrierbares PWM-Modul (Pu
 - und eine verständliche Erklärung des Funktionsprinzips
 
 **Projektstruktur**
-
+```{raw} latex
+\begin{minipage}{\linewidth}
 ```
+
+```{code-block} bash
+:linenos:
+:caption:
+
 pwm-spinalhdl/
 ├── build.sbt
 ├── project/
@@ -1002,14 +1301,24 @@ pwm-spinalhdl/
 │       └── Pwm.vhd
 ```
 
+```{raw} latex
+\end{minipage}
+```
+
 **Erklärung des PWM-Moduls**
 
 Das PWM-Modul erzeugt ein Signal, das schnell zwischen **an (1)** und **aus (0)** wechselt.  
 Wie lange das Signal „an“ bleibt, hängt vom **Duty-Cycle** ab – einem Eingabewert, der angibt, wie viel Prozent der Zeit das Signal „an“ sein soll.
 
 **Aufbau des Moduls**
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
 
-```scala
+```{code-block} scala
+:linenos:
+:caption:
+
 import spinal.core._
 
 class Pwm(width: Int) extends Component {
@@ -1042,6 +1351,10 @@ class Pwm(width: Int) extends Component {
 }
 ```
 
+```{raw} latex
+\end{minipage}
+```
+
 **Was macht das Modul?**
 
 - `width`: Gibt an, wie genau das PWM-Signal sein soll (z. B. 8 Bit → Werte von 0 bis 255).
@@ -1066,8 +1379,14 @@ Dieser Zyklus wiederholt sich kontinuierlich.
 Siehe oben unter „Aufbau des Moduls“.
 
 **[2] `src/test/scala/PwmSim.scala`**
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
 
-```scala
+```{code-block} scala
+:linenos:
+:caption:
+
 import spinal.core._
 import spinal.core.sim._
 
@@ -1105,8 +1424,19 @@ object PwmSim {
 }
 ```
 
+```{raw} latex
+\end{minipage}
+```
+
 **`[3]PwmVerilog.scala`**
-```scala
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} scala
+:linenos:
+:caption:
+
 import spinal.core._
 object PwmVerilog {
   def main(args: Array[String]): Unit =
@@ -1116,7 +1446,14 @@ object PwmVerilog {
 ```
 
 **`[4]PwmVhdl.scala`**
-```scala
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} scala
+:linenos:
+:caption:
+
 import spinal.core._
 object PwmVhdl {
   def main(args: Array[String]): Unit =
@@ -1125,8 +1462,19 @@ object PwmVhdl {
 }
 ```
 
+```{raw} latex
+\end{minipage}
+```
+
 **`sim.sh`**
-```scala
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} scala
+:linenos:
+:caption:
+
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -1138,8 +1486,19 @@ docker run --rm -it \
 echo "✅ PWM: VCD under simWorkspace/Pwm/"
 ```
 
+```{raw} latex
+\end{minipage}
+```
+
 **`gen.sh`**
-```scala
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} scala
+:linenos:
+:caption:
+
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -1151,17 +1510,50 @@ docker run --rm -it \
 echo "✅ PWM: HDL under generated/{verilog,vhdl}/"
 ```
 
+```{raw} latex
+\end{minipage}
+```
 
 **Projekt kompilieren und starten**
-```bash
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} bash
+:linenos:
+:caption:
+
 ./scripts/sim.sh  #Simulation mit VCD
 ```
-```bash
+
+```{raw} latex
+\end{minipage}
+```
+
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} bash
+:linenos:
+:caption:
+
 ./scripts/gen.sh  #HDL-Ausgabe (Verilog und VHDL)
 ```
 
+```{raw} latex
+\end{minipage}
+```
+
 **Generierter Verilog-Code: `Pwm.v`** 
-```verilog
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} verilog
+:linenos:
+:caption:
+
 // Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
 // Component : Pwm
 
@@ -1205,8 +1597,19 @@ module Pwm (
 endmodule
 ```
 
+```{raw} latex
+\end{minipage}
+```
+
 **Generierter VHDL-Code: `Pwm.vhd`** 
-```scala
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} vhdl
+:linenos:
+:caption:
+
 -- Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
 -- Component : Pwm
 
@@ -1249,6 +1652,10 @@ begin
   end process;
 
 end arch;
+```
+
+```{raw} latex
+\end{minipage}
 ```
 
 **Ergebnis**
@@ -1302,14 +1709,31 @@ Caches oder Debugging.
 Im Folgenden stehen drei realistische Konfigurationen: minimal, „microcontroller-artig“ und eine Variante mit zusätzlichen Rechen-Plugins. Anschließend folgt ein schlanker Top-Level, der die vom Core erzeugten Bus-Schnittstellen nach außen führt.
 
 Übliche Imports:
- ```scala
+ ```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} scala
+:linenos:
+:caption:
 > import spinal.core._
 > import vexriscv._
 > import vexriscv.plugin._
- ```
-### Minimaler Core (einfachste Konfiguration)
+```
 
-```scala
+```{raw} latex
+\end{minipage}
+```
+
+### Minimaler Core (einfachste Konfiguration)
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} scala
+:linenos:
+:caption:
+
 class VexRiscvMinimal extends Component {
   val cpu = new VexRiscv(
     VexRiscvConfig(
@@ -1324,6 +1748,11 @@ class VexRiscvMinimal extends Component {
   )
 }
 ```
+
+```{raw} latex
+\end{minipage}
+```
+
 Diese Konfiguration eignet sich für sehr kleine FPGAs und Demonstrationen. Sie hat weder
 Caches noch CSR‑Funktionen und ist dadurch leicht zu verstehen
 
@@ -1332,7 +1761,14 @@ In diesem Beispiel wird ein Prozessor mit einem einfachen Instruktionsbus, einem
 Der VexRiscv zeigt sehr deutlich, wie mächtig SpinalHDL ist. Während klassische HDLs schnell unübersichtlich werden, wenn man modulare und parametrisierbare Designs bauen möchte, bietet SpinalHDL hier große Vorteile. Dass ein kompletter Prozessor mit Scala und SpinalHDL beschrieben werden kann und anschließend als Verilog oder VHDL generiert wird, beweist die Praxistauglichkeit dieser Sprache.
 
 ### “MCU”-Profil (etwas umfangreicher)
-```scala
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} scala
+:linenos:
+:caption:
+
 class VexRiscvMcu extends Component {
   val cpu = new VexRiscv(
     VexRiscvConfig(
@@ -1350,12 +1786,24 @@ class VexRiscvMcu extends Component {
   )
 }
 ```
+
+```{raw} latex
+\end{minipage}
+```
+
 Diese Konfiguration ist bereits deutlich leistungsfähiger.
 Mit Hazard-Handling lassen sich Pipeline-Konflikte automatisch auflösen, und mit dem CSR-Plugin (Control and Status Registers) erhält der Prozessor die Basis für Betriebssystem-ähnliche Software.
 Das ist die Konfiguration, die man in einem kleinen SoC (z. B. mit UART, Timer und On-Chip-RAM) nutzen würde.
 
 ### Variante mit zusätzlichen Recheneinheiten
+```{raw} latex
+\begin{minipage}{\linewidth}
 ```
+
+```{code-block} scala
+:linenos:
+:caption:
+
 class VexRiscvWithMulDiv extends Component {
   val cpu = new VexRiscv(
     VexRiscvConfig(
@@ -1375,13 +1823,25 @@ class VexRiscvWithMulDiv extends Component {
   )
 }
 ```
+
+```{raw} latex
+\end{minipage}
+```
+
 Mit dieser Konfiguration erhält der Prozessor Unterstützung für Multiplikation und Division.
 Das ist besonders nützlich, wenn man Anwendungen ausführen möchte, die stark auf mathematische Operationen angewiesen sind (z. B. Signalverarbeitung oder Kryptographie).
 
 ### Top-Level: Bus aus dem Core herausführen
 Die Bus-Schnittstellen der Plugins lassen sich einfach nach außen führen.
 So kann man den Prozessor mit Speicher, Peripherie oder einem SoC-Framework verbinden.
+```{raw} latex
+\begin{minipage}{\linewidth}
 ```
+
+```{code-block} scala
+:linenos:
+:caption:
+
 class VexRiscvTop extends Component {
   val io = new Bundle {
     val iBus = master(IBusSimpleBus())   // Instruktionsbus
@@ -1408,17 +1868,34 @@ class VexRiscvTop extends Component {
   io.dBus <> dBusP.dBus
 }
 ```
+
+```{raw} latex
+\end{minipage}
+```
+
 Damit steht ein Prozessor-Top-Level zur Verfügung, der wie eine normale Komponente
 in andere Designs integriert werden kann.
 
 ### Verilog generieren
+```{raw} latex
+\begin{minipage}{\linewidth}
 ```
+
+```{code-block} scala
+:linenos:
+:caption:
+
 object VexRiscvTopVerilog {
   def main(args: Array[String]): Unit = {
     SpinalVerilog(new VexRiscvTop)
   }
 }
 ```
+
+```{raw} latex
+\end{minipage}
+```
+
 Dieser kleine Generator erzeugt aus dem SpinalHDL-Design den entsprechenden Verilog-Code,
 der in gängigen FPGA-Toolchains weiterverwendet werden kann.
 
