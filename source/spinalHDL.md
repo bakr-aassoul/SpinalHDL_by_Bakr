@@ -1834,6 +1834,7 @@ Das ist besonders nützlich, wenn man Anwendungen ausführen möchte, die stark 
 ### Top-Level: Bus aus dem Core herausführen
 Die Bus-Schnittstellen der Plugins lassen sich einfach nach außen führen.
 So kann man den Prozessor mit Speicher, Peripherie oder einem SoC-Framework verbinden.
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
