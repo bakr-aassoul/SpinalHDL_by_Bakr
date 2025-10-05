@@ -1445,6 +1445,10 @@ object PwmVerilog {
 }
 ```
 
+```{raw} latex
+\end{minipage}
+```
+
 **`[4]PwmVhdl.scala`**
 ```{raw} latex
 \begin{minipage}{\linewidth}
