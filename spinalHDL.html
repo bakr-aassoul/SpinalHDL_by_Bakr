@@ -436,7 +436,8 @@ Als Build-Tool wird <strong>sbt (Scala Build Tool)</strong> eingesetzt. <strong>
 <li><p>Größer-als (<code class="docutils literal notranslate"><span class="pre">greater</span></code>)</p></li>
 <li><p>Kleiner-als (<code class="docutils literal notranslate"><span class="pre">less</span></code>)</p></li>
 </ul>
-<p><strong>Projektstruktur</strong></p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text"><strong>Projektstruktur</strong></span><a class="headerlink" href="#id2" title="Link to this code">¶</a></div>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>comparator-spinalhdl/
 <span class="linenos"> 2</span>├── build.sbt
 <span class="linenos"> 3</span>├── src/
@@ -449,7 +450,9 @@ Als Build-Tool wird <strong>sbt (Scala Build Tool)</strong> eingesetzt. <strong>
 <span class="linenos">10</span>└── README.md
 </pre></div>
 </div>
-<p><strong>Aufbau des Moduls</strong></p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text"><strong>Aufbau des Moduls</strong></span><a class="headerlink" href="#id3" title="Link to this code">¶</a></div>
 <div class="highlight-scala notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">import</span><span class="w"> </span><span class="nn">spinal</span><span class="p">.</span><span class="nn">core</span><span class="p">.</span><span class="n">_</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Comparator</span><span class="p">(</span><span class="n">width</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Component</span><span class="w"> </span><span class="p">{</span>
@@ -475,6 +478,7 @@ Als Build-Tool wird <strong>sbt (Scala Build Tool)</strong> eingesetzt. <strong>
 <span class="linenos">23</span><span class="w">  </span><span class="n">io</span><span class="p">.</span><span class="n">less</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&quot;lt&quot;</span><span class="p">)</span>
 <span class="linenos">24</span><span class="p">}</span>
 </pre></div>
+</div>
 </div>
 <p><strong>Was macht das Modul?</strong></p>
 <ul class="simple">
