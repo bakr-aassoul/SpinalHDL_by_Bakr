@@ -521,14 +521,14 @@ class Comparator(width: Int) extends Component {
   - `greater`: wenn `a > b`
   - `less`: wenn `a < b`
 
-**Testbench: `ComparatorSim.scala`**
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} scala
 :linenos:
-:caption:
+:caption:**Testbench: `ComparatorSim.scala`**
 
 import spinal.core._
 import spinal.core.sim._
@@ -564,14 +564,14 @@ object ComparatorSim {
 \end{minipage}
 ```
 
-**Verilog-Ausgabe: `ComparatorVerilog.scala`**
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} scala
 :linenos:
-:caption: 
+:caption: **Verilog-Ausgabe: `ComparatorVerilog.scala`**
 
 import spinal.core._
 
@@ -589,14 +589,14 @@ object ComparatorVerilog {
 \end{minipage}
 ```
 
-**VHDL-Ausgabe: `ComparatorVhdl.scala`**
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} scala
 :linenos:
-:caption: 
+:caption: **VHDL-Ausgabe: `ComparatorVhdl.scala`**
 
 import spinal.core._
 
@@ -635,14 +635,14 @@ sbt "runMain ComparatorVhdl"
 
 Ergebnis: Die Dateien `Comparator.v` und `Comparator.vhd` werden generiert, und die Testbench prüft die Vergleichsfunktionen.
 
-**Generierter VHDL-Code: `Comparator.vhd`** 
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} vhdl
 :linenos:
-:caption:
+:caption: **Generierter VHDL-Code: `Comparator.vhd`** 
 
 -- Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
 -- Component : Comparator
@@ -680,14 +680,14 @@ end arch;
 \end{minipage}
 ```
 
-**Generierter Verilog-Code: `Comparator.v`** 
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} verilog
 :linenos:
-:caption:
+:caption:**Generierter Verilog-Code: `Comparator.v`** 
 
 // Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
 // Component : Comparator
@@ -717,14 +717,14 @@ endmodule
 
 Ein Zähler zählt bei jedem Takt um 1 nach oben. Er kann in vielen Anwendungen eingesetzt werden, z. B. als Zeitgeber, Schleifenzähler oder zur Adressierung.
 
-**Projektstruktur**
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} text
 :linenos:
-:caption:
+:caption:**Projektstruktur**
 
 counter-spinalhdl/
 ├── build.sbt
@@ -742,14 +742,14 @@ counter-spinalhdl/
 \end{minipage}
 ```
 
-**Aufbau des Moduls**
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} scala
 :linenos:
-:caption:
+:caption:**Aufbau des Moduls**
 
 import spinal.core._
 
@@ -781,14 +781,14 @@ class Counter(width: Int) extends Component {
 - `reset`: Wenn aktiv, wird der Zähler auf 0 gesetzt.
 - `value`: Der aktuelle Zählerwert.
 
-**Testbench: `CounterSim.scala`**
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} scala
 :linenos:
-:caption:
+:caption:**Testbench: `CounterSim.scala`**
 
 import spinal.core._
 import spinal.sim._
@@ -824,14 +824,14 @@ object CounterSim {
 \end{minipage}
 ```
 
-**Verilog-Ausgabe: `CounterVerilog.scala`**
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} scala
 :linenos:
-:caption:
+:caption:**Verilog-Ausgabe: `CounterVerilog.scala`**
 
 import spinal.core._
 
@@ -846,14 +846,14 @@ object CounterVerilog {
 \end{minipage}
 ```
 
-**VHDL-Ausgabe: `CounterVhdl.scala`**
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} scala
 :linenos:
-:caption:
+:caption:**VHDL-Ausgabe: `CounterVhdl.scala`**
 
 import spinal.core._
 object CounterVhdl {
@@ -887,14 +887,14 @@ sbt "runMain CounterVerilog"
 **Ergebnis:**
 Die Dateien `Counter.v` und `Counter.vhd` werden generiert. In der Simulation zählt der Wert bei `enable = true` hoch.
 
-**Generierter VHDL-Code: `Counter.vhd`** 
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} vhdl
 :linenos:
-:caption:
+:caption:**Generierter VHDL-Code: `Counter.vhd`** 
 
 -- Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
 -- Component : Counter
@@ -946,14 +946,14 @@ end arch;
 \end{minipage}
 ```
 
-**Generierter Verilog-Code: `Counter.v`** 
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} verilog
 :linenos:
-:caption:
+:caption:**Generierter Verilog-Code: `Counter.v`** 
 
 // Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
 // Component : Counter
@@ -996,14 +996,14 @@ endmodule
 
 Ein Taktteiler erzeugt aus einem schnellen Eingangstakt einen langsameren Ausgangstakt, indem er Takte zählt und z. B. nur jedes 256. Signal durchlässt.
 
-**Projektstruktur**
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} text
 :linenos:
-:caption:
+:caption:**Projektstruktur**
 
 clockdivider-spinalhdl/
 ├── build.sbt
@@ -1022,14 +1022,14 @@ clockdivider-spinalhdl/
 \end{minipage}
 ```
 
-**Aufbau des Moduls**
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} scala
 :linenos:
-:caption:
+:caption:**Aufbau des Moduls**
 
 import spinal.core._
 
@@ -1066,14 +1066,14 @@ class ClockDivider(divisorWidth: Int) extends Component {
 - **Beispiel**: Bei `divisorWidth = 8` ergibt sich ein Teiler von 256 (halbe Periode = 128 Takte).
 
 
-**Testbench: `ClockDividerSim.scala`**
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} scala
 :linenos:
-:caption:
+:caption:**Testbench: `ClockDividerSim.scala`**
 
 import spinal.core._
 import spinal.core.sim._
@@ -1098,14 +1098,14 @@ object ClockDividerSim {
 ```{raw} latex
 \end{minipage}
 ```
-**Verilog-Ausgabe: `ClockDividerVerilog.scala`**
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} scala
 :linenos:
-:caption:
+:caption:**Verilog-Ausgabe: `ClockDividerVerilog.scala`**
 
 import spinal.core._
 
@@ -1123,14 +1123,14 @@ object ClockDividerVerilog {
 \end{minipage}
 ```
 
-**VHDL-Ausgabe: `ClockDividerVhdl.scala`**
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} scala
 :linenos:
-:caption:
+:caption:**VHDL-Ausgabe: `ClockDividerVhdl.scala`**
 
 import spinal.core._
 
@@ -1172,14 +1172,14 @@ Das erzeugt:
 - `ClockDivider.vhd`: die Verilog-Datei
 - und zeigt die Simulation mit `clkOut`, der etwa alle 128 Takte wechselt.
 
-**Generierter VHDL-Code: `ClockDivider.vhd`** 
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} vhdl
 :linenos:
-:caption:
+:caption:**Generierter VHDL-Code: `ClockDivider.vhd`** 
 
 -- Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
 -- Component : ClockDivider
@@ -1223,14 +1223,14 @@ end arch;
 \end{minipage}
 ```
 
-**Generierter Verilog-Code: `ClockDivider.v`** 
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} verilog
 :linenos:
-:caption:
+:caption:**Generierter Verilog-Code: `ClockDivider.v`** 
 
 // Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
 // Component : ClockDivider
@@ -1272,14 +1272,14 @@ Dies ist ein einfaches SpinalHDL-Projekt, das ein parametrierbares PWM-Modul (Pu
 - die Hilfsskripte `scripts/sim.sh` (Simulation) und `scripts/gen.sh` (HDL-Generierung)
 - und eine verständliche Erklärung des Funktionsprinzips
 
-**Projektstruktur**
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} bash
 :linenos:
-:caption:
+:caption:**Projektstruktur**
 
 pwm-spinalhdl/
 ├── build.sbt
@@ -1289,7 +1289,7 @@ pwm-spinalhdl/
 │   ├── main/
 │   │   └── scala/
 │   │       ├── Pwm.scala                 ← [1] PWM-Modul
-│   │       └── PwmVerilog.scala          ← [3] Verilog-Generierung
+│   │       ├── PwmVerilog.scala          ← [3] Verilog-Generierung
 │   │       └── PwmVhdl.scala             ← [4] VHDL-Generierung
 │   └── test/
 │       └── scala/
@@ -1298,10 +1298,11 @@ pwm-spinalhdl/
 │   ├── sim.sh                            ←  Simulation
 │   └── gen.sh                            ←  HDL-Generierung
 └── generated/
-│   ├── verilog/
-│       └── Pwm.v
-│   └── vhdl/
-│       └── Pwm.vhd
+    ├── verilog/
+    │   └── Pwm.v
+    └── vhdl/
+        └── Pwm.vhd
+
 ```
 
 ```{raw} latex
@@ -1313,14 +1314,14 @@ pwm-spinalhdl/
 Das PWM-Modul erzeugt ein Signal, das schnell zwischen **an (1)** und **aus (0)** wechselt.  
 Wie lange das Signal „an“ bleibt, hängt vom **Duty-Cycle** ab – einem Eingabewert, der angibt, wie viel Prozent der Zeit das Signal „an“ sein soll.
 
-**Aufbau des Moduls**
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} scala
 :linenos:
-:caption:
+:caption:**Aufbau des Moduls**
 
 import spinal.core._
 
@@ -1381,14 +1382,14 @@ Dieser Zyklus wiederholt sich kontinuierlich.
 
 Siehe oben unter „Aufbau des Moduls“.
 
-**[2] `src/test/scala/PwmSim.scala`**
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} scala
 :linenos:
-:caption:
+:caption: **[2] `src/test/scala/PwmSim.scala`**
 
 import spinal.core._
 import spinal.core.sim._
@@ -1431,14 +1432,14 @@ object PwmSim {
 \end{minipage}
 ```
 
-**`[3]PwmVerilog.scala`**
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} scala
 :linenos:
-:caption:
+:caption:**`[3]PwmVerilog.scala`**
 
 import spinal.core._
 object PwmVerilog {
@@ -1452,14 +1453,14 @@ object PwmVerilog {
 \end{minipage}
 ```
 
-**`[4]PwmVhdl.scala`**
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} scala
 :linenos:
-:caption:
+:caption:**`[4]PwmVhdl.scala`**
 
 import spinal.core._
 object PwmVhdl {
@@ -1473,14 +1474,14 @@ object PwmVhdl {
 \end{minipage}
 ```
 
-**`sim.sh`**
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} scala
 :linenos:
-:caption:
+:caption:**`sim.sh`**
 
 #!/usr/bin/env bash
 set -euo pipefail
@@ -1497,14 +1498,14 @@ echo "✅ PWM: VCD under simWorkspace/Pwm/"
 \end{minipage}
 ```
 
-**`gen.sh`**
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} scala
 :linenos:
-:caption:
+:caption:**`gen.sh`**
 
 #!/usr/bin/env bash
 set -euo pipefail
@@ -1521,14 +1522,14 @@ echo "✅ PWM: HDL under generated/{verilog,vhdl}/"
 \end{minipage}
 ```
 
-**Projekt kompilieren und starten**
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} bash
 :linenos:
-:caption:
+:caption:**Projekt kompilieren und starten**
 
 ./scripts/sim.sh  #Simulation mit VCD
 ```
@@ -1552,14 +1553,14 @@ echo "✅ PWM: HDL under generated/{verilog,vhdl}/"
 \end{minipage}
 ```
 
-**Generierter Verilog-Code: `Pwm.v`** 
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} verilog
 :linenos:
-:caption:
+:caption:**Generierter Verilog-Code: `Pwm.v`** 
 
 // Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
 // Component : Pwm
@@ -1608,14 +1609,14 @@ endmodule
 \end{minipage}
 ```
 
-**Generierter VHDL-Code: `Pwm.vhd`** 
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} vhdl
 :linenos:
-:caption:
+:caption:**Generierter VHDL-Code: `Pwm.vhd`** 
 
 -- Generator : SpinalHDL v1.9.1    git head : 9cba1927b2fff87b0d54e8bbecec94e7256520e4
 -- Component : Pwm
@@ -1686,10 +1687,13 @@ ausgeführt werden können.
 
 Ein einfaches Bild dafür ist eine Fabrikstraße: während ein Arbeitsschritt an einer 
 Instruktion gerade ausgeführt wird, befindet sich die nächste Instruktion bereits 
-in der folgenden Station. Dadurch wird die Ausführung schneller und effizienter.  
+in der folgenden Station. Dadurch wird die Ausführung schneller und effizienter.
+
+```{raw} latex
+\clearpage
+```
 
 **Pipeline-Skizze:**
-
 ![Pipeline sketch](https://github.com/user-attachments/assets/91404905-f756-4b6a-950c-4e9791b61e3d)
 Die Abbildung zeigt eine 5-Stufen-Pipeline, in der mehrere Instruktionen überlappend 
 bearbeitet werden.  
