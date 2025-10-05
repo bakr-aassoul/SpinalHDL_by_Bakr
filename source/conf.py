@@ -26,33 +26,36 @@ latex_engine = 'xelatex'
 latex_additional_files = ['spinalhdl-logo.png']
 
 latex_elements = {
-    # keep the nice frame and soft wrapping Sphinx provides
+    # Keep code frames + soft wrapping in PDF
     'sphinxsetup': 'verbatimwithframe=true, verbatimwrapslines=true',
 
     'preamble': r'''
-        % XeLaTeX + fonts
+        % --- basics / fonts ---
         \usepackage{lmodern}
-        \usepackage{fontspec} % (optional; comment out if you prefer lmodern only)
+        % If you prefer system fonts with XeLaTeX, uncomment:
+        % \usepackage{fontspec}
         % \setmainfont{Noto Serif}[Scale=MatchLowercase]
         % \setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
 
-        \usepackage{fancyhdr}
         \usepackage{graphicx}
+        \usepackage{fancyhdr}
 
-        % Verbatim handling + soft wrapping
-        \usepackage{fvextra}     % extends fancyvrb
+        % --- verbatim handling (soft wrapping, no splits) ---
+        \usepackage{fvextra}   % better verbatim
         \fvset{
           breaklines=true,
           breakanywhere=true
         }
 
-        % NEW: avoid splitting code blocks across pages
+        % Ask LaTeX to move whole code blocks to next page if not enough space
         \usepackage{needspace}
-        % Ask LaTeX to keep at least N lines together; adjust N if you like
-        \AtBeginEnvironment{Verbatim}{\Needspace{10\baselineskip}}
-        \AtBeginEnvironment{sphinxVerbatim}{\Needspace{10\baselineskip}}
+        \usepackage{etoolbox}
+        \makeatletter
+        % Inject Needspace at the start of Sphinx's verbatim environment
+        \pretocmd{\sphinxVerbatim}{\Needspace{12\baselineskip}}{}{}
+        \makeatother
 
-        % (Optional) Unicode niceties; safe to leave in
+        % --- unicode niceties (optional but quiets warnings) ---
         \usepackage{newunicodechar}
         \newunicodechar{^^^^202f}{\,} % map U+202F narrow NBSP to thin space
 
