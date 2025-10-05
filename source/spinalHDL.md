@@ -77,7 +77,14 @@ val count = Reg(UInt(4 bits)) init(0)
 
 Wie in Scala aber spezialisiert für Hardwarelogik:
 
-```scala
+```{raw} latex
+\begin{minipage}{\linewidth}
+```
+
+```{code-block} scala
+:linenos:
+:caption: Beispiel einer Steuerstruktur
+
 when(cond) {
   // true-Zweig
 } elsewhen(otherCond) {
@@ -85,6 +92,10 @@ when(cond) {
 } otherwise {
   // fallback-Zweig
 }
+```
+
+```{raw} latex
+\end{minipage}
 ```
 
 Beispiel:
