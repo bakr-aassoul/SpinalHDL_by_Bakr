@@ -32,6 +32,11 @@ latex_elements = {
         \usepackage{lmodern}
         \usepackage{fancyhdr}
         \usepackage{graphicx}
+        \usepackage{fvextra}
+        \fvset{
+          breaklines=true,
+          breakanywhere=true
+        }
         \makeatletter
         \fancypagestyle{normal}{
             \fancyhf{}
