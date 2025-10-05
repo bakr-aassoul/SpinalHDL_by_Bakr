@@ -179,6 +179,9 @@ val arr = Array.fill(4)(UInt(8 bits))
 ```
 Vektoren erlauben z. B. Busse, Speicher, Registergruppen.
 
+```{raw} latex
+\clearpage
+```
 ## Komponentenstruktur
 
 Eine Hardwareeinheit (Modul) ist eine Klasse, die von `Component` erbt:
@@ -445,14 +448,14 @@ Ein Comparator vergleicht zwei Werte (`a` und `b`) und erzeugt Ausgänge für:
 - Größer-als (`greater`)
 - Kleiner-als (`less`)
   
-**Projektstruktur**
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} text
 :linenos:
-:caption: 
+:caption: **Projektstruktur**
 
 comparator-spinalhdl/
 ├── build.sbt
@@ -470,14 +473,14 @@ comparator-spinalhdl/
 \end{minipage}
 ```
 
-**Aufbau des Moduls**
+
 ```{raw} latex
 \begin{minipage}{\linewidth}
 ```
 
 ```{code-block} scala
 :linenos:
-:caption:
+:caption: **Aufbau des Moduls**
 
 import spinal.core._
 
