@@ -52,6 +52,8 @@ latex_elements = {
         {\Huge \bfseries SpinalHDL Dokumentation \par}
         \vspace{1cm}
         {\Large Bakr Aassoul \par}
+        \vspace{0.5cm}
+        {\large Betreuer: Prof.\ Dr.\ Jens Rettkowski \par}
         \vfill
         {\large \today \par}
     \end{titlepage}
