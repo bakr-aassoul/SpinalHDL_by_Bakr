@@ -1943,3 +1943,15 @@ leistungsfähigen RISC-V-Prozessoren reichen.
 SpinalHDL ist damit nicht nur ein Werkzeug für den Einstieg, 
 sondern eine ernstzunehmende Alternative zu VHDL und Verilog, 
 die sich in Zukunft noch stärker in der Hardwareentwicklung etablieren dürfte.
+
+```{raw} latex
+\clearpage
+```
+
+# Quellen
+
+**[1]** SpinalHDL: *An alternative hardware description language — FOSDEM 2017.*  
+<https://archive.fosdem.org/2017/schedule/event/spinal_hdl/>
+
+**[2]** MicroRV32 – *A RISC-V Implementation using SpinalHDL, Universität Bremen / DFKI.*  
+<https://agra.informatik.uni-bremen.de/doc/work/date21_unibooth_microrv32.pdf>
