@@ -1,7 +1,7 @@
 # Configuration file for the Sphinx documentation builder.
 
 # -- Project Information -----------------------------------------------------
-project = 'Betriebliche Praxis : SpinalHDL Dokumentation'
+project = 'SpinalHDL Dokumentation'
 copyright = '2025, Bakr Aassoul'
 author = 'Bakr Aassoul'
 
@@ -49,6 +49,8 @@ latex_elements = {
         \vspace*{3cm}
         \includegraphics[width=0.5\textwidth]{spinalhdl-logo.png}\par
         \vspace{2cm}
+        {\Large Betriebliche Praxis \par}  % <-- Added line
+        \vspace{0.5cm}
         {\Huge \bfseries SpinalHDL Dokumentation \par}
         \vspace{1cm}
         {\Large Bakr Aassoul \par}
