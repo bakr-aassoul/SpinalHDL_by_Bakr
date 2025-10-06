@@ -1,7 +1,7 @@
 # Configuration file for the Sphinx documentation builder.
 
 # -- Project Information -----------------------------------------------------
-project = 'SpinalHDL Dokumentation'
+project = 'Betriebliche Praxis : SpinalHDL Dokumentation'
 copyright = '2025, Bakr Aassoul'
 author = 'Bakr Aassoul'
 
