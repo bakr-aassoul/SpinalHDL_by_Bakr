@@ -1955,3 +1955,6 @@ die sich in Zukunft noch stärker in der Hardwareentwicklung etablieren dürfte.
 
 **[2]** MicroRV32 – *A RISC-V Implementation using SpinalHDL, Universität Bremen / DFKI.*  
 <https://agra.informatik.uni-bremen.de/doc/work/date21_unibooth_microrv32.pdf>
+
+**[3]** SpinalHDL Official Documentation – *Reference and Getting Started Guide.*  
+<https://spinalhdl.github.io/SpinalDoc-RTD/master/index.html>
